@@ -1,0 +1,155 @@
+.movieList {
+  width: 100%;
+  overflow-x: hidden;
+  height: 25vh;
+  gap: 0.5em;
+  overflow-y: hidden;
+}
+.line {
+  width: 72.5%;
+}
+.movie img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+}
+.movies {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin: 1em 0;
+}
+.hold img {
+  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
+}
+.movieBox {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.movieBox h1 {
+  font-weight: normal;
+  font-size: 12px;
+}
+.rates {
+  position: absolute;
+  right: 1px;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: rgba(255, 255, 255, 0.215);
+  padding: 0.5em;
+  border-radius: 8px;
+  scale: 0.8;
+}
+/* .play {
+  position: relative;
+  color: #c00;
+  top: -100px;
+  left: 40%;
+} */
+.seeAll {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #626364;
+  cursor: pointer;
+}
+.thumbnail {
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+  /* display: grid;
+  place-content: center; */
+  cursor: pointer;
+  margin: 0.2em 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.video {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  border-radius: 100%;
+  background: transparent;
+  color: #c00;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.126);
+  backdrop-filter: blur(0.01px) brightness(0.7);
+  display: grid;
+  place-content: center;
+  z-index: 2;
+  /* position: absolute; */
+}
+.playing {
+  /* position: relative !important; */
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  transition: 0.3s;
+  opacity: 0;
+  /* background-color: red; */
+  width: fit-content;
+  cursor: pointer;
+}
+.waves {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.126);
+  backdrop-filter: blur(0.01px);
+  border-radius: 100%;
+  animation: waves 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+.waveOne {
+  animation-delay: 0s;
+}
+
+.waveTwo {
+  animation-delay: 1s;
+}
+
+.waveThree {
+  animation-delay: 2s;
+}
+
+@keyframes waves {
+  0% {
+    transform: scale(0.5, 0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
+}
+
+.thumbnail:hover .playing {
+  opacity: 0.826;
+}
+
+.movieImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}

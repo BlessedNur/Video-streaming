@@ -1,0 +1,56 @@
+.loading {
+  width: 3rem;
+  height: 3rem;
+  border: 7px solid white;
+  border-top: 7px solid transparent;
+  animation: rot 2s linear infinite;
+  border-radius: 50%;
+}
+@keyframes rot {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill , minmax(200px , 1fr));
+  gap:1em;
+}
+.loader{
+  margin: 1em;
+}
+.Image{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.items{
+  
+}
+.main{
+  transition: .1s linear;
+  color: white;
+  overflow-y: hidden;
+  
+}
+.contentsDisplay{
+  height: 101vh;
+  background-color: black;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin-top: -56px;
+  transition: .1s linear;
+  
+}
+.movieList{
+  overflow-y: scroll;
+  height: 50vh;
+  padding: 0 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}

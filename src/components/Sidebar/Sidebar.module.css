@@ -1,0 +1,217 @@
+.logo Image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  transform: translateY(15px);
+  height: 10px;
+  /* overflow: hidden; */
+}
+.logoTwo {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  height: fit-content;
+  width: 100%;
+  /* scale: 1.5; */
+  transform: translate(-20px, 10px);
+}
+.logoThree {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  width: 100%;
+  scale: 1.6;
+  /* transform: translate(-1.5em, -0./2em); */
+  height: fit-content;
+}
+.aside {
+  position: relative;
+  background-color: rgb(13, 12, 12);
+  float: left;
+  /* width: 17em; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* padding: 1em; */
+  /* overflow: hidden; */
+  z-index: 1;
+  transition: background-color 0.1s, width 0.4s;
+}
+.asideTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+.asideUl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* gap: 1.5em; */
+  /* max-height: 26.5em; */
+  margin-top: 3em;
+  overflow: hidden;
+}
+.account {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+.asideLink {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.asideLi,
+.mode,
+.signOut {
+  width: 100%;
+  font-size: 11px;
+  padding: 0.6em 2.5em;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s, visibility 2s, opacity 3s;
+}
+.asideLi {
+  margin: 0.75em 0;
+  position: relative;
+  color: #626364;
+  text-decoration: none;
+  font-family: inherit !important;
+}
+/* .asideLi::after {
+  content: "hello";
+  position: absolute;
+  right: -60px;
+  background-color: red;
+  padding: 0.5em;
+  width: fit-content;
+  z-index: 2;
+}
+.asideLi::before {
+  content: "";
+  position: absolute;
+  right: -21px;
+  width: 0.6em;
+  height: 0.6em;
+  transform: rotate(45deg);
+
+  background-color: red;
+} */
+
+.asideBot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em 0;
+}
+
+.hold {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+}
+.gen {
+  justify-content: space-between;
+}
+.modeIcon {
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+.linkLight {
+  color: black !important;
+}
+.activeNavLink {
+  color: #c00 !important;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  padding: 0 1em;
+  margin: 0 1em;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* overflow: scroll; */
+  max-height: 0;
+  transition: max-height 0.5s ease;
+}
+.catShow {
+  max-height: 50px !important;
+}
+.categories::-webkit-scrollbar-thumb {
+  background: #c00 !important;
+  border-radius: 3px;
+}
+.categories::-webkit-scrollbar {
+  width: 1.2em;
+}
+
+.catdis {
+  display: none;
+}
+.toggled {
+  position: absolute;
+  left: 25%;
+  top: 8% !important;
+  background-color: #1c1d1d !important;
+  display: grid;
+  place-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+}
+.Light {
+  background: #d3d5db !important;
+}
+.svg {
+  width: 1em;
+  scale: 2;
+}
+@keyframes rot {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.svgRot {
+  animation: rot 2s;
+}
+@keyframes rotmoon {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+.rotMoon {
+  animation: rotmoon 1s;
+  scale: 1.2;
+}
+
+.activeSideLi {
+  border-right: 3px solid #c00;
+  color: #c00 !important;
+}

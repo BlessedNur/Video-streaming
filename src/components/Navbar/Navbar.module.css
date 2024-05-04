@@ -1,0 +1,149 @@
+.logo Image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  transform: translateY(15px);
+  height: 10px;
+  /* overflow: hidden; */
+}
+.logoTwo {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  height: fit-content;
+  width: 90%;
+  transform: translateX(-10px);
+}
+.logoThree {
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  /* width: 200%; */
+  transform: translate(-1.5em, -0.2em);
+  height: fit-content;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  z-index: 10;
+  position: relative;
+  background-color: transparent !important;
+  backdrop-filter: blur(4px);
+  background-color: red;
+  justify-content: space-between;
+}
+.left {
+  display: flex;
+  align-items: center;
+}
+.ul {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.link {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  font-weight: 600;
+}
+.language {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  cursor: pointer;
+  border-left: 1px solid #626364;
+  color: #626364;
+  padding: 0 1em;
+  /* width: 2em;
+  height: 2em; */
+  margin: 0 1em;
+}
+.language Image {
+  scale: 1.2;
+}
+.countryIcon {
+  width: 1.5em !important;
+  height: 1.5em !important;
+  border-radius: 50%;
+  display: grid;
+  cursor: pointer;
+  place-content: center;
+  overflow: hidden;
+  /* background-color: red; */
+}
+.profile {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 50%;
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 0 1em;
+}
+.account {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+/* .asideLi::after {
+  content: "hello";
+  position: absolute;
+  right: -60px;
+  background-color: red;
+  padding: 0.5em;
+  width: fit-content;
+  z-index: 2;
+}
+.asideLi::before {
+  content: "";
+  position: absolute;
+  right: -21px;
+  width: 0.6em;
+  height: 0.6em;
+  transform: rotate(45deg);
+
+  background-color: red;
+} */
+
+.hold {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+}
+.gen {
+  justify-content: space-between;
+}
+.modeIcon {
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+.linkLight {
+  color: white !important;
+}
+.activeNavLink {
+  color: #c00 !important;
+  font-weight: 600;
+  z-index: 1;
+}
+.activeSideLi {
+  border-right: 3px solid #c00;
+  color: #c00;
+}
+
+.Light {
+  background: #d3d5db !important;
+}
