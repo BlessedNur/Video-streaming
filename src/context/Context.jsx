@@ -4,7 +4,10 @@ import React, { createContext, useState, useEffect } from "react";
 export const movieContext = createContext();
 
 function Context({ children }) {
-  const [lightMode, setLightMode] = useState(false);
+  const storedMode = localStorage.getItem("mode");
+  const initialMode = storedMode !== null ? storedMode === "true" : false;
+  const [lightMode, setLightMode] = useState(initialMode);
+
   const [storedNavLink, setStoredNavLink] = useState("");
   const [storedSideLink, setStoredSideLink] = useState("");
 
@@ -32,7 +35,7 @@ function Context({ children }) {
     console.log(index);
     setStoredNavLink(index);
   };
-  
+
   const handleSideClick = (index) => {
     setActiveSideLink(index);
     localStorage.setItem("SideLink", index);
@@ -53,7 +56,7 @@ function Context({ children }) {
         storedSideLink,
         setStoredSideLink,
         handleNavClick,
-        handleSideClick
+        handleSideClick,
       ]}
     >
       {children}{" "}
