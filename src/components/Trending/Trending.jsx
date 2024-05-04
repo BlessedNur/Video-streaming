@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import style from "./Trending.module.css";
 import Image from "next/image";
