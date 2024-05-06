@@ -6,9 +6,9 @@
   overflow-y: hidden;
 }
 .line {
-  width: 72.5%;
+  width: 100%;
 }
-.movie img{
+.movie img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -148,8 +148,7 @@
   opacity: 0.826;
 }
 
-
-.movieImage{
+.movieImage {
   width: 100%;
   height: 100%;
   display: block;

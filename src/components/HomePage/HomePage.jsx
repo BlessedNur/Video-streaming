@@ -1,17 +1,40 @@
-"use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./Homepage.module.css";
 import { movieContext } from "@/context/Context";
-import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import Banner from "../Banner/Banner";
 import Recommended from "../Recommended/Recommended";
 import Trending from "../Trending/Trending";
 import TopRated from "../TopRated/Toprated";
 import Upcoming from "../Upcoming/Upcoming";
+import dynamic from "next/dynamic";
+import Sidebar from "../Sidebar/Sidebar";
+
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
+  const movieListRef = useRef(null);
+  const [showScrollDown, setShowScrollDown] = useState(true);
+  const [showScrollAllDown, setShowScrollAllDown] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = movieListRef.current.scrollTop;
+      setShowScrollDown(scrollPosition < 1);
+      setShowScrollAllDown(scrollPosition < 50);
+    };
+
+    if (movieListRef.current) {
+      movieListRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (movieListRef.current) {
+        movieListRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
   return (
     <main className={`${style.main} `}>
       <Sidebar />
@@ -22,25 +45,43 @@ function HomePage() {
         <Banner
           BannerApi={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1`}
         />
-        <div className={style.movieList}>
-          <Upcoming
-            title={"Upcoming Movies & Tv Shows"}
-            api={`https://api.themoviedb.org/3/movie/upcoming?api_key=0febce395055c78ab86a029443008afc&page=1`}
-          />
-          <Recommended
-            title={"Recommended Movies & Tv Shows"}
-            seeAllTypes={"See All Movies & Tv Shows"}
-            api={`https://api.themoviedb.org/3/movie/popular?api_key=0febce395055c78ab86a029443008afc&page=1`}
-            
-          />
-          <Trending
-            title={"Trending Movies & Tv Shows"}
-            api={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1`}
-          />
-          <TopRated
-            title={"Popular Movies & Tv Shows"}
-            api={`https://api.themoviedb.org/3/movie/top_rated?api_key=0febce395055c78ab86a029443008afc`}
-          />
+        <div
+          className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
+            style.lineThree
+          } ${style.lineTwo} ${
+            !showScrollDown ? style.lineTwoShow : style.lineTwoHide
+          } ${lightMode && style.lineTwoLight} ${
+            showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+          }`}
+        >
+          <div className={`${style.movieList} scroller`} ref={movieListRef}>
+            <div
+              className={`${style.scrollDown} ${
+                !showScrollAllDown && style.hiddenScroller
+              }`}
+            >
+              <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
+              <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
+            </div>
+
+            <Upcoming
+              title={"Upcoming Movies & Tv Shows"}
+              api={`https://api.themoviedb.org/3/movie/upcoming?api_key=0febce395055c78ab86a029443008afc&page=1`}
+            />
+            <Recommended
+              title={"Recommended Movies & Tv Shows"}
+              seeAllTypes={"See All Movies & Tv Shows"}
+              api={`https://api.themoviedb.org/3/movie/popular?api_key=0febce395055c78ab86a029443008afc&page=1`}
+            />
+            <Trending
+              title={"Trending Movies & Tv Shows"}
+              api={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1`}
+            />
+            <TopRated
+              title={"Popular Movies & Tv Shows"}
+              api={`https://api.themoviedb.org/3/movie/top_rated?api_key=0febce395055c78ab86a029443008afc`}
+            />
+          </div>
         </div>
       </div>
     </main>

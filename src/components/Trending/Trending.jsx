@@ -1,10 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Trending.module.css";
 import Image from "next/image";
+import { movieContext } from "@/context/Context";
 
 function Trending({ title, api }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+  ] = useContext(movieContext);
 
   useEffect(() => {
     const fetchtrendingMovies = async () => {
@@ -65,7 +80,7 @@ function Trending({ title, api }) {
               <h1>{movie.title}</h1>
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600" }}>
+                <p style={{ fontWeight: "600", color:lightMode&& "#fff"}}>
                   {movie.vote_average != 0
                     ? (movie.vote_average / 2).toFixed(1)
                     : "Not rated"}

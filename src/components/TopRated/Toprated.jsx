@@ -1,9 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./TopRated.module.css";
 import Image from "next/image";
+import { movieContext } from "@/context/Context";
 function TopRated({ title, api }) {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+  ] = useContext(movieContext);
 
   useEffect(() => {
     const fetchTopRatedMovies = async () => {
@@ -65,7 +80,7 @@ function TopRated({ title, api }) {
               <h1>{movie.title}</h1>
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600" }}>
+                <p style={{ fontWeight: "600",color:lightMode&&"#fff" }}>
                   {movie.vote_average != 0
                     ? (movie.vote_average / 2).toFixed(1)
                     : "Not rated"}

@@ -1,10 +1,11 @@
-"use client";
+// "use client";
 import React, { useContext, useEffect } from "react";
 import style from "./Navbar.module.css";
 import { movieContext } from "@/context/Context";
 import Link from "next/link";
 
 function Navbar() {
+
   const [
     lightMode,
     setLightMode,
@@ -71,11 +72,11 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "popular" ? style.activeNavLink : ""
+                activeNavLink === "Anime" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
               href="/"
               onClick={() => {
-                handleNavClick("popular");
+                handleNavClick("Anime");
               }}
             >
               Anime

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.2",
+    "mongoose": "^8.3.3",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"
