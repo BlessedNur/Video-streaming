@@ -214,7 +214,7 @@ function Sidebar() {
             activeSideLink === "categories" ? style.activeSideLi : ""
           } ${style.gen}`}
           onClick={() => {
-            handleSideClick("categories");
+            // handleSideClick("categories");
             if (!showMore) {
               setShowMore(true);
             } else {

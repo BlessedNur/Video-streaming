@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Trending.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 function Trending({ title, api, length }) {
   const [trendingMovies, setTrendingMovies] = useState([]);

@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Upcoming.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 function Upcoming({ title, api, length }) {
   // const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -27,10 +30,10 @@ function Upcoming({ title, api, length }) {
         const response = await fetch(`${api}`);
         const data = await response.json();
 
-        const filterMovies = data.slice(0,20).filter((movie) => {
+        const filterMovies = data.slice(0,70).filter((movie) => {
           const releaseYear = movie.release_date.split("-")[0]
           console.log(releaseYear);
-          return releaseYear == 2023 || releaseYear == 2024;
+          return releaseYear == 2022 ||releaseYear == 2023 || releaseYear == 2024;
         });
         setFilteredMovies(filterMovies);
 

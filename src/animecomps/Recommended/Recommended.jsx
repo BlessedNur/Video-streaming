@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Recommended.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 function Recommended({ title, seeAllTypes, api, length }) {
   const [recommendedMovies, setRecommendedMovies] = useState([]);

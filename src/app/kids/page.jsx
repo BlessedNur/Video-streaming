@@ -85,7 +85,7 @@ function HomePage() {
               containerWidth={"100%"}
               api={`http://localhost:3000/myapi/cartoon`}
               title={"Popular Cartoons"}
-              length={17}
+              length={19}
             />
             <TopRated
               title={"Toprated Cartoons"}
