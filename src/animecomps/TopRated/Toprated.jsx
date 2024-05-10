@@ -1,11 +1,10 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import style from "./Trending.module.css";
+import style from "./TopRated.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
-
-function Trending({ title, api, length }) {
-  const [trendingMovies, setTrendingMovies] = useState([]);
+function TopRated({ title, api, length }) {
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -22,17 +21,18 @@ function Trending({ title, api, length }) {
   ] = useContext(movieContext);
 
   useEffect(() => {
-    const fetchtrendingMovies = async () => {
+    const fetchTopRatedMovies = async () => {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
-        setTrendingMovies(data.slice(10, length));
+
+        setTopRatedMovies([...data.slice(40, length)]);
       } catch (error) {
-        console.error("Error fetching Trending movies:", error);
+        console.error("Error fetching TopRated movies:", error);
       }
     };
 
-    fetchtrendingMovies();
+    fetchTopRatedMovies();
   }, []);
 
   return (
@@ -50,18 +50,16 @@ function Trending({ title, api, length }) {
       </div>
       <div className={style.movieList}>
         <div className={style.movies}>
-          {trendingMovies.map((movie) => (
+          {topRatedMovies.map((movie) => (
             <div
               className={style.movieBox}
               key={movie.id}
               onClick={() => alert(`this is ${movie.title}`)}
             >
               <div className={style.thumbnail}>
-                <Image
-                  src={movie.backdrop_path}
+                <img
+                  src={movie.images.jpg.large_image_url}
                   alt={`Poster for ${movie.title}`}
-                  width={200}
-                  height={100}
                   className={style.movieImage}
                 />
                 <div class={style.playing}>
@@ -81,8 +79,8 @@ function Trending({ title, api, length }) {
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
-                  {movie.vote_average != 0
-                    ? ((movie.vote_average / 100) * 5).toFixed(1)
+                {movie.score != 0
+                    ? (movie.score/2).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>
@@ -94,4 +92,6 @@ function Trending({ title, api, length }) {
   );
 }
 
-export default Trending;
+export default TopRated;
+
+("https://api.themoviedb.org/3/movie/top_rated?api_key=0febce395055c78ab86a029443008afc");

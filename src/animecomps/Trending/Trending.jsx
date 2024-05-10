@@ -57,12 +57,9 @@ function Trending({ title, api, length }) {
               onClick={() => alert(`this is ${movie.title}`)}
             >
               <div className={style.thumbnail}>
-                <Image
-                  src={movie.backdrop_path}
-                  alt={`Poster for ${movie.title}`}
-                  width={200}
-                  height={100}
-                  className={style.movieImage}
+                <img
+                  src={movie.images.jpg.large_image_url}
+                  alt={`Poster for ${movie.title}`}                                 className={style.movieImage}
                 />
                 <div class={style.playing}>
                   <div className={style.video}>
@@ -81,8 +78,8 @@ function Trending({ title, api, length }) {
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
-                  {movie.vote_average != 0
-                    ? ((movie.vote_average / 100) * 5).toFixed(1)
+                {movie.score != 0
+                    ? (movie.score/2).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>

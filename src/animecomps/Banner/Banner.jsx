@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Banner.module.css";
 import Image from "next/image";
@@ -10,7 +10,7 @@ function Banner({ BannerApi, bannerWidth }) {
   const [lightMode, setLightMode] = useContext(movieContext);
 
   useEffect(() => {
-  const fetchData = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch(`${BannerApi}`);
         const data = await response.json();
@@ -24,8 +24,9 @@ function Banner({ BannerApi, bannerWidth }) {
   }, []);
 
   console.log(movies);
+  let interval;
   useEffect(() => {
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       setItemActive((prevItemActive) => (prevItemActive + 1) % movies.length);
     }, 5000);
 
@@ -45,9 +46,12 @@ function Banner({ BannerApi, bannerWidth }) {
   };
 
   return (
-    <div className={style.slider} style={{
-      maxWidth:bannerWidth,
-    }}>
+    <div
+      className={style.slider}
+      style={{
+        maxWidth: bannerWidth,
+      }}
+    >
       <div className={style.list}>
         {movies.map((movie, index) => (
           <div
@@ -57,19 +61,26 @@ function Banner({ BannerApi, bannerWidth }) {
             } ${lightMode ? style.Light : style.Dark}`}
           >
             <img
-              src={movie.backdrop_path}
+              src={`${movie.images.jpg.large_image_url}`}
               alt={`Movie ${index + 1}`}
             />
             <div className={style.content}>
               <h2 className={lightMode ? style.contentLight : ""}>
-                {movie.title}
+                {movie.title.length > 20
+                  ? `${movie.title.slice(0, 20)}...`
+                  : movie.title}{" "}
               </h2>
               <p className={lightMode ? style.contentLight : ""}>
-                {movie.overview.slice(0,100)}...
+                {movie.synopsis.slice(0, 100)}...
               </p>
               <div className={style.actions}>
                 <button>Watch</button>
-                <button onClick={()=>alert(`Added ${movie.title} to watchlist`)} className={lightMode ? style.contentLight : ""}>
+                {/* <button className={style.prev} onClick={handlePrev}> prev</button>
+                <button className={style.next} onClick={handleNext}>next</button> */}
+                <button
+                  onClick={() => alert(`Added ${movie.title} to watchlist`)}
+                  className={lightMode ? style.contentLight : ""}
+                >
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
               </div>

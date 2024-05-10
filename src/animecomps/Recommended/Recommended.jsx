@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import style from "./Trending.module.css";
+import style from "./Recommended.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
 
-function Trending({ title, api, length }) {
-  const [trendingMovies, setTrendingMovies] = useState([]);
+function Recommended({ title, seeAllTypes, api, length }) {
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -20,19 +20,19 @@ function Trending({ title, api, length }) {
     handleNavClick,
     handleSideClick,
   ] = useContext(movieContext);
-
   useEffect(() => {
-    const fetchtrendingMovies = async () => {
+    const fetchRecommendedMovies = async () => {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
-        setTrendingMovies(data.slice(10, length));
+
+        setRecommendedMovies([...data.slice(0, length)]);
       } catch (error) {
-        console.error("Error fetching Trending movies:", error);
+        console.error("Error fetching Recommended movies:", error);
       }
     };
 
-    fetchtrendingMovies();
+    fetchRecommendedMovies();
   }, []);
 
   return (
@@ -40,9 +40,9 @@ function Trending({ title, api, length }) {
       <div className={style.header}>
         <h2>{title}</h2>
         <div className={style.seeAll}>
-          <p>See All</p>
+          <p>{seeAllTypes}</p>
           <i
-            class="fa fa-chevron-right"
+            className="fa fa-chevron-right"
             style={{ fontSize: "10px" }}
             aria-hidden="true"
           ></i>
@@ -50,21 +50,21 @@ function Trending({ title, api, length }) {
       </div>
       <div className={style.movieList}>
         <div className={style.movies}>
-          {trendingMovies.map((movie) => (
+          {recommendedMovies.map((movie) => (
             <div
               className={style.movieBox}
               key={movie.id}
-              onClick={() => alert(`this is ${movie.title}`)}
+              onClick={() => alert(`This is ${movie.title}`)}
             >
               <div className={style.thumbnail}>
-                <Image
-                  src={movie.backdrop_path}
+                <img
+                  src={movie.images.jpg.image_url}
                   alt={`Poster for ${movie.title}`}
-                  width={200}
-                  height={100}
+                  width={110}
+                  height={150}
                   className={style.movieImage}
                 />
-                <div class={style.playing}>
+                <div className={style.playing}>
                   <div className={style.video}>
                     <i
                       className={`fa fa-play ${style.player}`}
@@ -72,16 +72,15 @@ function Trending({ title, api, length }) {
                     ></i>
                     <div className={style.round}></div>
                   </div>
-                  <div class={`${style.waves} ${style.waveOne}`}></div>
-                  <div class={`${style.waves} ${style.waveTwo}`}></div>
-                  <div class={`${style.waves} ${style.waveThree}`}></div>
+                  <div className={`${style.waves} ${style.waveOne}`}></div>
+                  <div className={`${style.waves} ${style.waveTwo}`}></div>
+                  <div className={`${style.waves} ${style.waveThree}`}></div>
                 </div>
               </div>
-              <h1>{movie.title}</h1>
               <div className={style.rates}>
-                <i class="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
                 <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
-                  {movie.vote_average != 0
+                  {movie.vote_average !== 0
                     ? ((movie.vote_average / 100) * 5).toFixed(1)
                     : "Not rated"}
                 </p>
@@ -94,4 +93,4 @@ function Trending({ title, api, length }) {
   );
 }
 
-export default Trending;
+export default Recommended;

@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Upcoming.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
-function Upcoming({ title, api }) {
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+function Upcoming({ title, api, length }) {
+  // const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -25,7 +26,15 @@ function Upcoming({ title, api }) {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
-        setUpcomingMovies(data.results.slice(2, 7));
+
+        const filterMovies = data.slice(0,20).filter((movie) => {
+          const releaseYear = movie.release_date.split("-")[0]
+          console.log(releaseYear);
+          return releaseYear == 2023 || releaseYear == 2024;
+        });
+        setFilteredMovies(filterMovies);
+
+        // setUpcomingMovies(data);
       } catch (error) {
         console.error("Error fetching Upcoming movies:", error);
       }
@@ -33,6 +42,8 @@ function Upcoming({ title, api }) {
 
     fetchUpcomingMovies();
   }, []);
+  // console.log(upcomingMovies.map(movie=>movie.release_date.split("-")[0]));
+  console.log(filteredMovies);
 
   return (
     <div className={style.line}>
@@ -49,7 +60,7 @@ function Upcoming({ title, api }) {
       </div>
       <div className={style.movieList}>
         <div className={style.movies}>
-          {upcomingMovies.map((movie) => (
+          {filteredMovies.map((movie) => (
             <div
               className={style.movieBox}
               key={movie.id}
@@ -57,7 +68,7 @@ function Upcoming({ title, api }) {
             >
               <div className={style.thumbnail}>
                 <Image
-                  src={`https://Image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                  src={movie.backdrop_path}
                   alt={`Poster for ${movie.title}`}
                   width={200}
                   height={100}
@@ -76,12 +87,16 @@ function Upcoming({ title, api }) {
                   <div class={`${style.waves} ${style.waveThree}`}></div>
                 </div>
               </div>
-              <h1>{movie.title}</h1>
+              <h1>
+                {movie.title.length > 20
+                  ? `${movie.title.slice(0, 20)}...`
+                  : movie.title}
+              </h1>
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600", color:lightMode && "#fff"}}>
+                <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
                   {movie.vote_average != 0
-                    ? (movie.vote_average / 2).toFixed(1)
+                    ? ((movie.vote_average / 100) * 5).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>

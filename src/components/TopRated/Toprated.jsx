@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./TopRated.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
-function TopRated({ title, api }) {
+function TopRated({ title, api, length }) {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -25,8 +26,12 @@ function TopRated({ title, api }) {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
+        const filterMovies = data.filter(
+          (movie) => ((movie.vote_average / 100) * 5).toFixed(1) >= 4
+          );
+          setFilteredMovies(filterMovies)
 
-        setTopRatedMovies([...data.results.slice(0, 5)]);
+        setTopRatedMovies([...data.slice(0, length)]);
       } catch (error) {
         console.error("Error fetching TopRated movies:", error);
       }
@@ -34,7 +39,7 @@ function TopRated({ title, api }) {
 
     fetchTopRatedMovies();
   }, []);
-
+console.log(filteredMovies);
   return (
     <div className={style.line}>
       <div className={style.header}>
@@ -50,7 +55,7 @@ function TopRated({ title, api }) {
       </div>
       <div className={style.movieList}>
         <div className={style.movies}>
-          {topRatedMovies.map((movie) => (
+          {filteredMovies.map((movie) => (
             <div
               className={style.movieBox}
               key={movie.id}
@@ -58,7 +63,7 @@ function TopRated({ title, api }) {
             >
               <div className={style.thumbnail}>
                 <Image
-                  src={`https://Image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                  src={movie.backdrop_path}
                   alt={`Poster for ${movie.title}`}
                   width={200}
                   height={100}
@@ -80,9 +85,9 @@ function TopRated({ title, api }) {
               <h1>{movie.title}</h1>
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600",color:lightMode&&"#fff" }}>
+                <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
                   {movie.vote_average != 0
-                    ? (movie.vote_average / 2).toFixed(1)
+                    ? ((movie.vote_average / 100) * 5).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>

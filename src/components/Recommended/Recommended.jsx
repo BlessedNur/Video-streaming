@@ -4,7 +4,7 @@ import style from "./Recommended.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
 
-function Recommended({ title, seeAllTypes, api }) {
+function Recommended({ title, seeAllTypes, api, length }) {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [
     lightMode,
@@ -26,7 +26,7 @@ function Recommended({ title, seeAllTypes, api }) {
         const response = await fetch(`${api}`);
         const data = await response.json();
 
-        setRecommendedMovies([...data.results.slice(0, 7)]);
+        setRecommendedMovies([...data.slice(0, length)]);
       } catch (error) {
         console.error("Error fetching Recommended movies:", error);
       }
@@ -58,7 +58,7 @@ function Recommended({ title, seeAllTypes, api }) {
             >
               <div className={style.thumbnail}>
                 <Image
-                  src={`https://Image.tmdb.org/t/p/original${movie.poster_path}`}
+                  src={movie.poster_path}
                   alt={`Poster for ${movie.title}`}
                   width={110}
                   height={150}
@@ -79,9 +79,9 @@ function Recommended({ title, seeAllTypes, api }) {
               </div>
               <div className={style.rates}>
                 <i className="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600", color:lightMode && "#fff" }}>
+                <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
                   {movie.vote_average !== 0
-                    ? (movie.vote_average / 2).toFixed(1)
+                    ? ((movie.vote_average / 100) * 5).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>

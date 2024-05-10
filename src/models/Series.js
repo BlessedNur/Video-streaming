@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
-const cartoonSchema = new Schema(
+const seriesSchema = new Schema(
   {
     id: {
       type: Number,
       required: true,
     },
-    title: {
+    name: {
       type: String,
       required: true,
     },
@@ -14,7 +14,7 @@ const cartoonSchema = new Schema(
       type: String,
       required: true,
     },
-    release_date: {
+    first_air_date: {
       type: String,
       required: true,
     },
@@ -34,29 +34,29 @@ const cartoonSchema = new Schema(
       type: [String],
       required: true,
     },
-    companyLogos: {
+    networkLogos: {
       type: [String],
-      required: true,
-    },
-    movieLogo: {
-      type: String,
       required: true,
     },
     Logo: {
       type: [String],
       required: true,
     },
+    seasonDetails: {
+      type: String,
+      required: true,
+    },
 
-    budget: {
-      type: Number,
+    number_of_seasons: {
+      type: String,
       required: true,
     },
-    revenue: {
-      type: Number,
+    number_of_episodes: {
+      type: String,
       required: true,
     },
-    runtime: {
-      type: Number,
+    episode_run_time: {
+      type: [String],
       required: true,
     },
     genreNames: {
@@ -67,7 +67,7 @@ const cartoonSchema = new Schema(
       type: Number,
       required: true,
     },
-    director: {
+    creator: {
       type: String,
       required: true,
     },
@@ -79,5 +79,4 @@ const cartoonSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Cartoon ||
-  mongoose.model("Cartoon", cartoonSchema);
+export default mongoose.models.Series || mongoose.model("Series", seriesSchema);

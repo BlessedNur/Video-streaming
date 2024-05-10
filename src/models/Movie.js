@@ -2,24 +2,11 @@ import mongoose, { Schema } from "mongoose";
 
 const movieSchema = new Schema(
   {
-    adult: {
-      type: String,
+    id: {
+      type: Number,
       required: true,
     },
-    backdrop_path: {
-      type: String,
-      required: true,
-    },
-    genre_ids: {
-      type: [String],
-      required: true,
-      MinItems: 1,
-    },
-    original_language: {
-      type: String,
-      required: true,
-    },
-    original_title: {
+    title: {
       type: String,
       required: true,
     },
@@ -27,23 +14,64 @@ const movieSchema = new Schema(
       type: String,
       required: true,
     },
-    poster_path: {
-      type: String,
-      required: true,
-    },
     release_date: {
       type: String,
       required: true,
     },
-    title: {
+    poster_path: {
       type: String,
+      required: true,
+    },
+    backdrop_path: {
+      type: String,
+      required: true,
+    },
+    cast: {
+      type: [String],
+      required: true,
+    },
+    trailers: {
+      type: [String],
+      required: true,
+    },
+    companyLogos: {
+      type: [String],
+      required: true,
+    },
+    movieLogo: {
+      type: String,
+      required: true,
+    },
+    Logo: {
+      type: [String],
+      required: true,
+    },
+
+    budget: {
+      type: Number,
+      required: true,
+    },
+    revenue: {
+      type: Number,
+      required: true,
+    },
+    runtime: {
+      type: Number,
+      required: true,
+    },
+    genreNames: {
+      type: [String],
       required: true,
     },
     vote_average: {
+      type: Number,
+      required: true,
+    },
+    director: {
       type: String,
       required: true,
     },
-    vote_count: {
+    keywords: {
       type: String,
       required: true,
     },
@@ -52,4 +80,3 @@ const movieSchema = new Schema(
 );
 
 export default mongoose.models.Movie || mongoose.model("Movie", movieSchema);
-

@@ -1,11 +1,10 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import style from "./Trending.module.css";
+import style from "./Upcoming.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
-
-function Trending({ title, api, length }) {
-  const [trendingMovies, setTrendingMovies] = useState([]);
+function Upcoming({ title, api, length }) {
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -22,18 +21,20 @@ function Trending({ title, api, length }) {
   ] = useContext(movieContext);
 
   useEffect(() => {
-    const fetchtrendingMovies = async () => {
+    const fetchUpcomingMovies = async () => {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
-        setTrendingMovies(data.slice(10, length));
+        setUpcomingMovies(data.slice(0, length) );
       } catch (error) {
-        console.error("Error fetching Trending movies:", error);
+        console.error("Error fetching Upcoming movies:", error);
       }
     };
 
-    fetchtrendingMovies();
+    fetchUpcomingMovies();
   }, []);
+  console.log(upcomingMovies);
+
 
   return (
     <div className={style.line}>
@@ -50,18 +51,16 @@ function Trending({ title, api, length }) {
       </div>
       <div className={style.movieList}>
         <div className={style.movies}>
-          {trendingMovies.map((movie) => (
+          {upcomingMovies.map((movie) => (
             <div
               className={style.movieBox}
               key={movie.id}
               onClick={() => alert(`this is ${movie.title}`)}
             >
               <div className={style.thumbnail}>
-                <Image
-                  src={movie.backdrop_path}
+                <img
+                  src={movie.images.jpg.large_image_url}
                   alt={`Poster for ${movie.title}`}
-                  width={200}
-                  height={100}
                   className={style.movieImage}
                 />
                 <div class={style.playing}>
@@ -77,12 +76,12 @@ function Trending({ title, api, length }) {
                   <div class={`${style.waves} ${style.waveThree}`}></div>
                 </div>
               </div>
-              <h1>{movie.title}</h1>
+              <h1>{movie.title.length>20?`${movie.title.slice(0,20)}...`:movie.title}</h1>
               <div className={style.rates}>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <p style={{ fontWeight: "600", color: lightMode && "#fff" }}>
-                  {movie.vote_average != 0
-                    ? ((movie.vote_average / 100) * 5).toFixed(1)
+                  {movie.score != 0
+                    ? (movie.score/2).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>
@@ -94,4 +93,4 @@ function Trending({ title, api, length }) {
   );
 }
 
-export default Trending;
+export default Upcoming;

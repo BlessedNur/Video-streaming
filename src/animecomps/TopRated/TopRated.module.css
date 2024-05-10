@@ -1,9 +1,10 @@
 .movieList {
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: hidden;
   height: fit-content;
   gap: 0.5em;
   overflow-y: hidden;
+  overflow-x: scroll;
 }
 .movieList::-webkit-scrollbar{
   display: none;
@@ -70,6 +71,7 @@
   border-radius: 10px;
   /* display: grid;
   place-content: center; */
+  cursor: pointer;
   margin: 0.2em 0;
 }
 
@@ -150,8 +152,8 @@
 }
 
 .movieImage {
-  width: 14em;
-  height: 100%;
+  width: 14.5em;
+  height: 7em;
   display: block;
   object-fit: cover;
 }

@@ -1,9 +1,12 @@
 .movieList {
   width: 100%;
-  overflow-x: hidden;
-  height: 25vh;
+  overflow-x: scroll;
+  height: fit-content;
   gap: 0.5em;
   overflow-y: hidden;
+}
+.movieList::-webkit-scrollbar{
+  display: none;
 }
 .line {
   width: 100%;
@@ -149,7 +152,7 @@
 }
 
 .movieImage {
-  width: 100%;
+  width: 14em;
   height: 100%;
   display: block;
   object-fit: cover;

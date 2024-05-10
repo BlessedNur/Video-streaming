@@ -3,9 +3,12 @@ import React, { useContext, useEffect } from "react";
 import style from "./Navbar.module.css";
 import { movieContext } from "@/context/Context";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
 
+  const pathname = usePathname()
+  console.log(pathname);
   const [
     lightMode,
     setLightMode,
@@ -32,7 +35,7 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "all" ? style.activeNavLink : ""
+               pathname === "/" || activeNavLink === "all" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
               href="/"
               onClick={() => {
@@ -46,7 +49,7 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "series" ? style.activeNavLink : ""
+                pathname === "/series" || activeNavLink === "series" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
               href="/"
               onClick={() => {
@@ -59,7 +62,7 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "movies" ? style.activeNavLink : ""
+                pathname === "/movies" || activeNavLink === "movies" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
               href="/"
               onClick={() => {
@@ -72,10 +75,11 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "Anime" ? style.activeNavLink : ""
+                pathname === "/anime" || activeNavLink === "Anime" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
-              href="/"
+              href="/anime"
               onClick={() => {
+                handleSideClick("anime")
                 handleNavClick("Anime");
               }}
             >
@@ -85,7 +89,7 @@ function Navbar() {
           <li>
             <Link
               className={`${style.link} ${
-                activeNavLink === "kids" ? style.activeNavLink : ""
+                pathname === "/kids" || activeNavLink === "kids" ? style.activeNavLink : ""
               } ${lightMode ? style.linkLight : ""}`}
               href="/kids"
               onClick={() => {

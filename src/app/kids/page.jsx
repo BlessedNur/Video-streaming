@@ -44,7 +44,8 @@ function HomePage() {
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
         <Banner
-          BannerApi={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1&certification_country=US&certification.lte=G&with_genres=16&include_adult=false`}
+          BannerApi={`http://localhost:3000/myapi/cartoon`}
+          bannerWidth={"100%"}
         />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
@@ -53,7 +54,8 @@ function HomePage() {
             !showScrollDown ? style.lineTwoShow : style.lineTwoHide
           } ${lightMode && style.lineTwoLight} ${
             showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
-          }`}
+            }`}
+          
         >
           <div className={`${style.movieList} scroller`} ref={movieListRef}>
             <div
@@ -65,17 +67,32 @@ function HomePage() {
               <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
             </div>
 
-            <Upcoming title={"Upcoming Cartoons"} />
+            <Upcoming
+              title={"Latest Cartoons"}
+              length={15}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/cartoon`}
+              
+            />
             <Recommended
               title={"Recommended Cartoons"}
+              containerWidth={"100%"}
+              length={10}
               seeAllTypes={"See All Cartoons"}
-              api={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1&certification_country=US&certification.lte=G&with_genres=16&include_adult=false&primary_release_date.lte`}
+              api={`http://localhost:3000/myapi/cartoon`}
             />
             <Trending
-              api={`https://api.themoviedb.org/3/discover/movie?api_key=0febce395055c78ab86a029443008afc&page=1&certification_country=US&certification.lte=G&with_genres=16&include_adult=false`}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/cartoon`}
               title={"Popular Cartoons"}
+              length={17}
             />
-            <TopRated title={"Toprated Cartoons"} />
+            <TopRated
+              title={"Toprated Cartoons"}
+              length={8}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/cartoon`}
+            />
           </div>
         </div>
       </div>

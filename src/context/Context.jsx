@@ -1,10 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import React, { createContext, useState, useEffect } from "react";
 
 export const movieContext = createContext();
 
 function Context({ children }) {
+  const pathname = usePathname();
+  console.log(pathname);
   const [storedNavLink, setStoredNavLink] = useState("");
   const [storedModes, setStoredModes] = useState("");
   const [storedSideLink, setStoredSideLink] = useState("");
@@ -32,14 +35,14 @@ function Context({ children }) {
 
   const handleNavClick = (index) => {
     setActiveNavLink(index);
-    localStorage.setItem("navLink", index);
     console.log(index);
     setStoredNavLink(index);
   };
+  // localStorage.setItem("navLink", pathname);
+  // localStorage.setItem("SideLink", index);
 
   const handleSideClick = (index) => {
     setActiveSideLink(index);
-    localStorage.setItem("SideLink", index);
     console.log(index);
     setStoredSideLink(index);
   };

@@ -1,15 +1,16 @@
+"use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import style from "./Homepage.module.css";
+import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
-import Navbar from "../Navbar/Navbar";
-import Banner from "../Banner/Banner";
-import Recommended from "../Recommended/Recommended";
-import Trending from "../Trending/Trending";
-import TopRated from "../TopRated/Toprated";
-import Upcoming from "../Upcoming/Upcoming";
-import dynamic from "next/dynamic";
-import Sidebar from "../Sidebar/Sidebar";
 
+import dynamic from "next/dynamic";
+import Navbar from "@/components/Navbar/Navbar";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Banner from "@/animecomps/Banner/Banner";
+import Upcoming from "@/animecomps/Upcoming/Upcoming";
+import Recommended from "@/animecomps/Recommended/Recommended";
+import Trending from "@/animecomps/Trending/Trending";
+import TopRated from "@/animecomps/TopRated/Toprated";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
@@ -43,9 +44,8 @@ function HomePage() {
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
         <Banner
-          bannerWidth={"70%"}
-          
-          BannerApi={`http://localhost:3000/myapi/movie`}
+          BannerApi={`http://localhost:3000/myapi/anime`}
+          bannerWidth={"100%"}
         />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
@@ -67,25 +67,29 @@ function HomePage() {
             </div>
 
             <Upcoming
-              title={"Latest Movies & Tv Shows"}
-              length={5}
-              api={`http://localhost:3000/myapi/movie`}
+              title={"Upcoming Anime"}
+              length={8}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/anime`}
             />
             <Recommended
-              title={"Recommended Movies & Tv Shows"}
-              length={8}
-              seeAllTypes={"See All Movies & Tv Shows"}
-              api={`http://localhost:3000/myapi/movie`}
+              title={"Recommended Anime"}
+              containerWidth={"100%"}
+              length={10}
+              seeAllTypes={"See All Anime"}
+              api={`http://localhost:3000/myapi/anime`}
             />
             <Trending
-              title={"Trending Movies & Tv Shows"}
-              length={15}
-              api={`http://localhost:3000/myapi/movie`}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/anime`}
+              title={"Popular Anime"}
+              length={17}
             />
             <TopRated
-              title={"Popular Movies & Tv Shows"}
-              length={5}
-              api={`http://localhost:3000/myapi/movie`}
+              title={"Toprated Anime"}
+              length={50}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/anime`}
             />
           </div>
         </div>
