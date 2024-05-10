@@ -44,7 +44,7 @@ function HomePage() {
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
         <Banner
-          BannerApi={`http://localhost:3000/myapi/anime`}
+          BannerApi={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/anime`}
           bannerWidth={"100%"}
         />
         <div
@@ -70,18 +70,18 @@ function HomePage() {
               title={"Upcoming Anime"}
               length={8}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/anime`}
             />
             <Recommended
               title={"Recommended Anime"}
               containerWidth={"100%"}
               length={10}
               seeAllTypes={"See All Anime"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/anime`}
             />
             <Trending
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/anime`}
               title={"Popular Anime"}
               length={17}
             />
@@ -89,7 +89,7 @@ function HomePage() {
               title={"Toprated Anime"}
               length={50}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/anime`}
             />
           </div>
         </div>

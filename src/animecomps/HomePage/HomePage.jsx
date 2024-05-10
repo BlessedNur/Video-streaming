@@ -45,7 +45,7 @@ function HomePage() {
         <Banner
           bannerWidth={"70%"}
           
-          BannerApi={`http://localhost:3000/myapi/movie`}
+          BannerApi={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
         />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
@@ -69,23 +69,23 @@ function HomePage() {
             <Upcoming
               title={"Latest Movies & Tv Shows"}
               length={5}
-              api={`http://localhost:3000/myapi/movie`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
             />
             <Recommended
               title={"Recommended Movies & Tv Shows"}
               length={8}
               seeAllTypes={"See All Movies & Tv Shows"}
-              api={`http://localhost:3000/myapi/movie`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
             />
             <Trending
               title={"Trending Movies & Tv Shows"}
               length={15}
-              api={`http://localhost:3000/myapi/movie`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
             />
             <TopRated
               title={"Popular Movies & Tv Shows"}
               length={5}
-              api={`http://localhost:3000/myapi/movie`}
+              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
             />
           </div>
         </div>
