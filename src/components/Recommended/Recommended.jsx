@@ -98,16 +98,15 @@ function Recommended({ title, seeAllTypes, api, length }) {
               height={160}
               borderRadius={10}
             />
-            {path === "/kids" ||
-              (path === "/movies" && (
-                <>
-                  <Skeleton
-                    width={path === "/kids" || path === "/movies" ? 134 : 120}
-                    height={160}
-                    borderRadius={10}
-                  />
-                </>
-              ))}
+            {(path === "/kids" || path === "/movies") && (
+              <div>
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+              </div>
+            )}
           </div>
         </SkeletonTheme>
       ) : (

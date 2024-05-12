@@ -62,7 +62,7 @@ function Trending({ title, api, length }) {
             <Skeleton width={204} height={100} borderRadius={7} />
             <Skeleton width={204} height={100} borderRadius={7} />
             <Skeleton width={204} height={100} borderRadius={7} />
-            {path === "/kids" || path === "/movies" && (
+            {(path === "/kids" || path === "/movies") && (
               <>
                 <Skeleton width={204} height={100} borderRadius={7} />
               </>

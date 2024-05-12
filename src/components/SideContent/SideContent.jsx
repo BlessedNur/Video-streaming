@@ -166,7 +166,7 @@ function SideContent() {
                   src={movie.backdrop_path}
                   alt={movie.title}
                   width={300}
-                  height={300}
+                  height={190}
                 />
               </div>
               <div className="right">
@@ -179,7 +179,7 @@ function SideContent() {
                 </div>
                 <p className="bot" style={{ color: "#c00", fontWeight: "600" }}>
                   {movie.episode_run_time.length > 0
-                    ? `${movie.episode_run_time} mins | episode`
+                    ? `${movie.episode_run_time} mingls | episode`
                     : "unconfirmed"}
                 </p>
               </div>

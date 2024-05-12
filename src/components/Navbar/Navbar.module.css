@@ -83,6 +83,12 @@
   width: 30px;
   background-color: white;
   border-radius: 50%;
+  overflow: hidden;
+}
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .right {
   display: flex;
@@ -147,7 +153,7 @@
 .Light {
   background: #d3d5db !important;
 }
-.profileDeta {
+.profileData {
   position: absolute;
   right: 0;
   top: 0;
@@ -157,8 +163,109 @@
   transition: 0.4s;
   transform: translateX(1000px);
   z-index: 12;
+  padding: 1em;
+}
+.profileData hr {
+  margin: 1em;
+  background-color: #626364;
 }
 .showProfile {
   transform: translateX(0);
 }
-
+.picSection {
+  /* height: 6em; */
+  width: 100%;
+  margin: 1em 0;
+  /* background-color: #c00; */
+  border: 1px solid #d3d5db;
+  border-radius: 10px;
+  padding: 1em;
+  position: relative;
+}
+.profilePic {
+  width: 7em;
+  height: 7em;
+  /* background-color: red; */
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profilePic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.personalInfo {
+  display: flex;
+  margin: 1em 0;
+  position: relative;
+}
+.mainInfo {
+  border: 1px solid #d3d5db;
+  padding: 1em;
+  border-radius: 10px;
+}
+.rowOne,
+.rowTwo {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.personalInfo h4,
+.picSection h4 {
+  color: #626364;
+  font-weight: 500;
+}
+.personalInfo h5,
+.picSection h4 {
+  /* color: #6f7377; */
+  font-weight: 600;
+  font-size: 11px;
+  margin-bottom: 0.2em;
+}
+.edit {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  border: 1px solid #d3d5db;
+  padding: 0.5em;
+  border-radius: 10px;
+  width: fit-content;
+  position: relative;
+  left: 55%;
+  cursor: pointer;
+}
+.editTwo {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  border: 1px solid #d3d5db;
+  padding: 0.5em;
+  border-radius: 10px;
+  width: fit-content;
+  position: relative;
+  top: 55%;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0;
+}
+.Light {
+  left: 0;
+  top: 0;
+  border-radius: 0 0 5px 0;
+}
+.Dark {
+  left: 0;
+  top: 0;
+  border-radius: 0 0 5px 0;
+  background-color: #1c1d1d !important;
+}

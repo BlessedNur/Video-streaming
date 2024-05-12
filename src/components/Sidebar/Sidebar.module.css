@@ -229,6 +229,7 @@
   visibility: hidden;
   opacity: 0;
   transition: .1s;
+  backdrop-filter: blur(5px);
 }
 .showDark{
   visibility: visible;
