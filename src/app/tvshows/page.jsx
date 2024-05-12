@@ -1,15 +1,16 @@
+"use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import style from "./Homepage.module.css";
+import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
-import Navbar from "../Navbar/Navbar";
-import Banner from "../Banner/Banner";
-import Recommended from "../Recommended/Recommended";
-import Trending from "../Trending/Trending";
-import TopRated from "../TopRated/Toprated";
-import Upcoming from "../Upcoming/Upcoming";
-import dynamic from "next/dynamic";
-import Sidebar from "../Sidebar/Sidebar";
 
+import dynamic from "next/dynamic";
+import Navbar from "@/components/Navbar/Navbar";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Banner from "@/tvshowscomps/Banner/Banner";
+import Upcoming from "@/tvshowscomps/Upcoming/Upcoming";
+import Recommended from "@/tvshowscomps/Recommended/Recommended";
+import Trending from "@/tvshowscomps/Trending/Trending";
+import TopRated from "@/tvshowscomps/TopRated/Toprated";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
@@ -43,9 +44,8 @@ function HomePage() {
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
         <Banner
-          bannerWidth={"70%"}
-          
-          BannerApi={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
+          BannerApi={`http://localhost:3000/myapi/series`}
+          bannerWidth={"100%"}
         />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
@@ -54,7 +54,8 @@ function HomePage() {
             !showScrollDown ? style.lineTwoShow : style.lineTwoHide
           } ${lightMode && style.lineTwoLight} ${
             showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
-          }`}
+            }`}
+          
         >
           <div className={`${style.movieList} scroller`} ref={movieListRef}>
             <div
@@ -67,25 +68,30 @@ function HomePage() {
             </div>
 
             <Upcoming
-              title={"Latest Movies & Tv Shows"}
-              length={5}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
+              title={"Latest TvShows"}
+              length={15}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/series`}
+              
             />
             <Recommended
-              title={"Recommended Movies & Tv Shows"}
-              length={8}
-              seeAllTypes={"See All Movies & Tv Shows"}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
+              title={"Recommended TvShows"}
+              containerWidth={"100%"}
+              length={10}
+              seeAllTypes={"See All TvShows"}
+              api={`http://localhost:3000/myapi/series`}
             />
             <Trending
-              title={"Trending Movies & Tv Shows"}
-              length={15}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/series`}
+              title={"Popular TvShows"}
+              length={19}
             />
             <TopRated
-              title={"Popular Movies & Tv Shows"}
-              length={5}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/movie`}
+              title={"Toprated TvShows"}
+              length={8}
+              containerWidth={"100%"}
+              api={`http://localhost:3000/myapi/series`}
             />
           </div>
         </div>

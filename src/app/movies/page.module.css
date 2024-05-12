@@ -126,11 +126,12 @@
   z-index: 3;
 }
 .lists {
-  width: 71%;
+  width: 100%;
   overflow-y: hidden;
   height: 50vh;
   position: relative;
   /* background-color: red; */
+  overflow-x: hidden;
   padding: 1em;
 }
 .movieList::-webkit-scrollbar {
@@ -149,4 +150,27 @@
   to {
     transform: translateY(8px);
   }
+}
+
+.movieListLight::after{
+  content: "";
+  position: absolute;
+  right: -35px;
+  top: 0;
+  transition: .4s;
+  width: 10%;
+  height: 100%;
+  background:linear-gradient(to right , transparent ,rgb(255, 255, 255) 50% );
+  /* z-index: 2; */
+}
+.movieListDark::after{
+  content: "";
+  position: absolute;
+  right: -35px;
+  top: 0;
+  width: 10%;
+  transition: .4s;
+  height: 100%;
+  background:linear-gradient(to right , transparent ,rgba(0,0,0) 50% );
+  /* z-index: 2; */
 }

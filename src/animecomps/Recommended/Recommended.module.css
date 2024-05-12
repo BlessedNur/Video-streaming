@@ -5,7 +5,7 @@
   gap: 0.5em;
   overflow-y: hidden;
 }
-.movieList::-webkit-scrollbar{
+.movieList::-webkit-scrollbar {
   display: none;
 }
 .line {
@@ -59,10 +59,11 @@
 } */
 .seeAll {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.5em;
   color: #626364;
   cursor: pointer;
+  z-index: 3;
 }
 .thumbnail {
   overflow: hidden;

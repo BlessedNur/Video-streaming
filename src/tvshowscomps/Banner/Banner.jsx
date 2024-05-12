@@ -2,22 +2,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Banner.module.css";
 import Image from "next/image";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { movieContext } from "@/context/Context";
-import { usePathname } from "next/navigation";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
   const [lightMode, setLightMode] = useContext(movieContext);
-  const path = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${BannerApi}`);
         const data = await response.json();
-        setMovies(data);
+        setMovies(data.slice(0, 30));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,7 +25,8 @@ function Banner({ BannerApi, bannerWidth }) {
     fetchData();
   }, []);
 
-  console.log(movies);
+  console.log(movies.length);
+  // console.log(movies.length);
   useEffect(() => {
     const interval = setInterval(() => {
       setItemActive((prevItemActive) => (prevItemActive + 1) % movies.length);
@@ -71,7 +71,7 @@ function Banner({ BannerApi, bannerWidth }) {
               </div>
             </div>
             <div className={style.movies}>
-              <Skeleton width={path === "/kids"|| path === "/movies"? 1260: 900} height={700} borderRadius={7} />
+              <Skeleton width={1260} height={700} borderRadius={7} />
             </div>
           </SkeletonTheme>
         ) : (
@@ -86,11 +86,12 @@ function Banner({ BannerApi, bannerWidth }) {
                 <img src={movie.backdrop_path} alt={`Movie ${index + 1}`} />
                 <div className={style.content}>
                   <h2 className={lightMode ? style.contentLight : ""}>
-                    {movie.title}
+                    {movie.name}
                   </h2>
                   <p className={lightMode ? style.contentLight : ""}>
                     {movie.overview.slice(0, 100)}...
                   </p>
+
                   <div className={style.actions}>
                     <button>Watch</button>
                     <button

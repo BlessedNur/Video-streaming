@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Banner.module.css";
 import Image from "next/image";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { movieContext } from "@/context/Context";
 
 function Banner({ BannerApi, bannerWidth }) {
@@ -28,7 +29,7 @@ function Banner({ BannerApi, bannerWidth }) {
   useEffect(() => {
     interval = setInterval(() => {
       setItemActive((prevItemActive) => (prevItemActive + 1) % movies.length);
-    }, 5000);
+    }, 8000);
 
     return () => {
       clearInterval(interval);
@@ -53,40 +54,63 @@ function Banner({ BannerApi, bannerWidth }) {
       }}
     >
       <div className={style.list}>
-        {movies.map((movie, index) => (
-          <div
-            key={movie.id}
-            className={`${style.item} ${
-              index === itemActive ? style.active : ""
-            } ${lightMode ? style.Light : style.Dark}`}
+        {movies.length === 0 ? (
+          <SkeletonTheme
+            baseColor={lightMode ? "#eee" : "#202020"}
+            highlightColor={lightMode ? "#b2b5bd" : "#444"}
           >
-            <img
-              src={`${movie.images.jpg.large_image_url}`}
-              alt={`Movie ${index + 1}`}
-            />
-            <div className={style.content}>
-              <h2 className={lightMode ? style.contentLight : ""}>
-                {movie.title.length > 20
-                  ? `${movie.title.slice(0, 20)}...`
-                  : movie.title}{" "}
+            <div className={style.header}>
+              <h2>
+                <Skeleton width={200} height={20} borderRadius={5} />
               </h2>
-              <p className={lightMode ? style.contentLight : ""}>
-                {movie.synopsis.slice(0, 100)}...
-              </p>
-              <div className={style.actions}>
-                <button>Watch</button>
-                {/* <button className={style.prev} onClick={handlePrev}> prev</button>
-                <button className={style.next} onClick={handleNext}>next</button> */}
-                <button
-                  onClick={() => alert(`Added ${movie.title} to watchlist`)}
-                  className={lightMode ? style.contentLight : ""}
-                >
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                </button>
+              <div style={{ zIndex: "3" }} className={style.seeAll}>
+                <p>
+                  <Skeleton width={100} height={20} borderRadius={5} />
+                </p>
               </div>
             </div>
-          </div>
-        ))}
+            <div className={style.movies}>
+              <Skeleton width={1260} height={700} borderRadius={7} />
+            </div>
+          </SkeletonTheme>
+        ) : (
+          <>
+            {movies.map((movie, index) => (
+              <div
+                key={movie.id}
+                className={`${style.item} ${
+                  index === itemActive ? style.active : ""
+                } ${lightMode ? style.Light : style.Dark}`}
+              >
+                <img
+                  src={`${movie.images.jpg.large_image_url}`}
+                  alt={`Movie ${index + 1}`}
+                />
+                <div className={style.content}>
+                  <h2 className={lightMode ? style.contentLight : ""}>
+                    {movie.title.length > 20
+                      ? `${movie.title.slice(0, 20)}...`
+                      : movie.title}{" "}
+                  </h2>
+                  <p className={lightMode ? style.contentLight : ""}>
+                    {movie.synopsis.slice(0, 100)}...
+                  </p>
+                  <div className={style.actions}>
+                    <button>Watch</button>
+                    {/* <button className={style.prev} onClick={handlePrev}> prev</button>
+                <button className={style.next} onClick={handleNext}>next</button> */}
+                    <button
+                      onClick={() => alert(`Added ${movie.title} to watchlist`)}
+                      className={lightMode ? style.contentLight : ""}
+                    >
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

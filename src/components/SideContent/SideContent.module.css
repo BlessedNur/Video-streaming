@@ -1,0 +1,89 @@
+.sider {
+  /* float: right; */
+  height: 200em;
+  width: 29%;
+  padding: 2em;
+  padding-top: 5em;
+  position: relative;
+  /* top: 20em; */
+  z-index: 4;
+  /* background-color: red; */
+}
+.categories {
+  width: 100%;
+  position: relative;
+}
+.category::-webkit-scrollbar {
+  display: none;
+}
+.category {
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.6em;
+  padding: 0.5em;
+}
+
+.category h6 {
+  background-color: #c00;
+  color: white;
+  padding: 0.5em 0.8em;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 10px;
+  transition: 0.2s;
+}
+.category h6:hover {
+  /* background-color: rgba(255, 255, 255, 0.122) !important; */
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  scale: 1.03;
+  box-shadow: 2px 3px 4px #c5c5c5, -3px -1px 4px #000;
+}
+.categoryL::after{
+  background:linear-gradient(to left, transparent ,rgb(255, 255, 255) 50% );
+}
+.categoryL::before{
+  background:linear-gradient(to right, transparent ,rgb(255, 255, 255) 50% );
+}
+
+.rates {
+  position: absolute;
+  right: 1px;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: rgba(255, 255, 255, 0.215);
+  padding: 0.5em;
+  border-radius: 8px;
+  scale: 0.8;
+}
+
+.movieBan {
+  background-color: #c00;
+  width: fit-content;
+  padding: 0.3em 2em;
+  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: 0;
+  z-index: 5;
+  /* border-radius: 10px 2px 2px 0; */
+  color: white;
+  font-size: 12px;
+}
+.trailer{
+  width: 100%;
+  height: 110%;
+  border-radius: 8px;
+  /* display: block; */
+  /* background-color: red; */
+}
+.suggestions{
+  overflow: hidden;
+  /* height: 35.5vh; */
+}

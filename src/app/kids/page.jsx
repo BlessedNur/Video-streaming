@@ -71,7 +71,7 @@ function HomePage() {
               title={"Latest Cartoons"}
               length={15}
               containerWidth={"100%"}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/cartoon`}
+              api={`http://localhost:3000/myapi/cartoon`}
               
             />
             <Recommended
@@ -79,11 +79,11 @@ function HomePage() {
               containerWidth={"100%"}
               length={10}
               seeAllTypes={"See All Cartoons"}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/cartoon`}
+              api={`http://localhost:3000/myapi/cartoon`}
             />
             <Trending
               containerWidth={"100%"}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/cartoon`}
+              api={`http://localhost:3000/myapi/cartoon`}
               title={"Popular Cartoons"}
               length={19}
             />
@@ -91,7 +91,7 @@ function HomePage() {
               title={"Toprated Cartoons"}
               length={8}
               containerWidth={"100%"}
-              api={`https://quanmovies-3vjw2m27w-blessednurs-projects.vercel.app/myapi/cartoon`}
+              api={`http://localhost:3000/myapi/cartoon`}
             />
           </div>
         </div>

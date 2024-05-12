@@ -1,5 +1,32 @@
 import mongoose, { Schema } from "mongoose";
 
+// Define sub-schema for cast
+const CastSchema = new Schema({
+  name: String,
+  character: String,
+  profile_path: String
+});
+
+// Define sub-schema for trailers
+const TrailerSchema = new Schema({
+  iso_639_1: String,
+  iso_3166_1: String,
+  name: String,
+  key: String,
+  site: String,
+  size: Number,
+  type: String,
+  official: Boolean,
+  published_at: Date,
+  id: String
+});
+
+// Define sub-schema for network logos
+const NetworkLogoSchema = new Schema({
+  name: String,
+  logo_path: String
+});
+
 const seriesSchema = new Schema(
   {
     id: {
@@ -27,15 +54,15 @@ const seriesSchema = new Schema(
       required: true,
     },
     cast: {
-      type: [String],
+      type: [CastSchema],
       required: true,
     },
     trailers: {
-      type: [String],
+      type: [TrailerSchema],
       required: true,
     },
     networkLogos: {
-      type: [String],
+      type: [NetworkLogoSchema],
       required: true,
     },
     Logo: {

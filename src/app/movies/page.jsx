@@ -1,15 +1,14 @@
+"use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
-import style from "./Homepage.module.css";
+import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
-import Navbar from "../Navbar/Navbar";
-import Banner from "../Banner/Banner";
-import Recommended from "../Recommended/Recommended";
-import Trending from "../Trending/Trending";
-import TopRated from "../TopRated/Toprated";
-import Upcoming from "../Upcoming/Upcoming";
-import dynamic from "next/dynamic";
-import Sidebar from "../Sidebar/Sidebar";
-import SideContent from "../SideContent/SideContent";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Navbar from "@/components/Navbar/Navbar";
+import Banner from "@/components/Banner/Banner";
+import Upcoming from "@/components/Upcoming/Upcoming";
+import Recommended from "@/components/Recommended/Recommended";
+import Trending from "@/components/Trending/Trending";
+import TopRated from "@/components/TopRated/Toprated";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
@@ -42,7 +41,6 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-        <div className={style.layer}>
           <Banner
             bannerWidth={"100%"}
             BannerApi={`http://localhost:3000/myapi/movie`}
@@ -68,12 +66,12 @@ function HomePage() {
 
               <Upcoming
                 title={"Latest Movies & Tv Shows"}
-                length={5}
+                length={15}
                 api={`http://localhost:3000/myapi/movie`}
               />
               <Recommended
                 title={"Recommended Movies & Tv Shows"}
-                length={8}
+                length={15}
                 seeAllTypes={"See All Movies & Tv Shows"}
                 api={`http://localhost:3000/myapi/movie`}
               />
@@ -89,8 +87,6 @@ function HomePage() {
               />
             </div>
           </div>
-        </div>
-        <SideContent />
       </div>
     </main>
   );

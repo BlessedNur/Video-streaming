@@ -13,6 +13,7 @@ function Context({ children }) {
   const [storedSideLink, setStoredSideLink] = useState("");
 
   const [lightMode, setLightMode] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
     const storedMode = localStorage.getItem("mode");
@@ -84,6 +85,8 @@ function Context({ children }) {
         handleNavClick,
         handleSideClick,
         toggleLightMode,
+        showProfile,
+        setShowProfile,
       ]}
     >
       {children}

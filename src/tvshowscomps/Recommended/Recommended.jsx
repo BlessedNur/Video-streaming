@@ -1,13 +1,13 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import style from "./TopRated.module.css";
+import style from "./Recommended.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-function TopRated({ title, api, length }) {
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
+function Recommended({ title, seeAllTypes, api, length }) {
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -22,25 +22,24 @@ function TopRated({ title, api, length }) {
     handleNavClick,
     handleSideClick,
   ] = useContext(movieContext);
-
   useEffect(() => {
-    const fetchTopRatedMovies = async () => {
+    const fetchRecommendedMovies = async () => {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
 
-        setTopRatedMovies([...data.slice(40, length)]);
+        setRecommendedMovies([...data.slice(0, length)]);
       } catch (error) {
-        console.error("Error fetching TopRated movies:", error);
+        console.error("Error fetching Recommended movies:", error);
       }
     };
 
-    fetchTopRatedMovies();
+    fetchRecommendedMovies();
   }, []);
 
   return (
     <div className={style.line}>
-      {topRatedMovies.length === 0 ? (
+      {recommendedMovies.length === 0 ? (
         <SkeletonTheme
           baseColor={lightMode ? "#eee" : "#202020"}
           highlightColor={lightMode ? "#b2b5bd" : "#444"}
@@ -51,17 +50,20 @@ function TopRated({ title, api, length }) {
             </h2>
             <div style={{ zIndex: "3" }} className={style.seeAll}>
               <p>
-                <Skeleton width={100} height={20} borderRadius={5} />
+                <Skeleton width={150} height={20} borderRadius={5} />
               </p>
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
+            <Skeleton width={133} height={180} borderRadius={10} />
           </div>
         </SkeletonTheme>
       ) : (
@@ -69,9 +71,9 @@ function TopRated({ title, api, length }) {
           <div className={style.header}>
             <h2>{title}</h2>
             <div className={style.seeAll}>
-              <p>See All</p>
+              <p>{seeAllTypes}</p>
               <i
-                class="fa fa-chevron-right"
+                className="fa fa-chevron-right"
                 style={{ fontSize: "10px" }}
                 aria-hidden="true"
               ></i>
@@ -79,19 +81,21 @@ function TopRated({ title, api, length }) {
           </div>
           <div className={style.movieList}>
             <div className={style.movies}>
-              {topRatedMovies.map((movie) => (
+              {recommendedMovies.map((movie) => (
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => alert(`this is ${movie.title}`)}
+                  onClick={() => alert(`This is ${movie.title}`)}
                 >
                   <div className={style.thumbnail}>
-                    <img
-                      src={movie.images.jpg.large_image_url}
+                    <Image
+                      src={movie.poster_path}
                       alt={`Poster for ${movie.title}`}
+                      width={110}
+                      height={150}
                       className={style.movieImage}
                     />
-                    <div class={style.playing}>
+                    <div className={style.playing}>
                       <div className={style.video}>
                         <i
                           className={`fa fa-play ${style.player}`}
@@ -99,19 +103,20 @@ function TopRated({ title, api, length }) {
                         ></i>
                         <div className={style.round}></div>
                       </div>
-                      <div class={`${style.waves} ${style.waveOne}`}></div>
-                      <div class={`${style.waves} ${style.waveTwo}`}></div>
-                      <div class={`${style.waves} ${style.waveThree}`}></div>
+                      <div className={`${style.waves} ${style.waveOne}`}></div>
+                      <div className={`${style.waves} ${style.waveTwo}`}></div>
+                      <div
+                        className={`${style.waves} ${style.waveThree}`}
+                      ></div>
                     </div>
                   </div>
-                  <h1>{movie.title}</h1>
                   <div className={style.rates}>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i className="fa fa-star" aria-hidden="true"></i>
                     <p
                       style={{ fontWeight: "600", color: lightMode && "#fff" }}
                     >
-                      {movie.score != 0
-                        ? (movie.score / 2).toFixed(1)
+                      {movie.vote_average !== 0
+                        ? (movie.vote_average / 2).toFixed(1)
                         : "Not rated"}
                     </p>
                   </div>
@@ -125,6 +130,4 @@ function TopRated({ title, api, length }) {
   );
 }
 
-export default TopRated;
-
-("https://api.themoviedb.org/3/movie/top_rated?api_key=0febce395055c78ab86a029443008afc");
+export default Recommended;

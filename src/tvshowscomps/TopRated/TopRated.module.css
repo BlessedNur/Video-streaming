@@ -23,7 +23,7 @@
 .movies {
   display: flex;
   align-items: flex-start;
-  gap: 0.5em;
+  gap: 1em;
   margin: 1em 0;
 }
 .hold img {
@@ -67,9 +67,8 @@
   z-index: 3;
 }
 .thumbnail {
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
-  border-radius: 10px;
   /* display: grid;
   place-content: center; */
   cursor: pointer;
@@ -157,4 +156,41 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+.movieBan {
+  background-color: #c00;
+  width: fit-content;
+  padding: 0.3em 2em;
+  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: -5px;
+  z-index: 5;
+  border-radius: 10px 2px 2px 0;
+  color: white;
+  font-size: 12px;
+}
+.movieBan::before {
+  content: "";
+  position: absolute;
+  width: 0.4em;
+  height: 0.4em;
+  left: 0.9px;
+  top: 25.4px;
+  border-radius: 500px 0 0 1000px;
+  z-index: 2;
+  background-color: black;
+}
+.movieBan::after {
+  content: "";
+  position: absolute;
+  width: 0.5em;
+  height: 0.9em;
+  left: 0;
+  top: 20px;
+  border-radius: 40px 0 0 35px;
+  z-index: 1;
+  background-color: #c00;
 }

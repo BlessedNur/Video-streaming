@@ -1,10 +1,9 @@
 .movieList {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: scroll;
   height: fit-content;
   gap: 0.5em;
   overflow-y: hidden;
-  overflow-x: scroll;
 }
 .movieList::-webkit-scrollbar {
   display: none;
@@ -23,7 +22,7 @@
 .movies {
   display: flex;
   align-items: flex-start;
-  gap: 0.5em;
+  gap: 1em;
   margin: 1em 0;
 }
 .hold img {
@@ -67,12 +66,13 @@
   z-index: 3;
 }
 .thumbnail {
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   border-radius: 10px;
   /* display: grid;
   place-content: center; */
   cursor: pointer;
+
   margin: 0.2em 0;
 }
 
@@ -156,5 +156,41 @@
   width: 14em;
   height: 100%;
   display: block;
+  border-radius: 10px;
   object-fit: cover;
+}
+.movieBan {
+  background-color: #c00;
+  width: fit-content;
+  padding: 0.3em 2em;
+  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: -5px;
+  z-index: 5;
+  border-radius: 10px 2px 2px 0;
+  color: white;
+  font-size: 12px;
+}
+.movieBan::before {
+  content: "";
+  position: absolute;
+  width: 0.4em;
+  height: 0.4em;
+  left: 0.98px;
+  top: 25.4px;
+  border-radius: 500px 0 0 1000px;
+  z-index: 2;
+  background-color: black;
+}
+.movieBan::after {
+  content: "";
+  position: absolute;
+  width: 0.5em;
+  height: 0.8em;
+  left: -0.2px;
+  top: 20px;
+  border-radius: 40px 0 0 35px;
+  z-index: 1;
+  background-color: #c00;
 }

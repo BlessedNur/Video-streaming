@@ -3,8 +3,8 @@
   overflow-x: hidden;
   height: fit-content;
   gap: 0.5em;
-  overflow-y: hidden;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 .movieList::-webkit-scrollbar {
   display: none;
@@ -73,6 +73,7 @@
   /* display: grid;
   place-content: center; */
   cursor: pointer;
+
   margin: 0.2em 0;
 }
 
@@ -151,10 +152,9 @@
 .thumbnail:hover .playing {
   opacity: 0.826;
 }
-
 .movieImage {
-  width: 14em;
-  height: 100%;
+  width: 10em;
+  height: 16em;
   display: block;
   object-fit: cover;
 }

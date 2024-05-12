@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 function Sidebar() {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
   const [toggleAside, setToggleAside] = useState(true);
   const [showMore, setShowMore] = useState(false);
   const [showMoreGen, setShowMoreGen] = useState(false);
@@ -26,6 +26,8 @@ function Sidebar() {
     handleNavClick,
     handleSideClick,
     toggleLightMode,
+    showProfile,
+    setShowProfile,
   ] = useContext(movieContext);
   const [navLabels, searchNavLabels] = useState(false);
 
@@ -336,7 +338,7 @@ function Sidebar() {
           }`}
           onClick={() => handleSideClick("Watchlist")}
         >
-          <i class={`fa-regular fa-heart ${style.sideLink}`}></i>
+          <i class={`fa fa-play ${style.sideLink}`}></i>
           <div
             href={""}
             className={style.asideLink}
@@ -357,7 +359,7 @@ function Sidebar() {
           }`}
           onClick={() => handleSideClick("favorites")}
         >
-          <i className={`fas fa-bookmark ${style.sideLink}`}></i>
+          <i className={`fa-regular fa-heart ${style.sideLink}`}></i>
           <div
             className={style.asideLink}
             style={{
@@ -435,6 +437,9 @@ function Sidebar() {
           </p>
         </div>
       </div>
+      <div className={`${style.dark} ${showProfile && style.showDark}`}
+      onClick={()=>setShowProfile(false)}
+      ></div>
     </aside>
   );
 }

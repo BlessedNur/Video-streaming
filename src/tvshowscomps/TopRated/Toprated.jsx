@@ -8,6 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 function TopRated({ title, api, length }) {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [
     lightMode,
     setLightMode,
@@ -28,8 +29,12 @@ function TopRated({ title, api, length }) {
       try {
         const response = await fetch(`${api}`);
         const data = await response.json();
+        const filterMovies = data.filter(
+          (movie) => (movie.vote_average / 2).toFixed(1) >= 4.2
+        );
+        setFilteredMovies(filterMovies);
 
-        setTopRatedMovies([...data.slice(40, length)]);
+        setTopRatedMovies([...data.slice(0, length)]);
       } catch (error) {
         console.error("Error fetching TopRated movies:", error);
       }
@@ -37,10 +42,10 @@ function TopRated({ title, api, length }) {
 
     fetchTopRatedMovies();
   }, []);
-
+  console.log(filteredMovies);
   return (
     <div className={style.line}>
-      {topRatedMovies.length === 0 ? (
+      {filteredMovies.length === 0 ? (
         <SkeletonTheme
           baseColor={lightMode ? "#eee" : "#202020"}
           highlightColor={lightMode ? "#b2b5bd" : "#444"}
@@ -56,12 +61,12 @@ function TopRated({ title, api, length }) {
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
+            <Skeleton width={199} height={100} borderRadius={7} />
           </div>
         </SkeletonTheme>
       ) : (
@@ -79,16 +84,18 @@ function TopRated({ title, api, length }) {
           </div>
           <div className={style.movieList}>
             <div className={style.movies}>
-              {topRatedMovies.map((movie) => (
+              {filteredMovies.map((movie) => (
                 <div
                   className={style.movieBox}
                   key={movie.id}
                   onClick={() => alert(`this is ${movie.title}`)}
                 >
                   <div className={style.thumbnail}>
-                    <img
-                      src={movie.images.jpg.large_image_url}
+                    <Image
+                      src={movie.backdrop_path}
                       alt={`Poster for ${movie.title}`}
+                      width={200}
+                      height={100}
                       className={style.movieImage}
                     />
                     <div class={style.playing}>
@@ -103,15 +110,20 @@ function TopRated({ title, api, length }) {
                       <div class={`${style.waves} ${style.waveTwo}`}></div>
                       <div class={`${style.waves} ${style.waveThree}`}></div>
                     </div>
+                    <h2 className={style.movieBan}>
+                      {movie.number_of_seasons > 1
+                        ? `${movie.number_of_seasons} seasons`
+                        : `${movie.number_of_seasons} season`}
+                    </h2>
                   </div>
-                  <h1>{movie.title}</h1>
+                  <h1>{movie.name}</h1>
                   <div className={style.rates}>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <p
                       style={{ fontWeight: "600", color: lightMode && "#fff" }}
                     >
-                      {movie.score != 0
-                        ? (movie.score / 2).toFixed(1)
+                      {movie.vote_average != 0
+                        ? (movie.vote_average / 2).toFixed(1)
                         : "Not rated"}
                     </p>
                   </div>

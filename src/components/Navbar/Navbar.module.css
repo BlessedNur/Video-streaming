@@ -147,3 +147,18 @@
 .Light {
   background: #d3d5db !important;
 }
+.profileDeta {
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-color: red; */
+  height: 100vh;
+  width: 25vw;
+  transition: 0.4s;
+  transform: translateX(1000px);
+  z-index: 12;
+}
+.showProfile {
+  transform: translateX(0);
+}
+
