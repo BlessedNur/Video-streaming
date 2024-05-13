@@ -158,6 +158,7 @@ function SideContent() {
         ) : (
           movies.map((movie) => (
             <div
+              key={movie.id}
               className="boxes"
               style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
             >
