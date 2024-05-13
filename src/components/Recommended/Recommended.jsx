@@ -5,10 +5,12 @@ import Image from "next/image";
 import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Recommended({ title, seeAllTypes, api, length }) {
   const path = usePathname();
+  const navigate = useRouter();
+
   // console.log(path);
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [
@@ -128,7 +130,7 @@ function Recommended({ title, seeAllTypes, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => alert(`This is ${movie.title}`)}
+                  onClick={() => {}}
                 >
                   <div className={style.thumbnail}>
                     <Image

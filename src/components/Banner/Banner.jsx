@@ -4,14 +4,14 @@ import style from "./Banner.module.css";
 import Image from "next/image";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { movieContext } from "@/context/Context";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
   const [lightMode, setLightMode] = useContext(movieContext);
   const path = usePathname();
-
+  const navigate = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,7 +71,11 @@ function Banner({ BannerApi, bannerWidth }) {
               </div>
             </div>
             <div className={style.movies}>
-              <Skeleton width={path === "/kids"|| path === "/movies"? 1260: 900} height={700} borderRadius={7} />
+              <Skeleton
+                width={path === "/kids" || path === "/movies" ? 1260 : 900}
+                height={700}
+                borderRadius={7}
+              />
             </div>
           </SkeletonTheme>
         ) : (
@@ -92,7 +96,7 @@ function Banner({ BannerApi, bannerWidth }) {
                     {movie.overview.slice(0, 100)}...
                   </p>
                   <div className={style.actions}>
-                    <button>Watch</button>
+                    <button onClick={()=>{}}>Watch</button>
                     <button
                       onClick={() => alert(`Added ${movie.title} to watchlist`)}
                       className={lightMode ? style.contentLight : ""}

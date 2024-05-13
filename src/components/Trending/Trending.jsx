@@ -5,11 +5,13 @@ import Image from "next/image";
 import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Trending({ title, api, length }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const path = usePathname();
+  const navigate = useRouter();
+
   const [
     lightMode,
     setLightMode,
@@ -38,6 +40,7 @@ function Trending({ title, api, length }) {
 
     fetchtrendingMovies();
   }, []);
+  console.log(trendingMovies);
 
   return (
     <div className={style.line}>
@@ -88,7 +91,7 @@ function Trending({ title, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => alert(`this is ${movie.title}`)}
+                  onClick={() => {}}
                 >
                   <div className={style.thumbnail}>
                     <Image

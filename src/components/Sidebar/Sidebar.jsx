@@ -330,7 +330,7 @@ function Sidebar() {
       )}
     </li> */}
         <Link
-          href={""}
+          href={"/watchlist"}
           className={`${style.asideLi} ${
             pathname === "/watchlist" || activeSideLink === "Watchlist"
               ? style.activeSideLi
@@ -351,7 +351,7 @@ function Sidebar() {
           </div>
         </Link>
         <Link
-          href={""}
+          href={"/favorites"}
           className={`${style.asideLi} ${
             pathname === "/favorites" || activeSideLink === "favorites"
               ? style.activeSideLi

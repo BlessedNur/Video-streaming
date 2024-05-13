@@ -4,11 +4,14 @@ import style from "./Banner.module.css";
 import Image from "next/image";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { movieContext } from "@/context/Context";
+import { useRouter } from "next/navigation";
 
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
   const [lightMode, setLightMode] = useContext(movieContext);
+  const navigate = useRouter();
+
 
   useEffect(() => {
     const fetchData = async () => {

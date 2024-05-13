@@ -209,6 +209,7 @@ function Navbar() {
             placeContent: "center",
             background: "transparent",
             transition: ".3s",
+            display: "none",
           }}
           className={`fa fa-chevron-right  ${
             lightMode ? style.Light : style.Dark
@@ -216,20 +217,11 @@ function Navbar() {
         ></i>
         <div className={style.header}>
           <h1>My Profile</h1>
-          <button class="Btn" onClick={()=>alert("LOGGED OUT")}>
-            <div class="sign">
-              <svg viewBox="0 0 512 512">
-                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
-              </svg>
-            </div>
-
-            <div class="text">Logout</div>
-          </button>
         </div>
         <div
           className={style.picSection}
           style={{
-            border: !lightMode && "1px solid #626364",
+            border: !lightMode && "1px solid #62636450",
           }}
         >
           <div className={style.flex}>
@@ -249,7 +241,7 @@ function Navbar() {
         <div
           className={style.mainInfo}
           style={{
-            border: !lightMode && "1px solid #626364",
+            border: !lightMode && "1px solid #62636450",
           }}
         >
           <p>Personal info</p>
@@ -277,16 +269,12 @@ function Navbar() {
                 <h4>Phone</h4>
                 <h5>+7230923423</h5>
               </div>
-              <div className={style.box}>
-                <h4>Password</h4>
-                <h5>*******</h5>
-              </div>
             </div>
           </div>
           <div
             className={style.edit}
             style={{
-              border: !lightMode && "1px solid #626364",
+              border: !lightMode && "1px solid #62636450",
               // color: !lightMode && "#626364",
             }}
           >
@@ -297,7 +285,7 @@ function Navbar() {
         <div
           className={style.picSection}
           style={{
-            border: !lightMode && "1px solid #626364",
+            border: !lightMode && "1px solid #62636450",
             // height: "11em",
             display: "flex",
             flexDirection: "column",
@@ -316,23 +304,37 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <button class="cta">
-          <span class="hover-underline-animation"> Contact us</span>
-          <svg
-            id="arrow-horizontal"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="10"
-            viewBox="0 0 46 16"
+        <div className="botP">
+          <button class="cta">
+            <span class="hover-underline-animation"> Contact us</span>
+            <svg
+              id="arrow-horizontal"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="10"
+              viewBox="0 0 46 16"
+            >
+              <path
+                id="Path_10"
+                data-name="Path 10"
+                d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                transform="translate(30)"
+              ></path>
+            </svg>
+          </button>
+          <button
+            className={`Btn ${lightMode && "btn"}`}
+            onClick={() => alert("LOGGED OUT")}
           >
-            <path
-              id="Path_10"
-              data-name="Path 10"
-              d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
-              transform="translate(30)"
-            ></path>
-          </svg>
-        </button>
+            <div class="sign">
+              <svg viewBox="0 0 512 512" className={lightMode && "btnSvg"}>
+                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+              </svg>
+            </div>
+
+            <div class={`text ${lightMode && "textx"}`}>Logout</div>
+          </button>
+        </div>
       </div>
     </>
   );

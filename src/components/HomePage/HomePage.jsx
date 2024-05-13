@@ -73,18 +73,18 @@ function HomePage() {
               />
               <Recommended
                 title={"Recommended Movies & Tv Shows"}
-                length={8}
+                length={18}
                 seeAllTypes={"See All Movies & Tv Shows"}
                 api={`http://localhost:3000/myapi/movie`}
               />
               <Trending
                 title={"Trending Movies & Tv Shows"}
-                length={15}
+                length={16}
                 api={`http://localhost:3000/myapi/movie`}
               />
               <TopRated
                 title={"Popular Movies & Tv Shows"}
-                length={5}
+                length={15}
                 api={`http://localhost:3000/myapi/movie`}
               />
             </div>
