@@ -113,6 +113,7 @@ function Upcoming({ title, api, length }) {
                       width={200}
                       height={100}
                       className={style.movieImage}
+                      unoptimized
                     />
                     <div class={style.playing}>
                       <div className={style.video}>
