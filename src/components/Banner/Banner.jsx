@@ -83,9 +83,8 @@ function Banner({ BannerApi, bannerWidth }) {
             {movies.map((movie, index) => (
               <div
                 key={movie.id}
-                className={`${style.item} ${
-                  index === itemActive ? style.active : ""
-                } ${lightMode ? style.Light : style.Dark}`}
+                className={`${style.item} ${index === itemActive ? style.active : ""
+                  } ${lightMode ? style.Light : style.Dark}`}
               >
                 <img src={movie.backdrop_path} alt={`Movie ${index + 1}`} />
                 <div className={style.content}>
@@ -96,7 +95,7 @@ function Banner({ BannerApi, bannerWidth }) {
                     {movie.overview.slice(0, 100)}...
                   </p>
                   <div className={style.actions}>
-                    <button onClick={()=>{}}>Watch</button>
+                    <button onClick={()=>navigate.push(`/${movie.id}`)}>Watch</button>
                     <button
                       onClick={() => alert(`Added ${movie.title} to watchlist`)}
                       className={lightMode ? style.contentLight : ""}

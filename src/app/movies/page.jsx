@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
@@ -41,52 +41,54 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-          <Banner
-            bannerWidth={"100%"}
-            BannerApi={`http://localhost:3000/myapi/movie`}
-          />
+        <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
+        <div
+          className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
+            style.lineThree
+          } ${style.lineTwo} ${
+            !showScrollDown ? style.lineTwoShow : style.lineTwoHide
+          } ${lightMode && style.lineTwoLight} ${
+            showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+          }`}
+        >
           <div
-            className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
-              style.lineThree
-            } ${style.lineTwo} ${
-              !showScrollDown ? style.lineTwoShow : style.lineTwoHide
-            } ${lightMode && style.lineTwoLight} ${
-              showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+            className={`${style.movieList} scroller ${
+              lightMode ? style.movieListLight : style.movieListDark
             }`}
+            ref={movieListRef}
           >
-            <div className={`${style.movieList} scroller ${lightMode?style.movieListLight:style.movieListDark}`} ref={movieListRef}>
-              <div
-                className={`${style.scrollDown} ${
-                  !showScrollAllDown && style.hiddenScroller
-                }`}
-              >
-                <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
-                <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
-              </div>
-
-              <Upcoming
-                title={"Latest Movies & Tv Shows"}
-                length={15}
-                api={`http://localhost:3000/myapi/movie`}
-              />
-              <Recommended
-                title={"Recommended Movies & Tv Shows"}
-                length={15}
-                seeAllTypes={"See All Movies & Tv Shows"}
-                api={`http://localhost:3000/myapi/movie`}
-              />
-              <Trending
-                title={"Trending Movies & Tv Shows"}
-                length={15}
-                api={`http://localhost:3000/myapi/movie`}
-              />
-              <TopRated
-                title={"Popular Movies & Tv Shows"}
-                length={5}
-                api={`http://localhost:3000/myapi/movie`}
-              />
+            <div
+              className={`${style.scrollDown} ${
+                !showScrollAllDown && style.hiddenScroller
+              }`}
+            >
+              <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
+              <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
             </div>
+
+            <Upcoming
+              title={"Latest Movies & Tv Shows"}
+              length={15}
+              api={`/myapi/movie`}
+            />
+            <Recommended
+              title={"Recommended Movies & Tv Shows"}
+              length={15}
+              seeAllTypes={"See All Movies & Tv Shows"}
+              api={`/myapi/movie`}
+            />
+            <Trending
+              title={"Trending Movies & Tv Shows"}
+              length={15}
+              api={`/myapi/movie`}
+            />
+            <TopRated
+              title={"Popular Movies & Tv Shows"}
+              length={5}
+              api={`/myapi/movie`}
+            />
           </div>
+        </div>
       </div>
     </main>
   );

@@ -1,9 +1,10 @@
 import React from "react";
 
 function page({ params }) {
+
   const id = params.id;
 
-  return <div>{id}</div>;
+  return <h1>{id}</h1>;
 }
 
 export default page;

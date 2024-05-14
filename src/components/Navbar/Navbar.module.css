@@ -236,7 +236,7 @@
   border-radius: 10px;
   width: fit-content;
   position: relative;
-  left: 55%;
+  /* left: 55%; */
   cursor: pointer;
 }
 .editTwo {

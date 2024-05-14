@@ -43,7 +43,7 @@ function SideContent() {
   useEffect(() => {
     const fetchUpcomingMovies = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/myapi/series`);
+        const response = await fetch(`myapi/series`);
         const data = await response.json();
 
         const filterMovies = data.filter((movie) => {
@@ -64,7 +64,7 @@ function SideContent() {
   useEffect(() => {
     const fetchTrailersMovies = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/myapi/movie`);
+        const response = await fetch(`myapi/movie`);
         const data = await response.json();
 
         const filterMovies = data.slice(1, 10).filter((movie) => {
@@ -203,13 +203,14 @@ function SideContent() {
             baseColor={lightMode ? "#eee" : "#202020"}
             highlightColor={lightMode ? "#b2b5bd" : "#444"}
           >
-            <h2 style={{margin:".5em 0"}}>
+            <h2 style={{ margin: ".5em 0" }}>
               <Skeleton height={20} width={150} />
             </h2>
           </SkeletonTheme>
         ) : (
-          <h2 style={{margin:".5em 0"}}>Trailers</h2>
+          <h2 style={{ margin: ".5em 0" }}>Trailers</h2>
         )}
+        <div className="trailers">
         <div className="trailer-box">
           <div className="vid">
             {moviesTrailers.length === 0 ? (
@@ -284,7 +285,7 @@ function SideContent() {
                   <>
                     <iframe
                       width="200"
-                      height="300"
+                      height="400"
                       src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
                       frameBorder="0"
                       className={style.trailer}
@@ -316,6 +317,7 @@ function SideContent() {
               </>
             )}
           </div>
+        </div>
         </div>
       </div>
     </div>

@@ -195,28 +195,19 @@ function Navbar() {
         }}
         // onClick={() => setShowProfile(false)}
       >
-        <i
-          onClick={
-            () => setShowProfile(false)
-            // !toggleAside ? setToggleAside(true) : setToggleAside(false)
-          }
-          style={{
-            cursor: "pointer",
-            position: "absolute",
-            height: "20px",
-            width: "30px",
-            display: "grid",
-            placeContent: "center",
-            background: "transparent",
-            transition: ".3s",
-            display: "none",
-          }}
-          className={`fa fa-chevron-right  ${
-            lightMode ? style.Light : style.Dark
-          }`}
-        ></i>
         <div className={style.header}>
           <h1>My Profile</h1>
+
+          <div
+            className={style.edit}
+            style={{
+              border: !lightMode && "1px solid #62636450",
+              // color: !lightMode && "#626364",
+            }}
+          >
+            <p>Edit profile Details</p>
+            <i class="fas fa-edit    "></i>
+          </div>
         </div>
         <div
           className={style.picSection}
@@ -253,7 +244,7 @@ function Navbar() {
               </div>
               <div className={style.box}>
                 <h4>Email Address</h4>
-                <h5>Ilma2334@gmail.com</h5>
+                <h5>Ilm*********</h5>
               </div>
               <div className={style.box}>
                 <h4>Bio</h4>
@@ -271,16 +262,6 @@ function Navbar() {
               </div>
             </div>
           </div>
-          <div
-            className={style.edit}
-            style={{
-              border: !lightMode && "1px solid #62636450",
-              // color: !lightMode && "#626364",
-            }}
-          >
-            <p>Edit profile Details</p>
-            <i class="fas fa-edit    "></i>
-          </div>
         </div>
         <div
           className={style.picSection}
@@ -289,7 +270,7 @@ function Navbar() {
             // height: "11em",
             display: "flex",
             flexDirection: "column",
-            gap: "1em",
+            gap: "3.5em",
           }}
         >
           <p>Address</p>

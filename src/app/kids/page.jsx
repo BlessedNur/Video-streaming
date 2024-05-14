@@ -43,10 +43,7 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-        <Banner
-          BannerApi={`http://localhost:3000/myapi/cartoon`}
-          bannerWidth={"100%"}
-        />
+        <Banner BannerApi={`/myapi/cartoon`} bannerWidth={"100%"} />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
             style.lineThree
@@ -54,8 +51,7 @@ function HomePage() {
             !showScrollDown ? style.lineTwoShow : style.lineTwoHide
           } ${lightMode && style.lineTwoLight} ${
             showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
-            }`}
-          
+          }`}
         >
           <div className={`${style.movieList} scroller`} ref={movieListRef}>
             <div
@@ -71,19 +67,18 @@ function HomePage() {
               title={"Latest Cartoons"}
               length={15}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/cartoon`}
-              
+              api={`/myapi/cartoon`}
             />
             <Recommended
               title={"Recommended Cartoons"}
               containerWidth={"100%"}
               length={10}
               seeAllTypes={"See All Cartoons"}
-              api={`http://localhost:3000/myapi/cartoon`}
+              api={`/myapi/cartoon`}
             />
             <Trending
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/cartoon`}
+              api={`/myapi/cartoon`}
               title={"Popular Cartoons"}
               length={19}
             />
@@ -91,7 +86,7 @@ function HomePage() {
               title={"Toprated Cartoons"}
               length={8}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/cartoon`}
+              api={`/myapi/cartoon`}
             />
           </div>
         </div>

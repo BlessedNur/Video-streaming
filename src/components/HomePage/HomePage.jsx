@@ -43,10 +43,7 @@ function HomePage() {
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
         <div className={style.layer}>
-          <Banner
-            bannerWidth={"100%"}
-            BannerApi={`http://localhost:3000/myapi/movie`}
-          />
+          <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
           <div
             className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
               style.lineThree
@@ -56,7 +53,12 @@ function HomePage() {
               showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
             }`}
           >
-            <div className={`${style.movieList} scroller ${lightMode?style.movieListLight:style.movieListDark}`} ref={movieListRef}>
+            <div
+              className={`${style.movieList} scroller ${
+                lightMode ? style.movieListLight : style.movieListDark
+              }`}
+              ref={movieListRef}
+            >
               <div
                 className={`${style.scrollDown} ${
                   !showScrollAllDown && style.hiddenScroller
@@ -69,23 +71,23 @@ function HomePage() {
               <Upcoming
                 title={"Latest Movies & Tv Shows"}
                 length={5}
-                api={`http://localhost:3000/myapi/movie`}
+                api={`/myapi/movie`}
               />
               <Recommended
                 title={"Recommended Movies & Tv Shows"}
                 length={18}
                 seeAllTypes={"See All Movies & Tv Shows"}
-                api={`http://localhost:3000/myapi/movie`}
+                api={`/myapi/movie`}
               />
               <Trending
                 title={"Trending Movies & Tv Shows"}
                 length={16}
-                api={`http://localhost:3000/myapi/movie`}
+                api={`/myapi/movie`}
               />
               <TopRated
                 title={"Popular Movies & Tv Shows"}
                 length={15}
-                api={`http://localhost:3000/myapi/movie`}
+                api={`/myapi/movie`}
               />
             </div>
           </div>

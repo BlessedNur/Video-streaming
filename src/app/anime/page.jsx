@@ -43,10 +43,7 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-        <Banner
-          BannerApi={`http://localhost:3000/myapi/anime`}
-          bannerWidth={"100%"}
-        />
+        <Banner BannerApi={`/myapi/anime`} bannerWidth={"100%"} />
         <div
           className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
             style.lineThree
@@ -70,18 +67,18 @@ function HomePage() {
               title={"Upcoming Anime"}
               length={8}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`/myapi/anime`}
             />
             <Recommended
               title={"Recommended Anime"}
               containerWidth={"100%"}
               length={10}
               seeAllTypes={"See All Anime"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`/myapi/anime`}
             />
             <Trending
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`/myapi/anime`}
               title={"Popular Anime"}
               length={17}
             />
@@ -89,7 +86,7 @@ function HomePage() {
               title={"Toprated Anime"}
               length={50}
               containerWidth={"100%"}
-              api={`http://localhost:3000/myapi/anime`}
+              api={`/myapi/anime`}
             />
           </div>
         </div>

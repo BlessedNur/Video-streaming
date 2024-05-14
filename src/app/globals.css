@@ -136,9 +136,17 @@ aside p {
 .trailer-box::-webkit-scrollbar{
   display:none;
 }
+.trailers{
+  overflow-y: hidden;
+  height: 50vh;
+  /* background-color: red; */
+  /* padding: 2em; */
+}
 .trailer-box{
   overflow-y: scroll;
-  height: 37vh;
+  max-height: 80%;
+  /* background-color: green; */
+
 }
 .ytp-title-text {
   display: none !important; 
