@@ -36,34 +36,34 @@ const Page = () => {
   // console.log(isLoading);
   // console.log(movies);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && animationContainer.current) {
-      import("lottie-web")
-        .then((Lottie) => {
-          const anim = Lottie.loadAnimation({
-            container: animationContainer.current,
-            renderer: "svg",
-            loop: true,
-            autoplay: true,
-            path: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/play_fill_loader.json",
-          });
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && animationContainer.current) {
+  //     import("lottie-web")
+  //       .then((Lottie) => {
+  //         const anim = Lottie.loadAnimation({
+  //           container: animationContainer.current,
+  //           renderer: "svg",
+  //           loop: true,
+  //           autoplay: true,
+  //           path: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/play_fill_loader.json",
+  //         });
 
-          anim.addEventListener("DOMLoaded", onDOMLoaded);
-          anim.setSpeed(1);
+  //         anim.addEventListener("DOMLoaded", onDOMLoaded);
+  //         anim.setSpeed(1);
 
-          function onDOMLoaded() {
-            anim.addEventListener("complete", () => {});
-          }
+  //         function onDOMLoaded() {
+  //           anim.addEventListener("complete", () => {});
+  //         }
 
-          return () => {
-            anim.destroy();
-          };
-        })
-        .catch((error) => {
-          console.error("Failed to load lottie-web", error);
-        });
-    }
-  },[cat]);
+  //         return () => {
+  //           anim.destroy();
+  //         };
+  //       })
+  //       .catch((error) => {
+  //         console.error("Failed to load lottie-web", error);
+  //       });
+  //   }
+  // },[cat]);
   // console.log(cat);
 
   useEffect(() => {
@@ -411,16 +411,16 @@ const Page = () => {
           <h2 style={{ color: !lightMode && "#fff" }}>Showing Results for</h2>
           <h2 style={{ color: !lightMode && "#fff" }}>"Popular"</h2>
         </div>
-        {isLoading ? (
+        {/* {isLoading ? (
           <div ref={animationContainer} id="animationWindow" />
-        ) : (
+        ) : ( */}
           <>
             {cat === 0 && renderList(movies)}
             {cat === 1 && renderList(series)}
             {cat === 2 && renderList(anime)}
             {cat === 3 && renderList(cartoon)}
           </>
-        )}
+        {/* // )} */}
       </div>
     </section>
   );
