@@ -12,6 +12,7 @@ const Page = () => {
   const [anime, setAnime] = useState([]);
   const [cartoon, setCartoon] = useState([]);
   const [cat, setCat] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   const [
     lightMode,
@@ -125,7 +126,7 @@ const Page = () => {
               className={style.movieBox}
               key={item.id}
               onClick={() => {}}
-              title={item.title}
+              title={item.title || item.name}
             >
               <div className={style.thumbnail}>
                 <Image
@@ -141,6 +142,45 @@ const Page = () => {
           ))}
     </section>
   );
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value.toLowerCase();
+
+    setSearchValue(searchQuery);
+    if (searchQuery === "") {
+      setFilteredItems([]);
+    } else {
+      let filteredItems = [];
+      switch (cat) {
+        case 0:
+          filteredItems = movies.filter((item) =>
+            item.title.toLowerCase().includes(searchQuery)
+          );
+          break;
+        case 1:
+          filteredItems = series.filter((item) =>
+            item.name.toLowerCase().includes(searchQuery)
+          );
+          break;
+        case 2:
+          filteredItems = anime.filter((item) =>
+            item.title.toLowerCase().includes(searchQuery)
+          );
+          break;
+        case 3:
+          filteredItems = cartoon.filter((item) =>
+            item.title.toLowerCase().includes(searchQuery)
+          );
+          break;
+        default:
+          break;
+      }
+      setFilteredItems(filteredItems);
+    }
+  };
+
+  console.log(filteredItems.length);
 
   return (
     <section
@@ -162,6 +202,8 @@ const Page = () => {
             <input
               type="text"
               className={style.input}
+              value={searchValue}
+              onChange={handleSearch}
               placeholder="Find movies , Tv shows ...."
               style={{ color: !lightMode ? "#fff" : "#000" }}
             />
@@ -184,10 +226,8 @@ const Page = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
+               
             </div>
-            <button>
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
           </div>
         </div>
         <div className={style.right}>
@@ -411,18 +451,56 @@ const Page = () => {
             </div>
           </div>
         </section>
-
-        <div
-          className={style.middle}
-          style={{
-            marginBottom: ".5em",
-          }}
-        >
-          <h2 style={{ color: !lightMode && "#fff" }}>Showing Results for</h2>
-          <h2 style={{ color: !lightMode && "#fff" }}>&quot;Popular&quot;</h2>
-        </div>
+        {searchValue && (
+          <div
+            className={style.middle}
+            style={{
+              marginBottom: ".5em",
+            }}
+          >
+            <h2 style={{ color: !lightMode && "#fff" }}>Showing Results for</h2>
+            <h2 style={{ color: !lightMode && "#fff" }}>
+              &quot;{searchValue}&quot;
+            </h2>
+          </div>
+        )}
         {isLoading ? (
           <div ref={animationContainer} id="animationWindow" />
+        ) : searchValue && filteredItems.length === 0 ? (
+          <div
+            style={{
+              textAlign: "center",
+              color: !lightMode ? "#fff" : "#000",
+              height: "70vh",
+              display: "grid",
+                placeContent: "center",
+              fontSize:"20px"
+            }}
+          >
+            Nothing found
+          </div>
+        ) : filteredItems.length > 0 ? (
+          <section className={style.Lists}>
+            {filteredItems.map((item) => (
+              <div
+                className={style.movieBox}
+                key={item.id}
+                onClick={() => {}}
+                title={item.title || item.name}
+              >
+                <div className={style.thumbnail}>
+                  <Image
+                    src={item.poster_path || item.images.jpg.image_url}
+                    alt={`Poster for ${item.title}`}
+                    width={110}
+                    height={165}
+                    className={style.movieImage}
+                  />
+                </div>
+                <div className={style.rates}></div>
+              </div>
+            ))}
+          </section>
         ) : (
           <>
             {cat === 0 && renderList(movies)}

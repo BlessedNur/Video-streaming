@@ -255,10 +255,10 @@
   display: grid;
   padding: 2em;
   padding-left: 3em;
-  gap: 1em;
+  gap: 1em ;
   height: 87vh;
   overflow-y: scroll;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(auto-fill , minmax(100px,1fr));
 }
 .categories {
   display: flex;

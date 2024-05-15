@@ -144,7 +144,7 @@ aside p {
 }
 .trailer-box {
   overflow-y: scroll;
-  max-height: 80%;
+  max-height: min-content;
   /* background-color: green; */
 }
 .ytp-title-text {
