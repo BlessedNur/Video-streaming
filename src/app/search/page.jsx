@@ -419,7 +419,7 @@ const Page = () => {
           }}
         >
           <h2 style={{ color: !lightMode && "#fff" }}>Showing Results for</h2>
-          <h2 style={{ color: !lightMode && "#fff" }}>"Popular"</h2>
+          <h2 style={{ color: !lightMode && "#fff" }}>&quot;Popular&quot;</h2>
         </div>
         {isLoading ? (
           <div ref={animationContainer} id="animationWindow" />
