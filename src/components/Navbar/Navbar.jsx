@@ -168,10 +168,10 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className={style.right} onClick={()=>navigate.push("/search")}>
-          <div className={style.search} title="search">
+        <div className={style.right} >
+          <Link href={"/search"} className={style.search} title="search" style={{color:"inherit"}}>
             <i className="fa fa-search" aria-hidden="true"></i>
-          </div>
+          </Link>
           <div className={style.bell} title="notifications">
             <i className="fa-regular fa-bell" aria-hidden="true"></i>
           </div>
