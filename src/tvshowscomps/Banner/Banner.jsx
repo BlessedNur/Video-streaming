@@ -85,7 +85,7 @@ function Banner({ BannerApi, bannerWidth }) {
                   index === itemActive ? style.active : ""
                 } ${lightMode ? style.Light : style.Dark}`}
               >
-                <img src={movie.backdrop_path} alt={`Movie ${index + 1}`} />
+                <Image src={movie.backdrop_path} width={6000} height={10000} className={style.movieImage} alt={`Movie ${index + 1}`} />
                 <div className={style.content}>
                   <h2 className={lightMode ? style.contentLight : ""}>
                     {movie.name}

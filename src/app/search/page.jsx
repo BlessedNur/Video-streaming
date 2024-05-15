@@ -64,7 +64,7 @@ const Page = () => {
         });
     }
   },[cat]);
-  console.log(cat);
+  // console.log(cat);
 
   useEffect(() => {
     const fetchData = async (url, setData) => {
@@ -206,7 +206,7 @@ const Page = () => {
             title="account"
           >
             <div className={style.profile}>
-              <Image width={200} height={200} src={"/images/wallpaperflare.com_wallpaper (16).jpg"} />
+              <Image width={200} height={200} alt="profile" src={"/images/wallpaperflare.com_wallpaper (16).jpg"} />
             </div>
           </div>
         </div>
