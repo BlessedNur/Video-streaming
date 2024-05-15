@@ -63,7 +63,7 @@ const Page = () => {
           console.error("Failed to load lottie-web", error);
         });
     }
-  });
+  },[cat]);
   console.log(cat);
 
   useEffect(() => {
