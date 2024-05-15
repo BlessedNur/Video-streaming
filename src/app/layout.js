@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
           <Context>{children}</Context>
         {/* </SkeletonTheme> */}
+        
       </body>
     </html>
   );

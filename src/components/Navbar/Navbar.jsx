@@ -3,10 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Navbar.module.css";
 import { movieContext } from "@/context/Context";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Navbar() {
   const pathname = usePathname();
+  const navigate = useRouter()
   const [countires, setCountries] = useState({
     UK: "UK",
     JAPANESE: "JAPANESE",
@@ -167,7 +168,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className={style.right}>
+        <div className={style.right} onClick={()=>navigate.push("/search")}>
           <div className={style.search} title="search">
             <i className="fa fa-search" aria-hidden="true"></i>
           </div>

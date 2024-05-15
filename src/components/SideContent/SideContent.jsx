@@ -284,7 +284,7 @@ function SideContent() {
                 {moviesTrailers.map((movie) => (
                   <>
                     <iframe
-                      width="200"
+                      width="4p00"
                       height="400"
                       src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
                       frameBorder="0"

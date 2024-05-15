@@ -27,6 +27,7 @@ function Recommended({ title, seeAllTypes, api, length }) {
     handleNavClick,
     handleSideClick,
   ] = useContext(movieContext);
+  
   useEffect(() => {
     const fetchRecommendedMovies = async () => {
       try {
