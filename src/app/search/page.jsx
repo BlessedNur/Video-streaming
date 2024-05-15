@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
 import Image from "next/image";
-const page = () => {
+const Page = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [anime, setAnime] = useState([]);
@@ -426,4 +426,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
