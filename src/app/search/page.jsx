@@ -6,13 +6,17 @@ import Navbar from "@/components/Navbar/Navbar";
 import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 const Page = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [anime, setAnime] = useState([]);
   const [cartoon, setCartoon] = useState([]);
-  const [cat, setCat] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const path = usePathname();
+  const [note, setNote] = useState(false);
 
   const [
     lightMode,
@@ -30,7 +34,35 @@ const Page = () => {
     toggleLightMode,
     showProfile,
     setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
   ] = useContext(movieContext);
+
+  genre && setFilteredType("Default");
+  path === "/search" && handleSideClick("");
+  const previousCat = useRef(cat);
+
+  const handleNote = () => {
+    if (searchValue && notFound) {
+      setNote(true);
+      setTimeout(() => {
+        setNote(false);
+      }, 5000);
+    }
+  };
+
+  useEffect(() => {
+    if (previousCat.current !== cat) {
+      handleNote();
+    }
+    previousCat.current = cat;
+  }, [cat, searchValue, notFound]);
 
   const animationContainer = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +96,7 @@ const Page = () => {
           console.error("Failed to load lottie-web", error);
         });
     }
-  });
+  }, [searchValue || (!notFound && isLoading)]);
   // console.log(cat);
 
   useEffect(() => {
@@ -98,20 +130,106 @@ const Page = () => {
         break;
     }
   }, [cat]);
+  const renderList = (items) => {
+    let filteredItems = [...items];
 
-  const renderList = (items) => (
-    <section className={style.Lists}>
-      {items == anime
-        ? items.map((item) => (
+    if (genre) {
+      filteredItems = filteredItems.filter((item) =>
+        item.genreNames.includes(genre)
+      );
+    }
+
+    let sortedItems = [...filteredItems];
+    switch (filteredType) {
+      case "Top Rated":
+        sortedItems = sortedItems.filter(
+          (item) => item.vote_average > 10 || item.popularity > 400
+        );
+        sortedItems.sort((a, b) => {
+          if (
+            (b.vote_average || b.popularity) ===
+            (a.vote_average || a.popularity)
+          ) {
+            return b.popularity - a.popularity;
+          }
+          return (
+            (b.vote_average || b.popularity) - (a.vote_average || a.popularity)
+          );
+        });
+        break;
+      case "Trending":
+        sortedItems = sortedItems.filter(
+          (item) => item.vote_average > 70 || item.popularity > 2400
+        );
+        sortedItems.sort((a, b) => {
+          if (
+            (b.vote_average || b.popularity) ===
+            (a.vote_average || a.popularity)
+          ) {
+            return b.popularity - a.popularity;
+          }
+          return (
+            (b.vote_average || b.popularity) + (a.vote_average || a.popularity)
+          );
+        });
+        break;
+      case "Latest":
+        sortedItems = sortedItems.filter((item) => {
+          let latestDate = null;
+          if (item.release_date) {
+            latestDate = item.release_date;
+          } else if (item.first_air_date) {
+            latestDate = item.first_air_date;
+          } else if (item.year) {
+            latestDate = new Date(item.year, 0); // Assuming 'year' represents the release year
+          }
+          return latestDate && new Date(latestDate) <= new Date();
+        });
+        sortedItems.sort((a, b) => {
+          let aDate = null;
+          let bDate = null;
+          if (a.release_date) {
+            aDate = new Date(a.release_date);
+          } else if (a.first_air_date) {
+            aDate = new Date(a.first_air_date);
+          } else if (a.year) {
+            aDate = new Date(a.year, 0); // Assuming 'year' represents the release year
+          }
+          if (b.release_date) {
+            bDate = new Date(b.release_date);
+          } else if (b.first_air_date) {
+            bDate = new Date(b.first_air_date);
+          } else if (b.year) {
+            bDate = new Date(b.year, 0); // Assuming 'year' represents the release year
+          }
+          return bDate - aDate;
+        });
+        break;
+      case "Default":
+        sortedItems;
+        break;
+      default:
+        break;
+    }
+
+    // console.log(sortedItems.map((item) => item.popularity));
+    return (
+      <section
+        className={`${style.Lists} ${
+          filteredItems.length === 0 && style.ListGenre
+        }`}
+      >
+        {filteredItems.length > 0 ? (
+          sortedItems.map((item) => (
             <div
               className={style.movieBox}
               key={item.id}
               onClick={() => {}}
-              title={item.title}
+              title={item.title || item.name}
             >
               <div className={style.thumbnail}>
                 <Image
-                  src={item.images.jpg.image_url}
+                  src={item.poster_path || item.images.jpg.image_url}
                   alt={`Poster for ${item.title}`}
                   width={110}
                   height={165}
@@ -121,27 +239,33 @@ const Page = () => {
               <div className={style.rates}></div>
             </div>
           ))
-        : items.map((item) => (
-            <div
-              className={style.movieBox}
-              key={item.id}
-              onClick={() => {}}
-              title={item.title || item.name}
-            >
-              <div className={style.thumbnail}>
-                <Image
-                  src={item.poster_path}
-                  alt={`Poster for ${item.title}`}
-                  width={110}
-                  height={165}
-                  className={style.movieImage}
-                />
-              </div>
-              <div className={style.rates}></div>
-            </div>
-          ))}
-    </section>
-  );
+        ) : (
+          <div
+            style={{
+              textAlign: "center",
+              color: !lightMode ? "#fff" : "#000",
+              height: "80%",
+              width: "90vw",
+              display: "grid",
+              placeContent: "center",
+              fontSize: "20px",
+            }}
+          >
+            <dotlottie-player
+              src="https://lottie.host/a1d6e94d-b2bd-4a7d-9529-55d0e08b014b/e6QbYU4gAC.json"
+              background="transparent"
+              speed="1"
+              style={{ height: "300px" }}
+              loop
+              autoplay
+            ></dotlottie-player>
+            <h2>Nothing found</h2>
+          </div>
+        )}
+      </section>
+    );
+  };
+
   const [filteredItems, setFilteredItems] = useState([]);
 
   const handleSearch = (e) => {
@@ -180,7 +304,17 @@ const Page = () => {
     }
   };
 
-  console.log(filteredItems.length);
+  useEffect(() => {
+    setFilteredItems([]);
+  }, [cat]);
+
+  useEffect(() => {
+    if (searchValue && filteredItems.length === 0) {
+      setNotFound(true);
+    } else {
+      setNotFound(false);
+    }
+  }, [searchValue, filteredItems]);
 
   return (
     <section
@@ -203,30 +337,101 @@ const Page = () => {
               type="text"
               className={style.input}
               value={searchValue}
-              onChange={handleSearch}
+              onChange={
+                !isLoading
+                  ? (e) => {
+                      handleSearch(e);
+                      setGenre("");
+                    }
+                  : undefined
+              }
               placeholder="Find movies , Tv shows ...."
               style={{ color: !lightMode ? "#fff" : "#000" }}
             />
-            <div
+            <button
               className={`${style.filters} ${!lightMode && style.filtersDark}`}
+              onClick={() =>
+                !showFilter ? setShowFilter(true) : setShowFilter(false)
+              }
+              disabled={searchValue || genre ? true : false}
             >
-              <p style={{ color: !lightMode && "#ffffffab" }}>Filter</p>
+              <p
+                className={`${!lightMode && style.DarkSvg} ${
+                  genre && !lightMode && style.SvgGenre
+                }`}
+              >
+                Filter
+              </p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                style={{ fill: !lightMode && "#fff" }}
-                fill="none"
+                style={{}}
+                className={`${!lightMode && style.DarkSvg} ${
+                  searchValue || (genre && !lightMode && style.SvgGenre)
+                }`}
                 id="filter"
               >
                 <path
-                  fill={!lightMode ? "#ffffffab" : "#000"}
+                  fill={searchValue || genre ? "#b1b5bf" : "#000"}
                   fillRule="evenodd"
                   d="M20 5h-1.17a3.001 3.001 0 0 0-5.66 0H4a1 1 0 0 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2zm-4 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 12a1 1 0 0 1 1-1h1.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-9.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 0 1-1-1zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-1.17a3.001 3.001 0 0 0-5.66 0H4zm13 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
                   clipRule="evenodd"
                 ></path>
               </svg>
-               
+            </button>
+            <div
+              className={`${style.filterList} ${
+                showFilter && style.filterListShow
+              } ${!lightMode && style.filterListDark}`}
+            >
+              <ul className={style.filterUl}>
+                <li
+                  className={style.filter}
+                  onClick={() => {
+                    setFilteredType("Top Rated");
+                    setShowFilter(false);
+                  }}
+                >
+                  Top Rated
+                </li>
+                <li
+                  className={style.filter}
+                  onClick={() => {
+                    setFilteredType("Trending");
+                    setShowFilter(false);
+                  }}
+                >
+                  Trending
+                </li>
+                <li
+                  className={style.filter}
+                  onClick={() => {
+                    setFilteredType("Latest");
+                    setShowFilter(false);
+                  }}
+                >
+                  Latest
+                </li>
+                <li
+                  className={style.filter}
+                  onClick={() => {
+                    setFilteredType("Default");
+                    setShowFilter(false);
+                  }}
+                >
+                  Default
+                </li>
+              </ul>
+            </div>
+            <div
+              className={`${style.Note} ${note && style.ShowNote}`}
+              style={{
+                position: "absolute",
+              }}
+            >
+              NOTE : Please renew your search after selecting a new
+              category.Have issues? <Link href={""}>Contact us</Link>
             </div>
           </div>
         </div>
@@ -436,17 +641,28 @@ const Page = () => {
                 </li>
               </ul>
             </div>
-            <div className={style.RightCat}>
+            <div className={style.genres}>
+              <p>Genres</p>
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+            <div
+              className={style.RightCat}
+              style={{ borderBottom: !lightMode && "1px solid #85888d6f" }}
+            >
               <h3 style={{ color: !lightMode && "#fff" }}>Sorted by:</h3>
               <p
                 className={style.sortClass}
                 style={{
-                  width: "fit-content",
+                  width: "7em",
+                  display: "grid",
+                  placeContent: "center",
+                  whiteSpace: "nowrap",
+                  textAlign: "center",
                   background: !lightMode && "#ebebeb15",
                   color: !lightMode && "#fff",
                 }}
               >
-                {"Popular"}
+                {filteredType}
               </p>
             </div>
           </div>
@@ -464,20 +680,40 @@ const Page = () => {
             </h2>
           </div>
         )}
+        {genre && !searchValue && (
+          <div
+            className={style.middle}
+            style={{
+              marginBottom: ".5em",
+            }}
+          >
+            <h2 style={{ color: !lightMode && "#fff" }}>Genre</h2>
+            <h2 style={{ color: !lightMode && "#fff" }}>&quot;{genre}&quot;</h2>
+          </div>
+        )}
         {isLoading ? (
           <div ref={animationContainer} id="animationWindow" />
-        ) : searchValue && filteredItems.length === 0 ? (
+        ) : notFound ? (
           <div
             style={{
               textAlign: "center",
               color: !lightMode ? "#fff" : "#000",
               height: "70vh",
               display: "grid",
-                placeContent: "center",
-              fontSize:"20px"
+              placeContent: "center",
+              fontSize: "20px",
             }}
           >
-            Nothing found
+            {" "}
+            <dotlottie-player
+              src="https://lottie.host/a1d6e94d-b2bd-4a7d-9529-55d0e08b014b/e6QbYU4gAC.json"
+              background="transparent"
+              speed="1"
+              style={{ height: "300px" }}
+              loop
+              autoplay
+            ></dotlottie-player>
+            <h2>Nothing found</h2>
           </div>
         ) : filteredItems.length > 0 ? (
           <section className={style.Lists}>

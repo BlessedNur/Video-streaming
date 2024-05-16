@@ -26,8 +26,14 @@ function Recommended({ title, seeAllTypes, api, length }) {
     setStoredSideLink,
     handleNavClick,
     handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
   ] = useContext(movieContext);
-  
   useEffect(() => {
     const fetchRecommendedMovies = async () => {
       try {
@@ -116,7 +122,14 @@ function Recommended({ title, seeAllTypes, api, length }) {
         <>
           <div className={style.header}>
             <h2>{title}</h2>
-            <div className={style.seeAll}>
+            <div
+              className={style.seeAll}
+              onClick={() => {
+                setFilteredType("Default");
+                path === "/" || path === "/movies"? setCat(0) : path === "/kids" && setCat(3);
+                navigate.push("/search");
+              }}
+            >
               <p>{seeAllTypes}</p>
               <i
                 className="fa fa-chevron-right"

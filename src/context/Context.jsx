@@ -11,9 +11,14 @@ function Context({ children }) {
   const [storedNavLink, setStoredNavLink] = useState("");
   const [storedModes, setStoredModes] = useState("");
   const [storedSideLink, setStoredSideLink] = useState("");
-
-  const [lightMode, setLightMode] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [lightMode, setLightMode] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
+  const [filteredType, setFilteredType] = useState("Default");
+  const [cat, setCat] = useState(0);
+  const [genre, setGenre] = useState("");
+  
+  console.log(cat);
 
   useEffect(() => {
     const storedMode = localStorage.getItem("mode");
@@ -87,6 +92,14 @@ function Context({ children }) {
         toggleLightMode,
         showProfile,
         setShowProfile,
+        filteredType,
+        setFilteredType,
+        cat,
+        setCat,
+        genre,
+        setGenre,
+        searchValue,
+        setSearchValue,
       ]}
     >
       {children}

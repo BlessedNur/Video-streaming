@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
           <Context>{children}</Context>
         {/* </SkeletonTheme> */}
-        
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
       </body>
     </html>
   );

@@ -26,6 +26,13 @@ function Upcoming({ title, api, length }) {
     setStoredSideLink,
     handleNavClick,
     handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
   ] = useContext(movieContext);
 
   useEffect(() => {
@@ -89,7 +96,17 @@ function Upcoming({ title, api, length }) {
         <>
           <div className={style.header}>
             <h2>{title}</h2>
-            <div style={{ zIndex: "3" }} className={style.seeAll}>
+            <div
+              style={{ zIndex: "3" }}
+              className={style.seeAll}
+              onClick={() => {
+                setFilteredType("Latest");
+                path === "/" || path === "/movies"
+                  ? setCat(0)
+                  : path === "/kids" && setCat(3);
+                navigate.push("/search");
+              }}
+            >
               <p>See All</p>
               <i
                 class="fa fa-chevron-right"

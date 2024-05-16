@@ -145,7 +145,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
+  /* gap: 1em; */
   padding: 0 1em;
   margin: 0 1em;
   width: 100%;
@@ -154,6 +154,18 @@
   /* overflow: scroll; */
   max-height: 0;
   transition: max-height 0.5s ease;
+}
+.categories p{
+  /* background-color: red; */
+  box-sizing: border-box;
+  padding: .5em;
+  width: 100%;
+  transition: .3s;
+  text-align: center;
+}
+.categories p:hover{
+  background-color: #c00;
+  color: white;
 }
 .catShow {
   max-height: 50px !important;

@@ -67,23 +67,23 @@ function HomePage() {
             </div>
 
             <Upcoming
-              title={"Latest Movies & Tv Shows"}
+              title={"Latest Movies"}
               length={15}
               api={`/myapi/movie`}
             />
             <Recommended
-              title={"Recommended Movies & Tv Shows"}
+              title={"Recommended Movies"}
               length={15}
-              seeAllTypes={"See All Movies & Tv Shows"}
+              seeAllTypes={"See All Movies"}
               api={`/myapi/movie`}
             />
             <Trending
-              title={"Trending Movies & Tv Shows"}
+              title={"Trending Movies"}
               length={15}
               api={`/myapi/movie`}
             />
             <TopRated
-              title={"Popular Movies & Tv Shows"}
+              title={"Popular Movies"}
               length={5}
               api={`/myapi/movie`}
             />

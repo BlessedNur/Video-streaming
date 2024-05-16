@@ -5,10 +5,12 @@ import { movieContext } from "@/context/Context";
 import Image from "next/image";
 import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { useRouter } from "next/navigation";
 
 function SideContent() {
   const [movies, setMovies] = useState([]);
   const [moviesTrailers, setMoviesTrailers] = useState([]);
+  const navigate = useRouter();
   const [
     lightMode,
     setLightMode,
@@ -23,6 +25,16 @@ function SideContent() {
     handleNavClick,
     handleSideClick,
     toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
   ] = useContext(movieContext);
   useEffect(() => {
     const categories = document.querySelector(".cats");
@@ -105,16 +117,78 @@ function SideContent() {
             </SkeletonTheme>
           ) : (
             <>
-              <h6>Action</h6>
-              <h6>Horror</h6>
-              <h6>Drama</h6>
-              <h6>Comedy</h6>
-              <h6>Romance</h6>
-              <h6>Mystery</h6>
-              <h6>Fantasy</h6>
-              <h6>Adventure</h6>
-              <h6>Musical</h6>
-              <h6>Thriller</h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Action");
+                }}
+              >
+                Action
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Horror");
+                }}
+              >
+                Horror
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Drama");
+                }}
+              >
+                Drama
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Comedy");
+                }}
+              >
+                Comedy
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Romance");
+                }}
+              >
+                Romance
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Mystery");
+                }}
+              >
+                Mystery
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Fantasy");
+                }}
+              >
+                Fantasy
+              </h6>
+              <h6
+                onClick={() => {
+                  navigate.push("/search");
+                  setSearchValue("");
+                  setGenre("Adventure");
+                }}
+              >
+                Adventure
+              </h6>
             </>
           )}
         </div>
@@ -180,7 +254,7 @@ function SideContent() {
                 </div>
                 <p className="bot" style={{ color: "#c00", fontWeight: "600" }}>
                   {movie.episode_run_time.length > 0
-                    ? `${movie.episode_run_time} mingls | episode`
+                    ? `${movie.episode_run_time} mins | episode`
                     : "unconfirmed"}
                 </p>
               </div>
@@ -211,113 +285,113 @@ function SideContent() {
           <h2 style={{ margin: ".5em 0" }}>Trailers</h2>
         )}
         <div className="trailers">
-        <div className="trailer-box">
-          <div className="vid">
-            {moviesTrailers.length === 0 ? (
-              <SkeletonTheme
-                baseColor={lightMode ? "#eee" : "#202020"}
-                highlightColor={lightMode ? "#b2b5bd" : "#444"}
-              >
-                <Skeleton height={130} width={330} borderRadius={10} />
-                <div
-                  className="view"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
+          <div className="trailer-box">
+            <div className="vid">
+              {moviesTrailers.length === 0 ? (
+                <SkeletonTheme
+                  baseColor={lightMode ? "#eee" : "#202020"}
+                  highlightColor={lightMode ? "#b2b5bd" : "#444"}
                 >
-                  <Skeleton height={20} width={120} />
-                  <Skeleton height={20} width={70} />
-                </div>
-                <Skeleton height={130} width={330} borderRadius={10} />
-                <div
-                  className="view"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Skeleton height={20} width={120} />
-                  <Skeleton height={20} width={70} />
-                </div>
-                <Skeleton height={130} width={330} borderRadius={10} />
-                <div
-                  className="view"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Skeleton height={20} width={120} />
-                  <Skeleton height={20} width={70} />
-                </div>
-                <Skeleton height={130} width={330} borderRadius={10} />
-                <div
-                  className="view"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Skeleton height={20} width={120} />
-                  <Skeleton height={20} width={70} />
-                </div>
-                <Skeleton height={130} width={330} borderRadius={10} />
-                <div
-                  className="view"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Skeleton height={20} width={120} />
-                  <Skeleton height={20} width={70} />
-                </div>
-              </SkeletonTheme>
-            ) : (
-              <>
-                {moviesTrailers.map((movie) => (
-                  <>
-                    <iframe
-                      width="4p00"
-                      height="400"
-                      src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
-                      frameBorder="0"
-                      className={style.trailer}
-                      allowFullScreen
-                      title=""
-                    ></iframe>
-                    <div
-                      className="view"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <h5>{movie.title}</h5>
-                      <Link
-                        href={""}
+                  <Skeleton height={130} width={330} borderRadius={10} />
+                  <div
+                    className="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Skeleton height={20} width={120} />
+                    <Skeleton height={20} width={70} />
+                  </div>
+                  <Skeleton height={130} width={330} borderRadius={10} />
+                  <div
+                    className="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Skeleton height={20} width={120} />
+                    <Skeleton height={20} width={70} />
+                  </div>
+                  <Skeleton height={130} width={330} borderRadius={10} />
+                  <div
+                    className="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Skeleton height={20} width={120} />
+                    <Skeleton height={20} width={70} />
+                  </div>
+                  <Skeleton height={130} width={330} borderRadius={10} />
+                  <div
+                    className="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Skeleton height={20} width={120} />
+                    <Skeleton height={20} width={70} />
+                  </div>
+                  <Skeleton height={130} width={330} borderRadius={10} />
+                  <div
+                    className="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Skeleton height={20} width={120} />
+                    <Skeleton height={20} width={70} />
+                  </div>
+                </SkeletonTheme>
+              ) : (
+                <>
+                  {moviesTrailers.map((movie) => (
+                    <>
+                      <iframe
+                        width="4p00"
+                        height="400"
+                        src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
+                        frameBorder="0"
+                        className={style.trailer}
+                        allowFullScreen
+                        title=""
+                      ></iframe>
+                      <div
+                        className="view"
                         style={{
-                          color: "#626364",
-                          textDecoration: "none",
-                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        view more
-                      </Link>
-                    </div>
-                  </>
-                ))}
-              </>
-            )}
+                        <h5>{movie.title}</h5>
+                        <Link
+                          href={""}
+                          style={{
+                            color: "#626364",
+                            textDecoration: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          view more
+                        </Link>
+                      </div>
+                    </>
+                  ))}
+                </>
+              )}
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

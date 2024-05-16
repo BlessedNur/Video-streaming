@@ -24,8 +24,14 @@ function TopRated({ title, api, length }) {
     setStoredSideLink,
     handleNavClick,
     handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
   ] = useContext(movieContext);
-
   useEffect(() => {
     const fetchTopRatedMovies = async () => {
       try {
@@ -71,7 +77,14 @@ function TopRated({ title, api, length }) {
         <>
           <div className={style.header}>
             <h2>{title}</h2>
-            <div className={style.seeAll}>
+            <div
+              className={style.seeAll}
+              onClick={() => {
+                setFilteredType("Top Rated");
+                setCat(2);
+                navigate.push("/search");
+              }}
+            >
               <p>See All</p>
               <i
                 class="fa fa-chevron-right"

@@ -4,10 +4,11 @@ import style from "./Sidebar.module.css";
 import { movieContext } from "@/context/Context";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Sidebar() {
   const pathname = usePathname();
+  const navigate = useRouter();
   // console.log(pathname);
   const [toggleAside, setToggleAside] = useState(true);
   const [showMore, setShowMore] = useState(false);
@@ -28,6 +29,14 @@ function Sidebar() {
     toggleLightMode,
     showProfile,
     setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
   ] = useContext(movieContext);
   const [navLabels, searchNavLabels] = useState(false);
 
@@ -55,8 +64,8 @@ function Sidebar() {
             // <h1>QUANMOVIES</h1>
             <Image
               src={"/images/New_Project__3_-removebg-preview.png"}
-              width={300}
-              height={300}
+              width={200}
+              height={200}
               className={style.logoThree}
             />
             // <h1>Logo</h1>
@@ -270,16 +279,84 @@ function Sidebar() {
             borderLeft: lightMode ? "1px solid black" : "1px solid white",
           }}
         >
-          <p>Action</p>
-          <p>Horror</p>
-          <p>Comedy</p>
-          <p>Thriller</p>
-          <p>Romance</p>
-          <p>Science Fiction</p>
-          <p>Fantasy</p>
-          <p>Adventure</p>
-          <p>Musical</p>
-          <p>Drama</p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Action");
+            }}
+          >
+            Action
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+              setGenre("Horror");
+            }}
+          >
+            Horror
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Drama");
+            }}
+          >
+            Drama
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Comedy");
+            }}
+          >
+            Comedy
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Romance");
+            }}
+          >
+            Romance
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Mystery");
+            }}
+          >
+            Mystery
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Fantasy");
+            }}
+          >
+            Fantasy
+          </p>
+          <p
+            onClick={() => {
+              pathname !== "/search" && navigate.push("/search");
+                //  setSearchValue("")
+
+              setGenre("Adventure");
+            }}
+          >
+            Adventure
+          </p>
         </div>
         {/* <li
       className={`${style.asideLi} ${
@@ -437,8 +514,9 @@ function Sidebar() {
           </p>
         </div>
       </div>
-      <div className={`${style.dark} ${showProfile && style.showDark}`}
-      onClick={()=>setShowProfile(false)}
+      <div
+        className={`${style.dark} ${showProfile && style.showDark}`}
+        onClick={() => setShowProfile(false)}
       ></div>
     </aside>
   );
