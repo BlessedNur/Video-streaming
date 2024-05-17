@@ -100,7 +100,7 @@ function Page() {
         movieListRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
+  }, [scrollPosition]);
 
   function convertRuntime(minutes) {
     const hours = Math.floor(minutes / 60);
@@ -224,7 +224,7 @@ function Page() {
                       <h1>Casts</h1>
 
                       {selectedMovie.cast.map((items) => (
-                        <div className={style.castProfile}>
+                        <div className={style.castProfile} key={items._id}>
                           <div className={style.leftCast}>
                             <Image
                               src={
@@ -250,6 +250,7 @@ function Page() {
                         {filteredArray.map((items) => (
                           <div
                             className={style.boxes}
+                            key={items._id}
                             onClick={() => setSelectedMovie(items)}
                           >
                             <div className={style.leftS}>
@@ -287,8 +288,9 @@ function Page() {
                   </div>
                   <div
                     className={`${style.scrollDown}  ${
-                      selectedMovie.overview.length > 200 && !showScrollAllDown?
-                      style.hiddenScroller:""
+                      selectedMovie.overview.length > 200 && !showScrollAllDown
+                        ? style.hiddenScroller
+                        : ""
                     }`}
                   >
                     <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
