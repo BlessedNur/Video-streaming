@@ -78,7 +78,7 @@
 .lineTwoLight::before {
   background: linear-gradient(rgb(255, 255, 255) 20%, transparent) !important;
 }
-.lineThree::after {
+.storyLine::after {
   content: "";
   position: absolute;
   left: 0;
@@ -89,15 +89,6 @@
   height: 30%;
   background: linear-gradient(to top, rgb(0, 0, 0) 20%, transparent);
   z-index: 1;
-}
-
-.lineThreeHide::after {
-  visibility: hidden;
-  opacity: 0;
-}
-.lineThreeShow::after {
-  opacity: 1;
-  visibility: visible;
 }
 .lineTwoHide::before {
   visibility: hidden;
@@ -115,23 +106,26 @@
     transparent
   ) !important;
 }
-
+.storyLine {
+  height: 15vh;
+  overflow: scroll;
+}
 .scrollDown {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   bottom: 10%;
-  left: 45%;
-  visibility: visible;
-  opacity: 1;
+  left: 25%;
+  visibility: hidden;
+  opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 3;
   color: #9b9c9c;
 }
 .hiddenScroller {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   z-index: 3;
 }
 .lists {
@@ -167,7 +161,8 @@
   background: linear-gradient(to right, transparent, rgba(0, 0, 0) 50%);
   /* z-index: 2; */
 }
-.movieList::-webkit-scrollbar {
+.movieList::-webkit-scrollbar,
+.storyLine::-webkit-scrollbar {
   display: none;
 }
 .scrollBtn {
@@ -186,7 +181,7 @@
 }
 .layer {
   /* background-color: green; */
-  width: 70%;
+  width: 100%;
 }
 
 .RightIntro button:first-child {
@@ -258,20 +253,108 @@
   max-height: 9em;
   width: 100%;
   display: grid;
-  place-content: center;
+  /* place-content:; */
 }
 .ImageMovie {
   height: 100%;
-  width: 100%;
+  min-width: 60%;
 }
 .overview {
   /* background-color: red; */
   /* height: 30em; */
   /* width: 40em; */
   display: flex;
-  /* justify-content: space-between; */
-  gap: 6em;
+  justify-content: space-between;
+  /* gap: 2em; */
 }
 .storyLine {
   width: 50%;
+}
+.cast {
+  transform: translateY(-150px);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 20em;
+  height: 40vh;
+  overflow: scroll;
+}
+.cast h1{
+  font-size:13px
+}
+.castTwo {
+  transform: translateY(-150px);
+  display: flex;
+  width: 22em;
+  flex-direction: column;
+  gap: 2em;
+  height: 40vh;
+  overflow: scroll;
+}
+.cast::-webkit-scrollbar,
+.castTwo::-webkit-scrollbar {
+  display: none;
+}
+.castProfile {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.castimage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leftCast {
+  width: 5em;
+  height: 5em;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.rightCast h3:first-child {
+  font-weight: 600 !important;
+  color: white;
+  font-size: 13px;
+}
+.rightCast h3:last-child {
+  /* color:white; */
+  font-size: 12px;
+}
+.rightCast h3:nth-child(2) {
+  /* color:white; */
+  font-size: 12px;
+}
+.boxes {
+  display: flex;
+  gap: 0.5em;
+  width: 20em;
+  flex-direction: column-reverse;
+  /* margin: 0.5em 0; */
+  cursor: pointer;
+  /* width:30em; */
+  padding: 0.5em;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+.boxes:hover {
+  border: 2px solid #909396;
+}
+.Imager {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.leftS {
+  width: 100%;
+  height: 100%;
+}
+.topS {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
