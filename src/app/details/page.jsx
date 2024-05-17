@@ -100,7 +100,7 @@ function Page() {
         movieListRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [scrollPosition]);
+  }, []);
 
   function convertRuntime(minutes) {
     const hours = Math.floor(minutes / 60);
