@@ -7,7 +7,7 @@ export const movieContext = createContext();
 
 function Context({ children }) {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
   const [storedNavLink, setStoredNavLink] = useState("");
   const [storedModes, setStoredModes] = useState("");
   const [storedSideLink, setStoredSideLink] = useState("");
@@ -17,9 +17,22 @@ function Context({ children }) {
   const [filteredType, setFilteredType] = useState("Default");
   const [cat, setCat] = useState(0);
   const [genre, setGenre] = useState("");
-  
-  console.log(cat);
+  const [selectedMovie, setSelectedMovie] = useState(() => {
+    if (typeof window !== "undefined") {
+      const storedMovie = localStorage.getItem("movie");
+      return storedMovie ? JSON.parse(storedMovie) : [];
+    } else {
+      return [];
+    }
+  });
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("movie", JSON.stringify(selectedMovie));
+    }
+  }, [selectedMovie]);
+
+  console.log(selectedMovie);
   useEffect(() => {
     const storedMode = localStorage.getItem("mode");
     if (storedMode) {
@@ -49,7 +62,7 @@ function Context({ children }) {
 
   const handleSideClick = (index) => {
     setActiveSideLink(index);
-    console.log(index);
+    // console.log(index);
     setStoredSideLink(index);
   };
 
@@ -100,6 +113,8 @@ function Context({ children }) {
         setGenre,
         searchValue,
         setSearchValue,
+        selectedMovie,
+        setSelectedMovie,
       ]}
     >
       {children}

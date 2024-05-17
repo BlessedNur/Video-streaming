@@ -6,11 +6,36 @@ import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useRouter } from "next/navigation";
 
-
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
-  const [lightMode, setLightMode] = useContext(movieContext);
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
+  ] = useContext(movieContext);
   const navigate = useRouter();
 
   useEffect(() => {
@@ -85,7 +110,13 @@ function Banner({ BannerApi, bannerWidth }) {
                   index === itemActive ? style.active : ""
                 } ${lightMode ? style.Light : style.Dark}`}
               >
-                <Image src={movie.backdrop_path} width={6000} height={10000} className={style.movieImage} alt={`Movie ${index + 1}`} />
+                <Image
+                  src={movie.backdrop_path}
+                  width={6000}
+                  height={10000}
+                  className={style.movieImage}
+                  alt={`Movie ${index + 1}`}
+                />
                 <div className={style.content}>
                   <h2 className={lightMode ? style.contentLight : ""}>
                     {movie.name}
@@ -95,7 +126,14 @@ function Banner({ BannerApi, bannerWidth }) {
                   </p>
 
                   <div className={style.actions}>
-                  <button onClick={()=>{}}>Watch</button>
+                    <button
+                      onClick={() => {
+                        navigate.push("/details");
+                        setSelectedMovie(movie);
+                      }}
+                    >
+                      Watch
+                    </button>{" "}
                     <button
                       onClick={() => alert(`Added ${movie.title} to watchlist`)}
                       className={lightMode ? style.contentLight : ""}

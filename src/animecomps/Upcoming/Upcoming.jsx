@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 function Upcoming({ title, api, length }) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const navigate = useRouter();
-
   const [
     lightMode,
     setLightMode,
@@ -31,7 +30,15 @@ function Upcoming({ title, api, length }) {
     setFilteredType,
     cat,
     setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
   ] = useContext(movieContext);
+  console.log(lightMode);
+  
   useEffect(() => {
     const fetchUpcomingMovies = async () => {
       try {
@@ -99,7 +106,11 @@ function Upcoming({ title, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => {}}
+                  onClick={() => {
+                    navigate.push("/details")
+                    setSelectedMovie(movie)
+                  }}
+            
                 >
                   <div className={style.thumbnail}>
                     <img

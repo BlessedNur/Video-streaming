@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 function TopRated({ title, api, length }) {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const navigate = useRouter();
-
   const [
     lightMode,
     setLightMode,
@@ -31,6 +30,12 @@ function TopRated({ title, api, length }) {
     setFilteredType,
     cat,
     setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
   ] = useContext(movieContext);
   useEffect(() => {
     const fetchTopRatedMovies = async () => {
@@ -99,7 +104,10 @@ function TopRated({ title, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => {}}
+                  onClick={() => {
+                    navigate.push("/details");
+                    setSelectedMovie(movie);
+                  }}
                 >
                   <div className={style.thumbnail}>
                     <img

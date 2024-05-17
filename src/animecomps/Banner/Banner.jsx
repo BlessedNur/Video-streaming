@@ -9,9 +9,34 @@ import { useRouter } from "next/navigation";
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
-  const [lightMode, setLightMode] = useContext(movieContext);
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
+  ] = useContext(movieContext);
   const navigate = useRouter();
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,7 +124,14 @@ function Banner({ BannerApi, bannerWidth }) {
                     {movie.synopsis.slice(0, 100)}...
                   </p>
                   <div className={style.actions}>
-                    <button>Watch</button>
+                    <button
+                      onClick={() => {
+                        navigate.push("/details");
+                        setSelectedMovie(movie);
+                      }}
+                    >
+                      Watch
+                    </button>{" "}
                     {/* <button className={style.prev} onClick={handlePrev}> prev</button>
                 <button className={style.next} onClick={handleNext}>next</button> */}
                     <button

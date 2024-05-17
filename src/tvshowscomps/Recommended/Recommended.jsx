@@ -31,6 +31,12 @@ function Recommended({ title, seeAllTypes, api, length }) {
     setFilteredType,
     cat,
     setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
   ] = useContext(movieContext);
   useEffect(() => {
     const fetchRecommendedMovies = async () => {
@@ -102,7 +108,10 @@ function Recommended({ title, seeAllTypes, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => {}}
+                  onClick={() => {
+                    navigate.push("/details");
+                    setSelectedMovie(movie);
+                  }}
                 >
                   <div className={style.thumbnail}>
                     <Image

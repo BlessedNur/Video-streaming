@@ -128,6 +128,26 @@ function Sidebar() {
         </Link>
       </li> */}
         <Link
+          href={"/search"}
+          className={`${style.asideLi} ${
+            pathname === "/search" || activeSideLink === "search"
+              ? style.activeSideLi
+              : ""
+          }`}
+          onClick={() => handleSideClick("search")}
+        >
+          <i className={`fas fa-search ${style.sideLink}`}></i>
+          <div
+            className={style.asideLink}
+            style={{
+              visibility: toggleAside ? "hidden" : "visible",
+              opacity: toggleAside ? 0 : 1,
+            }}
+          >
+            Search
+          </div>
+        </Link>
+        <Link
           href={"/"}
           className={`${style.asideLi} ${
             pathname === "/" || activeSideLink === "home"
@@ -282,7 +302,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Action");
             }}
@@ -300,7 +320,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Drama");
             }}
@@ -310,7 +330,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Comedy");
             }}
@@ -320,7 +340,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Romance");
             }}
@@ -330,7 +350,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Mystery");
             }}
@@ -340,7 +360,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Fantasy");
             }}
@@ -350,7 +370,7 @@ function Sidebar() {
           <p
             onClick={() => {
               pathname !== "/search" && navigate.push("/search");
-                //  setSearchValue("")
+              //  setSearchValue("")
 
               setGenre("Adventure");
             }}
@@ -425,26 +445,6 @@ function Sidebar() {
             }}
           >
             Watchlist
-          </div>
-        </Link>
-        <Link
-          href={"/favorites"}
-          className={`${style.asideLi} ${
-            pathname === "/favorites" || activeSideLink === "favorites"
-              ? style.activeSideLi
-              : ""
-          }`}
-          onClick={() => handleSideClick("favorites")}
-        >
-          <i className={`fa-regular fa-heart ${style.sideLink}`}></i>
-          <div
-            className={style.asideLink}
-            style={{
-              visibility: toggleAside ? "hidden" : "visible",
-              opacity: toggleAside ? 0 : 1,
-            }}
-          >
-            Favorites
           </div>
         </Link>
       </ul>

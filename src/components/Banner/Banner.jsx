@@ -9,7 +9,33 @@ import { usePathname, useRouter } from "next/navigation";
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
-  const [lightMode, setLightMode] = useContext(movieContext);
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
+  ] = useContext(movieContext);
   const path = usePathname();
   const navigate = useRouter();
   useEffect(() => {
@@ -51,7 +77,7 @@ function Banner({ BannerApi, bannerWidth }) {
     <div
       className={style.slider}
       style={{
-        maxWidth: bannerWidth,
+        minWidth: bannerWidth,
       }}
     >
       <div className={style.list}>
@@ -83,8 +109,9 @@ function Banner({ BannerApi, bannerWidth }) {
             {movies.map((movie, index) => (
               <div
                 key={movie.id}
-                className={`${style.item} ${index === itemActive ? style.active : ""
-                  } ${lightMode ? style.Light : style.Dark}`}
+                className={`${style.item} ${
+                  index === itemActive ? style.active : ""
+                } ${lightMode ? style.Light : style.Dark}`}
               >
                 <img src={movie.backdrop_path} alt={`Movie ${index + 1}`} />
                 <div className={style.content}>
@@ -95,7 +122,10 @@ function Banner({ BannerApi, bannerWidth }) {
                     {movie.overview.slice(0, 100)}...
                   </p>
                   <div className={style.actions}>
-                    <button onClick={()=>navigate.push(`/${movie.id}`)}>Watch</button>
+                    <button onClick={() => {
+                      navigate.push("/details")
+                      setSelectedMovie(movie)
+                    }}>Watch</button>
                     <button
                       onClick={() => alert(`Added ${movie.title} to watchlist`)}
                       className={lightMode ? style.contentLight : ""}

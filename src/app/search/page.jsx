@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import style from "./page.module.css";
 import { movieContext } from "@/context/Context";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 const Page = () => {
   const [movies, setMovies] = useState([]);
@@ -17,6 +17,8 @@ const Page = () => {
   const [notFound, setNotFound] = useState(false);
   const path = usePathname();
   const [note, setNote] = useState(false);
+  const navigate = useRouter();
+
 
   const [
     lightMode,
@@ -42,6 +44,8 @@ const Page = () => {
     setGenre,
     searchValue,
     setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
   ] = useContext(movieContext);
 
   genre && setFilteredType("Default");
@@ -224,7 +228,10 @@ const Page = () => {
             <div
               className={style.movieBox}
               key={item.id}
-              onClick={() => {}}
+              onClick={() => {
+                navigate.push("/details")
+                setSelectedMovie(item)
+              }}
               title={item.title || item.name}
             >
               <div className={style.thumbnail}>

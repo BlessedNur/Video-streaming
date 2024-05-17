@@ -11,7 +11,6 @@ function Trending({ title, api, length }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const path = usePathname();
   const navigate = useRouter();
-
   const [
     lightMode,
     setLightMode,
@@ -32,6 +31,12 @@ function Trending({ title, api, length }) {
     setFilteredType,
     cat,
     setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
   ] = useContext(movieContext);
 
   useEffect(() => {
@@ -107,7 +112,10 @@ function Trending({ title, api, length }) {
                 <div
                   className={style.movieBox}
                   key={movie.id}
-                  onClick={() => {}}
+                  onClick={() => {
+                    navigate.push("/details");
+                    setSelectedMovie(movie);
+                  }}
                 >
                   <div className={style.thumbnail}>
                     <Image
