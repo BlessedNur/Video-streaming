@@ -26,10 +26,6 @@ const NetworkLogoSchema = new Schema({
   name: String,
   logo_path: String
 });
-const GenreSchema = new Schema({
-  id: Number,
-  name: String
-});
 
 const seriesSchema = new Schema(
   {
@@ -91,7 +87,7 @@ const seriesSchema = new Schema(
       required: true,
     },
     genreNames: {
-      type: [GenreSchema],
+      type: [String],
       required: true,
     },
     vote_average: {

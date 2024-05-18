@@ -28,7 +28,7 @@ function Context({ children }) {
         : [];
       return Array.isArray(watchlistArray) ? watchlistArray : [];
     } else {
-      return [];
+      return [] ;
     }
   });
 

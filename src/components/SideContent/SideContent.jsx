@@ -61,7 +61,7 @@ function SideContent() {
         const filterMovies = data.filter((movie) => {
           const releaseYear = movie.first_air_date.split("-")[0];
           console.log(releaseYear);
-          return releaseYear == 2024;
+          return releaseYear == 2024 || releaseYear == 2020;
         });
         setMovies(filterMovies.slice(1, 3));
 
@@ -73,6 +73,7 @@ function SideContent() {
 
     fetchUpcomingMovies();
   }, []);
+  console.log(movies)
   useEffect(() => {
     const fetchTrailersMovies = async () => {
       try {
@@ -262,7 +263,7 @@ function SideContent() {
                 <i className="fa fa-star" aria-hidden="true"></i>
                 <p style={{ fontWeight: "600", color: lightMode && "#000" }}>
                   {movie.vote_average !== 0
-                    ? (movie.vote_average / 2).toFixed(1)
+                    ? ((movie.vote_average / 100 )*5).toFixed(1)
                     : "Not rated"}
                 </p>
               </div>

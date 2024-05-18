@@ -33,7 +33,7 @@
 }
 .del.Light {
   /* border: 1px solid black; */
-  width: 2em;
+  min-width: 2em;
   height: 2em;
   border-radius: 50%;
   display: grid;
@@ -43,7 +43,7 @@
   place-content: center;
 }
 .del.Dark {
-  width: 2em;
+  min-width: 2em;
   height: 2em;
   border-radius: 50%;
   display: grid;
@@ -68,15 +68,15 @@
 }
 .remove {
   position: absolute;
-  bottom: -5px;
-  right: 15px;
-  color:  #efefeffd;
+  bottom: -20px;
+  right: -20px;
+  color: #efefeffd;
   border-radius: 5px;
   background-color: #c00;
   padding: 0.5em;
   visibility: hidden;
   opacity: 0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .removeDark {
@@ -86,4 +86,10 @@
 .del:hover + .remove {
   visibility: visible;
   opacity: 1;
+}
+.watcher {
+  position: absolute;
+  top: 8%;
+  left: 9%;
+  font-size: 25px;
 }

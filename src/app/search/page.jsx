@@ -8,6 +8,7 @@ import { movieContext } from "@/context/Context";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import useMediaQuery from "@/components/UseMediaQuery";
 const Page = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -18,7 +19,7 @@ const Page = () => {
   const path = usePathname();
   const [note, setNote] = useState(false);
   const navigate = useRouter();
-
+  const mobile = useMediaQuery("(max-width: 768px)");
 
   const [
     lightMode,
@@ -229,8 +230,8 @@ const Page = () => {
               className={style.movieBox}
               key={item.id}
               onClick={() => {
-                navigate.push("/details")
-                setSelectedMovie(item)
+                navigate.push("/details");
+                setSelectedMovie(item);
               }}
               title={item.title || item.name}
             >
@@ -355,82 +356,88 @@ const Page = () => {
               placeholder="Find movies , Tv shows ...."
               style={{ color: !lightMode ? "#fff" : "#000" }}
             />
-            <button
-              className={`${style.filters} ${!lightMode && style.filtersDark}`}
-              onClick={() =>
-                !showFilter ? setShowFilter(true) : setShowFilter(false)
-              }
-              disabled={searchValue || genre ? true : false}
-            >
-              <p
-                className={`${!lightMode && style.DarkSvg} ${
-                  genre && !lightMode && style.SvgGenre
+            {!mobile && (
+              <button
+                className={`${style.filters} ${
+                  !lightMode && style.filtersDark
                 }`}
+                onClick={() =>
+                  !showFilter ? setShowFilter(true) : setShowFilter(false)
+                }
+                disabled={searchValue || genre ? true : false}
               >
-                Filter
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                style={{}}
-                className={`${!lightMode && style.DarkSvg} ${
-                  searchValue || (genre && !lightMode && style.SvgGenre)
-                }`}
-                id="filter"
+                <p
+                  className={`${!lightMode && style.DarkSvg} ${
+                    genre && !lightMode && style.SvgGenre
+                  }`}
+                >
+                  Filter
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  style={{}}
+                  className={`${!lightMode && style.DarkSvg} ${
+                    searchValue || (genre && !lightMode && style.SvgGenre)
+                  }`}
+                  id="filter"
+                >
+                  <path
+                    fill={searchValue || genre ? "#b1b5bf" : "#000"}
+                    fillRule="evenodd"
+                    d="M20 5h-1.17a3.001 3.001 0 0 0-5.66 0H4a1 1 0 0 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2zm-4 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 12a1 1 0 0 1 1-1h1.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-9.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 0 1-1-1zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-1.17a3.001 3.001 0 0 0-5.66 0H4zm13 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            )}
+            {!mobile && (
+              <div
+                className={`${style.filterList} ${
+                  showFilter && style.filterListShow
+                } ${!lightMode && style.filterListDark}`}
               >
-                <path
-                  fill={searchValue || genre ? "#b1b5bf" : "#000"}
-                  fillRule="evenodd"
-                  d="M20 5h-1.17a3.001 3.001 0 0 0-5.66 0H4a1 1 0 0 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2zm-4 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 12a1 1 0 0 1 1-1h1.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-9.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 0 1-1-1zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-1.17a3.001 3.001 0 0 0-5.66 0H4zm13 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
-            <div
-              className={`${style.filterList} ${
-                showFilter && style.filterListShow
-              } ${!lightMode && style.filterListDark}`}
-            >
-              <ul className={style.filterUl}>
-                <li
-                  className={style.filter}
-                  onClick={() => {
-                    setFilteredType("Top Rated");
-                    setShowFilter(false);
-                  }}
-                >
-                  Top Rated
-                </li>
-                <li
-                  className={style.filter}
-                  onClick={() => {
-                    setFilteredType("Trending");
-                    setShowFilter(false);
-                  }}
-                >
-                  Trending
-                </li>
-                <li
-                  className={style.filter}
-                  onClick={() => {
-                    setFilteredType("Latest");
-                    setShowFilter(false);
-                  }}
-                >
-                  Latest
-                </li>
-                <li
-                  className={style.filter}
-                  onClick={() => {
-                    setFilteredType("Default");
-                    setShowFilter(false);
-                  }}
-                >
-                  Default
-                </li>
-              </ul>
-            </div>
+                <ul className={style.filterUl}>
+                  <li
+                    className={style.filter}
+                    onClick={() => {
+                      setFilteredType("Top Rated");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Top Rated
+                  </li>
+                  <li
+                    className={style.filter}
+                    onClick={() => {
+                      setFilteredType("Trending");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Trending
+                  </li>
+                  <li
+                    className={style.filter}
+                    onClick={() => {
+                      setFilteredType("Latest");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Latest
+                  </li>
+                  <li
+                    className={style.filter}
+                    onClick={() => {
+                      setFilteredType("Default");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Default
+                  </li>
+                </ul>
+              </div>
+            )}
             <div
               className={`${style.Note} ${note && style.ShowNote}`}
               style={{
@@ -472,6 +479,7 @@ const Page = () => {
           style={{
             backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
             color: lightMode ? "#000" : "#d3d5db",
+            display: "none",
           }}
           // onClick={() => setShowProfile(false)}
         >
@@ -606,7 +614,10 @@ const Page = () => {
       <div className={style.lists}>
         <section className={style.header}>
           <div className={style.categories}>
-            <h1 style={{ color: !lightMode && "#fff", fontSize: "20px" }}>
+            <h1
+              className={style.welcome}
+              style={{ color: !lightMode && "#fff", fontSize: "20px" }}
+            >
               Entertainment for All
             </h1>
             <div className={style.leftCat}>
@@ -652,26 +663,109 @@ const Page = () => {
               <p>Genres</p>
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </div>
-            <div
-              className={style.RightCat}
-              style={{ borderBottom: !lightMode && "1px solid #85888d6f" }}
-            >
-              <h3 style={{ color: !lightMode && "#fff" }}>Sorted by:</h3>
-              <p
-                className={style.sortClass}
-                style={{
-                  width: "7em",
-                  display: "grid",
-                  placeContent: "center",
-                  whiteSpace: "nowrap",
-                  textAlign: "center",
-                  background: !lightMode && "#ebebeb15",
-                  color: !lightMode && "#fff",
-                }}
+            {mobile ? (
+              <div className={style.filts}>
+                <button
+                  className={` ${!lightMode && style.filtersDark} ${
+                    style.filtersTwo
+                  }`}
+                  onClick={() =>
+                    !showFilter ? setShowFilter(true) : setShowFilter(false)
+                  }
+                  disabled={searchValue || genre ? true : false}
+                >
+                  <p
+                    className={`${!lightMode && style.DarkSvg} ${
+                      genre && !lightMode && style.SvgGenre
+                    }`}
+                  >
+                    Filter
+                  </p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    style={{}}
+                    className={`${!lightMode && style.DarkSvg} ${
+                      searchValue || (genre && !lightMode && style.SvgGenre)
+                    }`}
+                    id="filter"
+                  >
+                    <path
+                      fill={searchValue || genre ? "#b1b5bf" : "#000"}
+                      fillRule="evenodd"
+                      d="M20 5h-1.17a3.001 3.001 0 0 0-5.66 0H4a1 1 0 0 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2zm-4 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 12a1 1 0 0 1 1-1h1.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-9.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 0 1-1-1zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-1.17a3.001 3.001 0 0 0-5.66 0H4zm13 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <div
+                  className={`${style.filterList} ${style.filterListTwo} ${
+                    showFilter && style.filterListShow
+                  } ${!lightMode && style.filterListDark}`}
+                >
+                  <ul className={style.filterUl}>
+                    <li
+                      className={style.filter}
+                      onClick={() => {
+                        setFilteredType("Top Rated");
+                        setShowFilter(false);
+                      }}
+                    >
+                      Top Rated
+                    </li>
+                    <li
+                      className={style.filter}
+                      onClick={() => {
+                        setFilteredType("Trending");
+                        setShowFilter(false);
+                      }}
+                    >
+                      Trending
+                    </li>
+                    <li
+                      className={style.filter}
+                      onClick={() => {
+                        setFilteredType("Latest");
+                        setShowFilter(false);
+                      }}
+                    >
+                      Latest
+                    </li>
+                    <li
+                      className={style.filter}
+                      onClick={() => {
+                        setFilteredType("Default");
+                        setShowFilter(false);
+                      }}
+                    >
+                      Default
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <div
+                className={style.RightCat}
+                style={{ borderBottom: !lightMode && "1px solid #85888d6f" }}
               >
-                {filteredType}
-              </p>
-            </div>
+                <h3 style={{ color: !lightMode && "#fff" }}>Sorted by:</h3>
+                <p
+                  className={style.sortClass}
+                  style={{
+                    width: "7em",
+                    display: "grid",
+                    placeContent: "center",
+                    whiteSpace: "nowrap",
+                    textAlign: "center",
+                    background: !lightMode && "#ebebeb15",
+                    color: !lightMode && "#fff",
+                  }}
+                >
+                  {filteredType}
+                </p>
+              </div>
+            )}
           </div>
         </section>
         {searchValue && (

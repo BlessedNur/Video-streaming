@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
+  const [hoverB, setHoverB] = useState(false)
+
   const [
     lightMode,
     setLightMode,
@@ -135,10 +137,21 @@ function Banner({ BannerApi, bannerWidth }) {
                       Watch
                     </button>{" "}
                     <button
-                      onClick={() => alert(`Added ${movie.title} to watchlist`)}
+                      onMouseOver={() => setHoverB(true)}
+                      onMouseLeave={() => setHoverB(false)}
+                      onClick={() => {
+                        addToWatchlist(selectedMovie);
+                      }}
+                      title={"Add to watchlist"}
                       className={lightMode ? style.contentLight : ""}
+                      style={{ color: lightMode && "#000" }}
                     >
-                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      <i
+                        className={`${
+                          !hoverB ? "fa-regular" : "fa"
+                        } fa-bookmark`}
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </div>
                 </div>

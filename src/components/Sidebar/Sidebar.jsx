@@ -5,8 +5,10 @@ import { movieContext } from "@/context/Context";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import useMediaQuery from "../UseMediaQuery";
 
 function Sidebar() {
+  const tablet = useMediaQuery("(max-width: 900px)");
   const pathname = usePathname();
   const navigate = useRouter();
   // console.log(pathname);
@@ -87,6 +89,7 @@ function Sidebar() {
             background: "transparent",
             transition: ".3s",
             transform: toggleAside ? "rotate(180deg)" : "rotate(0)",
+            display: tablet && "none",
           }}
           className={`fa fa-chevron-left show-aside ${
             toggleAside ? style.toggled : ""
@@ -435,7 +438,7 @@ function Sidebar() {
           }`}
           onClick={() => handleSideClick("Watchlist")}
         >
-          <i class={`fa fa-play ${style.sideLink}`}></i>
+          <i class={`fa fa-bookmark ${style.sideLink}`}></i>
           <div
             href={""}
             className={style.asideLink}

@@ -22,6 +22,7 @@ function HomePage() {
       const scrollPosition = movieListRef.current.scrollTop;
       setShowScrollDown(scrollPosition < 1);
       setShowScrollAllDown(scrollPosition < 50);
+      console.log(scrollPosition);
     };
 
     if (movieListRef.current) {
@@ -42,22 +43,21 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-        <div className={style.layer}>
-          <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
-          <div
-            className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
-              style.lineThree
-            } ${style.lineTwo} ${
-              !showScrollDown ? style.lineTwoShow : style.lineTwoHide
-            } ${lightMode && style.lineTwoLight} ${
-              showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
-            }`}
-          >
+        <div
+          className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
+            style.lineThree
+          } ${style.lineTwo} ${
+            !showScrollDown ? style.lineTwoShow : style.lineTwoHide
+          } ${lightMode && style.lineTwoLight} ${
+            showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+          }`}
+        >
+          <div className={style.layer} ref={movieListRef}>
+            <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
             <div
-              className={`${style.movieList} scroller ${
+              className={`${style.movieLit} scroller ${
                 lightMode ? style.movieListLight : style.movieListDark
               }`}
-              ref={movieListRef}
             >
               <div
                 className={`${style.scrollDown} ${

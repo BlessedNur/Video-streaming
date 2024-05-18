@@ -10,6 +10,7 @@ import Navbar from "@/components/DetailsNavbar/Navbar";
 
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
+  const [hoverB, setHoverB] = useState(false);
   const [
     lightMode,
     setLightMode,
@@ -200,22 +201,33 @@ function Page() {
                       </div>
                       <div className={style.actions}>
                         <button>Watch</button>{" "}
-                        <button
+                          <button
+                            
+                            onMouseOver={() => setHoverB(true)}
+                            onMouseLeave={() => setHoverB(false)}
                           onClick={() => {
                             addToWatchlist(selectedMovie);
-                          }}
+                            }}
+                            title={"Add to watchlist"}
                           className={lightMode ? style.contentLight : ""}
                           style={{ color: lightMode && "#000" }}
                         >
-                          <i className="fa fa-plus" aria-hidden="true"></i>
+                          <i
+                            className={`${
+                              !hoverB ? "fa-regular" : "fa"
+                            } fa-bookmark`}
+                            aria-hidden="true"
+                          ></i>
                         </button>
                       </div>
                     </div>
                     <div className={style.budget}>
                       <h2>Budget:</h2>
                       <p>
-                        {selectedMovie.budget != 0
-                          ? formatCurrency(selectedMovie.budget)
+                        {selectedMovie.budget
+                          ? selectedMovie.budget != 0
+                            ? formatCurrency(selectedMovie.budget)
+                            : "Unconfirmed"
                           : "Unconfirmed"}
                       </p>
                     </div>
@@ -223,9 +235,18 @@ function Page() {
                   <div className={style.overview}>
                     <div className="info">
                       <h3 style={{ whiteSpace: "nowrap" }}>
-                        {convertRuntime(selectedMovie.runtime)}
+                        {selectedMovie.runtime
+                          ? convertRuntime(selectedMovie.runtime) ||
+                            selectedMovie.year
+                          : selectedMovie.episode_run_time !== 0
+                          ? `${selectedMovie.episode_run_time}mins/episode`
+                          : ""}{" "}
                       </h3>
-                      <h3>{selectedMovie.release_date.split("-")[0]}</h3>
+                      <h3>
+                        {selectedMovie.release_date
+                          ? selectedMovie.release_date.split("-")[0]
+                          : selectedMovie.first_air_date.split("-")[0]}
+                      </h3>
                       <h3>
                         {selectedMovie.genreNames.find(
                           (name) => name === "Horror"
@@ -253,30 +274,36 @@ function Page() {
                         borderRight: lightMode && "2px solid #e7e6e6fd",
                       }}
                     >
-                      <h1>Director</h1>
-                      <div className={style.castProfile}>
-                        <div className={style.leftCast}>
-                          <Image
-                            src={
-                              selectedMovie.director.profile_path
-                                ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
-                                : "/images/blank-profile-picture-973460_960_720.webp"
-                            }
-                            width={100}
-                            className={style.castimage}
-                            height={100}
-                          />
-                        </div>
-                        <div className={style.rightCast}>
-                          <h3 style={{ color: lightMode && "#000" }}>
-                            {selectedMovie.director.name}
-                          </h3>
-                        </div>
-                      </div>
+                      {selectedMovie.director ? (
+                        <>
+                          <h1>Director</h1>
+                          <div className={style.castProfile}>
+                            <div className={style.leftCast}>
+                              <Image
+                                src={
+                                  selectedMovie.director.profile_path
+                                    ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
+                                    : "/images/blank-profile-picture-973460_960_720.webp"
+                                }
+                                width={100}
+                                className={style.castimage}
+                                height={100}
+                              />
+                            </div>
+                            <div className={style.rightCast}>
+                              <h3 style={{ color: lightMode && "#000" }}>
+                                {selectedMovie.director.name}
+                              </h3>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                       <h1>Casts</h1>
 
-                      {selectedMovie.cast.map((items) => (
-                        <div className={style.castProfile} key={items._id}>
+                      {selectedMovie.cast.map((items, index) => (
+                        <div className={style.castProfile} key={index}>
                           <div className={style.leftCast}>
                             <Image
                               src={
@@ -301,12 +328,12 @@ function Page() {
                     <div className={style.castTwo}>
                       <h1>More like this</h1>
                       <div>
-                        {filteredArray.map((items) => (
+                        {filteredArray.map((items, index) => (
                           <div
                             className={`${style.boxes} ${
                               lightMode && style.boxesDark
                             }`}
-                            key={items._id}
+                            key={index}
                             onClick={() => setSelectedMovie(items)}
                           >
                             <div className={style.leftS}>
@@ -333,12 +360,20 @@ function Page() {
                                 </h3>
                                 <div className="detail">
                                   <p>
-                                    {items.release_date.split("-")[0] ||
-                                      items.first_air_date.split("-")[0]}
+                                    {" "}
+                                    {selectedMovie.release_date
+                                      ? selectedMovie.release_date.split("-")[0]
+                                      : selectedMovie.first_air_date.split(
+                                          "-"
+                                        )[0]}
                                   </p>
                                   <p>
-                                    {convertRuntime(items.runtime) ||
-                                      items.year}
+                                    {items.runtime
+                                      ? convertRuntime(items.runtime) ||
+                                        items.year
+                                      : items.episode_run_time !== 0
+                                      ? `${items.episode_run_time}mins/episode`
+                                      : ""}
                                   </p>
                                 </div>
                                 <div className={style.rates}>

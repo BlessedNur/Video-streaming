@@ -50,6 +50,7 @@
   transition: 0.3s;
   position: relative;
   gap: 0.5em;
+  /* display: none; */
   border-radius: 4px;
 }
 .filterList {
@@ -67,6 +68,18 @@
   transition: 0.3s;
   z-index: 1;
   overflow: hidden;
+}
+.filterListTwo {
+  width: 100%;
+  left: 0% !important;
+  top: 100% !important;
+}
+.filterListTwo p {
+  font-size: 11px;
+}
+.filts {
+  width: fit-content;
+  position: relative;
 }
 .filterListDark {
   background-color: #1c1d1d;
@@ -99,7 +112,8 @@
 .filtersDark p {
   color: #fff;
 }
-.filters p {
+.filters p,
+.filtersTwo p {
   font-weight: 600;
   font-size: 12px;
 }
@@ -349,6 +363,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2em;
+  position: relative;
   /* gap: 3em; */
   width: 100%;
   padding-left: 3em;
@@ -429,4 +444,60 @@
 
 .genres {
   display: none;
+}
+.filtersTwo {
+  display: flex;
+  align-items: center;
+  background-color: #ebebeb;
+  cursor: pointer;
+  padding: 0.5em;
+  transition: 0.3s;
+  border: none;
+  /* position: relative; */
+  gap: 0.5em;
+  /* display: none; */
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 908px) {
+  .welcome {
+    display: none;
+  }
+
+  .search {
+    width: 40em;
+  }
+}
+@media screen and (max-width: 768px) {
+  .categories {
+    /* flex-direction: column;
+    align-items: flex-start; */
+    padding: 1em;
+  }
+  .search {
+    width: 20em;
+  }
+  .filters {
+    /* display: none; */
+    position: absolute;
+  }
+  .left {
+    max-width: 10em;
+  }
+  .nav {
+    padding: 1em;
+  }
+  .Lists {
+    padding: 1em;
+  }
+  .middle {
+    padding: 1em;
+  }
+  .RightCat {
+    display: none;
+  }
+  .RightCat h1,
+  .RightCat p {
+    font-size: 10px;
+  }
 }

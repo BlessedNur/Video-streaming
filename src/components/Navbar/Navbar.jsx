@@ -189,10 +189,12 @@ function Navbar() {
         </div>
       </nav>
       <div
+        
         className={`${style.profileData} ${showProfile && style.showProfile}`}
         style={{
           backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
           color: lightMode ? "#000" : "#d3d5db",
+          display:"none"
         }}
         // onClick={() => setShowProfile(false)}
       >

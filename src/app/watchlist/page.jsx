@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 
 function Page() {
   const navigate = useRouter();
+
+  
   const [
     lightMode,
     setLightMode,
@@ -44,7 +46,6 @@ function Page() {
     const index = watchlist.findIndex((movie) => movie.id === movieId);
 
     if (index !== -1) {
-      // Remove the movie from the watchlist array
       const updatedWatchlist = [
         ...watchlist.slice(0, index),
         ...watchlist.slice(index + 1),
@@ -86,47 +87,60 @@ function Page() {
                     }}
                   />
                 </div>
-                <div
-                  className={`${style.del} ${
-                    lightMode ? style.Light : style.Dark
-                  }`}
-                  onClick={() => removeFromWatchlist(item.id)}
-                >
-                  <i className={`fa fa-trash `} aria-hidden="true"></i>
+                <div className="tit">
+                  <p>
+                    {item.title.length > 20
+                      ? `${
+                          item.title.slice(0, 20) || item.name.slice(0, 20)
+                        }...`
+                      : item.title || item.name}
+                  </p>
+
+                  <div
+                    className={`${style.del} ${
+                      lightMode ? style.Light : style.Dark
+                    }`}
+                    onClick={() => removeFromWatchlist(item.id)}
+                  >
+                    <i className={`fa fa-trash `} aria-hidden="true"></i>
+                  </div>
+                  <h3
+                    className={`${style.remove} ${
+                      !lightMode && style.removeDark
+                    }`}
+                  >
+                    Remove
+                  </h3>
                 </div>
-                <h3
-                  className={`${style.remove} ${
-                    !lightMode && style.removeDark
-                  }`}
-                >
-                  Remove
-                </h3>
               </div>
             ))}
           </section>
         </section>
       ) : (
-        <div
-          style={{
-            textAlign: "center",
-            color: !lightMode ? "#fff" : "#000",
-            height: "100vh",
-            display: "grid",
-            placeContent: "center",
-            fontSize: "20px",
-            background: lightMode ? "#fff" : "#000",
-          }}
-        >
-          <dotlottie-player
-            src="https://lottie.host/a1d6e94d-b2bd-4a7d-9529-55d0e08b014b/e6QbYU4gAC.json"
-            background="transparent"
-            speed="1"
-            style={{ height: "300px" }}
-            loop
-            autoplay
-          ></dotlottie-player>
-          <h2>Nothing in WatchList</h2>
-        </div>
+        <>
+          <div
+            style={{
+              textAlign: "center",
+              color: !lightMode ? "#fff" : "#000",
+              height: "100vh",
+              display: "grid",
+              placeContent: "center",
+              fontSize: "20px",
+              background: lightMode ? "#fff" : "#000",
+            }}
+            >
+            <h1 className={style.watcher}>Watchlist</h1>
+            <dotlottie-player
+              src="https://lottie.host/a1d6e94d-b2bd-4a7d-9529-55d0e08b014b/e6QbYU4gAC.json"
+              background="transparent"
+              speed="1"
+              style={{ height: "300px" }}
+              loop
+              autoplay
+            ></dotlottie-player>
+            <h2>Nothing in WatchList</h2>
+          </div>
+        </>
       )}
     </>
   );

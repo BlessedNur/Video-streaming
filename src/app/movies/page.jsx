@@ -20,7 +20,7 @@ function HomePage() {
     const handleScroll = () => {
       const scrollPosition = movieListRef.current.scrollTop;
       setShowScrollDown(scrollPosition < 1);
-      setShowScrollAllDown(scrollPosition < 50);
+      setShowScrollAllDown(scrollPosition < 300);
     };
 
     if (movieListRef.current) {
@@ -41,22 +41,22 @@ function HomePage() {
       <div
         className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
       >
-        <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
         <div
-          className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
-            style.lineThree
-          } ${style.lineTwo} ${
-            !showScrollDown ? style.lineTwoShow : style.lineTwoHide
-          } ${lightMode && style.lineTwoLight} ${
-            showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+          className={`${style.movieList} scroller ${
+            lightMode ? style.movieListLight : style.movieListDark
           }`}
-        >
-          <div
-            className={`${style.movieList} scroller ${
-              lightMode ? style.movieListLight : style.movieListDark
-            }`}
-            ref={movieListRef}
           >
+          <div
+          ref={movieListRef}
+            className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
+              style.lineThree
+            } ${style.lineTwo} ${
+              !showScrollDown ? style.lineTwoShow : style.lineTwoHide
+            } ${lightMode && style.lineTwoLight} ${
+              showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
+            }`}
+          >
+            <Banner bannerWidth={"100%"} BannerApi={`/myapi/movie`} />
             <div
               className={`${style.scrollDown} ${
                 !showScrollAllDown && style.hiddenScroller

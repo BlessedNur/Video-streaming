@@ -40,7 +40,7 @@
   justify-content: space-between;
   /* padding: 1em; */
   /* overflow: hidden; */
-  /* z-index: 1; */
+  z-index: 5;
   transition: background-color 0.1s, width 0.4s;
 }
 .asideTop {
@@ -246,4 +246,10 @@
 .showDark{
   visibility: visible;
   opacity: 1;
+}
+@media screen and (max-width:500px){
+  .aside{
+    display: none;
+  }
+
 }

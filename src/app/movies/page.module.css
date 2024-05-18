@@ -50,7 +50,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1em;
-  height: 50vh;
+  height: 100vh;
+  /* margin-top: ; */
   /* background-color: green; */
 }
 .lineTwo::before {
@@ -112,8 +113,8 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  bottom: 10%;
-  left: 45%;
+  bottom: 3%;
+  left: 50%;
   visibility: visible;
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -127,14 +128,17 @@
 }
 .lists {
   width: 100%;
-  overflow-y: hidden;
-  height: 50vh;
-  position: relative;
+  overflow-y: scroll;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  /* position: relative; */
   /* background-color: red; */
-  overflow-x: hidden;
   padding: 1em;
 }
-.movieList::-webkit-scrollbar {
+.movieList::-webkit-scrollbar,
+.lists::-webkit-scrollbar {
   display: none;
 }
 .scrollBtn {
@@ -150,27 +154,4 @@
   to {
     transform: translateY(8px);
   }
-}
-
-.movieListLight::after{
-  content: "";
-  position: absolute;
-  right: -35px;
-  top: 0;
-  transition: .4s;
-  width: 10%;
-  height: 100%;
-  background:linear-gradient(to right , transparent ,rgb(255, 255, 255) 50% );
-  /* z-index: 2; */
-}
-.movieListDark::after{
-  content: "";
-  position: absolute;
-  right: -35px;
-  top: 0;
-  width: 10%;
-  transition: .4s;
-  height: 100%;
-  background:linear-gradient(to right , transparent ,rgba(0,0,0) 50% );
-  /* z-index: 2; */
 }

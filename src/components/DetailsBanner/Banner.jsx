@@ -48,7 +48,7 @@ function Banner({ bannerWidth }) {
     >
       <div
         className={`${style.list} ${lightMode ? style.Light : style.Dark}`}
-        key={selectedMovie.id}
+        // key={selectedMovie.id}
       >
         <Image
           src={
