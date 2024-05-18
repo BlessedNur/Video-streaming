@@ -36,6 +36,8 @@ function Page() {
     setSearchValue,
     selectedMovie,
     setSelectedMovie,
+    watchlist,
+    setWatchlist,
   ] = useContext(movieContext);
   useEffect(() => {
     const getAllCats = async () => {
@@ -115,18 +117,48 @@ function Page() {
   const handleImageLoad = () => {
     setLoading(false);
   };
+  const formatCurrency = (number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(number);
+  };
 
+  const addToWatchlist = (movie) => {
+    const alreadyInWatchlist = watchlist.some((item) => item.id === movie.id);
+
+    if (alreadyInWatchlist) {
+      alert("Already added to watchlist");
+    } else {
+      setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
+    }
+  };
   return (
     <>
       {selectedMovie.length === 0 ? (
-        <h1>Nothing here</h1>
+        <div className={`loading ${!lightMode && "loaderLight"}`}>
+          <div className={`spinner center`}>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+            <div className="spinner-blade"></div>
+          </div>
+        </div>
       ) : (
         <section className={`${style.main} `}>
           <Sidebar />
           <Navbar />
           <div
             className={`${style.contentsDisplay} ${
-              lightMode ? "mainLight" : ""
+              lightMode ? "mainLightTwo" : ""
             }`}
           >
             <Banner bannerWidth={"100%"} />
@@ -136,11 +168,7 @@ function Page() {
                   style.lineThree
                 } ${style.lineTwo}`}
               >
-                <div
-                  className={`${style.movieList} scroller ${
-                    lightMode ? style.movieListLight : style.movieListDark
-                  }`}
-                >
+                <div className={`${style.movieList} scroller `}>
                   <div className={style.intro}>
                     <div className={style.leftIntro}>
                       {/* <div className={style.image}>
@@ -173,14 +201,23 @@ function Page() {
                       <div className={style.actions}>
                         <button>Watch</button>{" "}
                         <button
-                          onClick={() =>
-                            alert(`Added ${selectedMovie.title} to watchlist`)
-                          }
+                          onClick={() => {
+                            addToWatchlist(selectedMovie);
+                          }}
                           className={lightMode ? style.contentLight : ""}
+                          style={{ color: lightMode && "#000" }}
                         >
                           <i className="fa fa-plus" aria-hidden="true"></i>
                         </button>
                       </div>
+                    </div>
+                    <div className={style.budget}>
+                      <h2>Budget:</h2>
+                      <p>
+                        {selectedMovie.budget != 0
+                          ? formatCurrency(selectedMovie.budget)
+                          : "Unconfirmed"}
+                      </p>
                     </div>
                   </div>
                   <div className={style.overview}>
@@ -189,7 +226,15 @@ function Page() {
                         {convertRuntime(selectedMovie.runtime)}
                       </h3>
                       <h3>{selectedMovie.release_date.split("-")[0]}</h3>
-                      <h3>PG 13</h3>
+                      <h3>
+                        {selectedMovie.genreNames.find(
+                          (name) => name === "Horror"
+                        ) ? (
+                          <h3>PG 16</h3>
+                        ) : (
+                          <h3>PG 13</h3>
+                        )}
+                      </h3>
                     </div>
                     <div
                       className={`${style.storyLine} ${
@@ -202,7 +247,12 @@ function Page() {
                       <h1 style={{ fontSize: "20px" }}>Overview</h1>
                       <p>{selectedMovie.overview}</p>
                     </div>
-                    <div className={style.cast}>
+                    <div
+                      className={style.cast}
+                      style={{
+                        borderRight: lightMode && "2px solid #e7e6e6fd",
+                      }}
+                    >
                       <h1>Director</h1>
                       <div className={style.castProfile}>
                         <div className={style.leftCast}>
@@ -218,7 +268,9 @@ function Page() {
                           />
                         </div>
                         <div className={style.rightCast}>
-                          <h3>{selectedMovie.director.name}</h3>
+                          <h3 style={{ color: lightMode && "#000" }}>
+                            {selectedMovie.director.name}
+                          </h3>
                         </div>
                       </div>
                       <h1>Casts</h1>
@@ -238,7 +290,9 @@ function Page() {
                             />
                           </div>
                           <div className={style.rightCast}>
-                            <h3>{items.name}</h3>
+                            <h3 style={{ color: lightMode && "#000" }}>
+                              {items.name}
+                            </h3>
                             <h3>As {items.character}</h3>
                           </div>
                         </div>
@@ -249,14 +303,16 @@ function Page() {
                       <div>
                         {filteredArray.map((items) => (
                           <div
-                            className={style.boxes}
+                            className={`${style.boxes} ${
+                              lightMode && style.boxesDark
+                            }`}
                             key={items._id}
                             onClick={() => setSelectedMovie(items)}
                           >
                             <div className={style.leftS}>
                               <Image
                                 src={
-                                  items.backdrop_path ||
+                                  items.poster_path ||
                                   items.images.jpg.image_url
                                 }
                                 alt={items.title || items.name}
@@ -267,18 +323,40 @@ function Page() {
                             </div>
                             <div className="right">
                               <div className={style.topS}>
-                                <h3 style={{ fontSize: "13px" }}>
-                                  {items.name || items.title.slice(0, 15)}
+                                <h3
+                                  style={{
+                                    fontSize: "14px",
+                                    color: lightMode && "#000",
+                                  }}
+                                >
+                                  {items.name || items.title.slice(0, 25)}
                                 </h3>
-                                {/* <div className="detail"> */}
-                                {/* <p>
-                                  {items.release_date.split("-")[0] ||
-                                    items.first_air_date.split("-")[0]}
-                                </p>
-                                <p>
-                                  {convertRuntime(items.runtime) || items.year}
-                                </p> */}
-                                {/* </div> */}
+                                <div className="detail">
+                                  <p>
+                                    {items.release_date.split("-")[0] ||
+                                      items.first_air_date.split("-")[0]}
+                                  </p>
+                                  <p>
+                                    {convertRuntime(items.runtime) ||
+                                      items.year}
+                                  </p>
+                                </div>
+                                <div className={style.rates}>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <h4
+                                    style={{
+                                      fontWeight: "600",
+                                      color: lightMode && "#000",
+                                    }}
+                                  >
+                                    {items.vote_average != 0
+                                      ? (
+                                          (items.vote_average / 100) *
+                                          5
+                                        ).toFixed(1)
+                                      : "Not rated"}
+                                  </h4>
+                                </div>
                               </div>
                             </div>
                           </div>

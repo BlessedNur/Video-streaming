@@ -1,0 +1,89 @@
+.Lists {
+  /* background-color: red; */
+  padding: 2em;
+  padding-left: 3em;
+  gap: 2em 1em;
+  height: 100%;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+.Lists::-webkit-scrollbar {
+  display: none;
+}
+.watch {
+  height: 100vh;
+  padding: 2em;
+  /* transform: translateX(2em); */
+}
+.watch h1 {
+  transform: translateX(1.5em);
+  font-size: 25px;
+}
+.movieBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  position: relative;
+  height: fit-content;
+}
+.movieBox img {
+  border-radius: 8px;
+  cursor: pointer;
+}
+.del.Light {
+  /* border: 1px solid black; */
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: grid;
+  color: #c00;
+  transition: 0.3s;
+  background-color: #efefeffd;
+  place-content: center;
+}
+.del.Dark {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: grid;
+  color: #c00;
+  transition: 0.3s;
+  background-color: rgb(13, 12, 12);
+  place-content: center;
+}
+.del.Light:hover {
+  background-color: #c00;
+  color: #efefeffd;
+  scale: 1.05;
+}
+.del.Dark:hover {
+  background-color: #c00;
+  color: rgb(13, 12, 12);
+  scale: 1.05;
+}
+.del {
+  padding: 0.3em;
+  cursor: pointer;
+}
+.remove {
+  position: absolute;
+  bottom: -5px;
+  right: 15px;
+  color:  #efefeffd;
+  border-radius: 5px;
+  background-color: #c00;
+  padding: 0.5em;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+}
+
+.removeDark {
+  color: rgb(13, 12, 12) !important;
+  background-color: #c00;
+}
+.del:hover + .remove {
+  visibility: visible;
+  opacity: 1;
+}

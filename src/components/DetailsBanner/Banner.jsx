@@ -60,7 +60,19 @@ function Banner({ bannerWidth }) {
           height={1000}
           className={style.movieImage}
         />
-        <div className={style.content}></div>
+        <div className={style.rates}>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <h4
+            style={{
+              fontWeight: "600",
+              color: lightMode && "#000",
+            }}
+          >
+            {selectedMovie.vote_average != 0
+              ? ((selectedMovie.vote_average / 100) * 5).toFixed(1)
+              : "Not rated"}
+          </h4>
+        </div>
       </div>
     </div>
   );

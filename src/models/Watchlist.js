@@ -21,23 +21,35 @@ const TrailerSchema = new Schema({
   id: String
 });
 
-// Define sub-schema for network logos
-const NetworkLogoSchema = new Schema({
+// Define sub-schema for company logos
+const CompanyLogoSchema = new Schema({
   name: String,
   logo_path: String
 });
-const GenreSchema = new Schema({
+
+// Define sub-schema for director
+const DirectorSchema = new Schema({
+  adult: Boolean,
+  gender: Number,
   id: Number,
-  name: String
+  known_for_department: String,
+  name: String,
+  original_name: String,
+  popularity: Number,
+  profile_path: String,
+  credit_id: String,
+  department: String,
+  job: String
 });
 
-const seriesSchema = new Schema(
+
+const watchlistSchema = new Schema(
   {
     id: {
       type: Number,
       required: true,
     },
-    name: {
+    title: {
       type: String,
       required: true,
     },
@@ -45,7 +57,7 @@ const seriesSchema = new Schema(
       type: String,
       required: true,
     },
-    first_air_date: {
+    release_date: {
       type: String,
       required: true,
     },
@@ -65,41 +77,41 @@ const seriesSchema = new Schema(
       type: [TrailerSchema],
       required: true,
     },
-    networkLogos: {
-      type: [NetworkLogoSchema],
+    companyLogos: {
+      type: [CompanyLogoSchema],
+      required: true,
+    },
+    movieLogo: {
+      type: String,
       required: true,
     },
     Logo: {
       type: [String],
       required: true,
     },
-    seasonDetails: {
-      type: String,
-      required: true,
-    },
 
-    number_of_seasons: {
-      type: String,
+    budget: {
+      type: Number,
       required: true,
     },
-    number_of_episodes: {
-      type: String,
+    revenue: {
+      type: Number,
       required: true,
     },
-    episode_run_time: {
-      type: [String],
+    runtime: {
+      type: Number,
       required: true,
     },
     genreNames: {
-      type: [GenreSchema],
+      type: [String],
       required: true,
     },
     vote_average: {
       type: Number,
       required: true,
     },
-    creator: {
-      type: String,
+    director: {
+      type: DirectorSchema,
       required: true,
     },
     keywords: {
@@ -110,4 +122,4 @@ const seriesSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Series || mongoose.model("Series", seriesSchema);
+export default mongoose.models.WatchList || mongoose.model("WatchList", watchlistSchema);

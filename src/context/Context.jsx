@@ -12,11 +12,26 @@ function Context({ children }) {
   const [storedModes, setStoredModes] = useState("");
   const [storedSideLink, setStoredSideLink] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [lightMode, setLightMode] = useState(true);
+  const [lightMode, setLightMode] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [filteredType, setFilteredType] = useState("Default");
   const [cat, setCat] = useState(0);
   const [genre, setGenre] = useState("");
+
+  // const [watchlist, setWatchlist] = useState([]);
+
+  const [watchlist, setWatchlist] = useState(() => {
+    if (typeof window !== "undefined") {
+      const StoredWatch = localStorage.getItem("watch");
+      const watchlistArray = StoredWatch
+        ? Object.values(JSON.parse(StoredWatch))
+        : [];
+      return Array.isArray(watchlistArray) ? watchlistArray : [];
+    } else {
+      return [];
+    }
+  });
+
   const [selectedMovie, setSelectedMovie] = useState(() => {
     if (typeof window !== "undefined") {
       const storedMovie = localStorage.getItem("movie");
@@ -32,7 +47,13 @@ function Context({ children }) {
     }
   }, [selectedMovie]);
 
-  console.log(selectedMovie);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("watch", JSON.stringify(watchlist));
+    }
+  }, [watchlist]);
+
+  // console.log(selectedMovie);
   useEffect(() => {
     const storedMode = localStorage.getItem("mode");
     if (storedMode) {
@@ -115,6 +136,8 @@ function Context({ children }) {
         setSearchValue,
         selectedMovie,
         setSelectedMovie,
+        watchlist,
+        setWatchlist,
       ]}
     >
       {children}
