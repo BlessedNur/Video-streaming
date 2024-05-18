@@ -7,7 +7,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Navbar from "@/components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 
-function page() {
+function Page() {
   const navigate = useRouter();
   const [
     lightMode,
@@ -132,4 +132,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
