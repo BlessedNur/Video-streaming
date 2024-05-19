@@ -53,7 +53,8 @@ function Banner({ bannerWidth }) {
         <Image
           src={
             selectedMovie.backdrop_path ||
-            selectedMovie.images.jpg.large_image_url
+            selectedMovie.images?.jpg?.large_image_url ||
+            "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
           }
           alt={selectedMovie.title || selectedMovie.name}
           width={1000}

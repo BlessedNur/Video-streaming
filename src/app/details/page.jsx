@@ -13,7 +13,7 @@ import Navigation from "@/components/Navigation/Navigation";
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
-  const mobile = useMediaQuery("(max-width:500px)");
+  const mobile = useMediaQuery("(max-width:900px)");
 
   const [
     lightMode,
@@ -161,7 +161,7 @@ function Page() {
         </div>
       ) : (
         <section className={`${style.main} `}>
-          <Sidebar />
+          {!mobile && <Sidebar />}
           <Navbar />
           <div
             className={`${style.contentsDisplay} ${
@@ -391,7 +391,7 @@ function Page() {
                                     </div>
                                     <div className={style.rates}>
                                       <i
-                                        class="fa fa-star"
+                                        className="fa fa-star"
                                         aria-hidden="true"
                                       ></i>
                                       <h4
@@ -586,28 +586,32 @@ function Page() {
                           )}
                           <h1>Casts</h1>
 
-                          {selectedMovie.cast.map((items, index) => (
-                            <div className={style.castProfile} key={index}>
-                              <div className={style.leftCast}>
-                                <Image
-                                  src={
-                                    items.profile_path
-                                      ? items.profile_path
-                                      : "/images/blank-profile-picture-973460_960_720.webp"
-                                  }
-                                  width={100}
-                                  className={style.castimage}
-                                  height={100}
-                                />
+                          {selectedMovie.cast ? (
+                            selectedMovie.cast.map((items, index) => (
+                              <div className={style.castProfile} key={index}>
+                                <div className={style.leftCast}>
+                                  <Image
+                                    src={
+                                      items.profile_path
+                                        ? items.profile_path
+                                        : "/images/blank-profile-picture-973460_960_720.webp"
+                                    }
+                                    width={100}
+                                    className={style.castimage}
+                                    height={100}
+                                  />
+                                </div>
+                                <div className={style.rightCast}>
+                                  <h3 style={{ color: lightMode && "#000" }}>
+                                    {items.name}
+                                  </h3>
+                                  <h3>As {items.character}</h3>
+                                </div>
                               </div>
-                              <div className={style.rightCast}>
-                                <h3 style={{ color: lightMode && "#000" }}>
-                                  {items.name}
-                                </h3>
-                                <h3>As {items.character}</h3>
-                              </div>
-                            </div>
-                          ))}
+                            ))
+                          ) : (
+                            <h1>No Cast Available</h1>
+                          )}
                         </div>
                         <div className={style.castTwo}>
                           <h1>More like this</h1>
@@ -664,7 +668,7 @@ function Page() {
                                     </div>
                                     <div className={style.rates}>
                                       <i
-                                        class="fa fa-star"
+                                        className="fa fa-star"
                                         aria-hidden="true"
                                       ></i>
                                       <h4
@@ -690,6 +694,7 @@ function Page() {
                       </div>
                       <div
                         className={`${style.scrollDown}  ${
+                          selectedMovie?.overview &&
                           selectedMovie.overview.length > 200 &&
                           !showScrollAllDown
                             ? style.hiddenScroller
