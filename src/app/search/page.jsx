@@ -332,7 +332,7 @@ const Page = () => {
         transition: ".3s",
       }}
     >
-      <Sidebar />
+      {mobile ? <Navbar /> : <Sidebar />}
       <div className={style.nav}>
         <div className={style.left}>
           <div className={`${style.search} ${!lightMode && style.searchDark}`}>
@@ -449,31 +449,33 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className={style.right}>
-          <div className={style.bell} title="notifications">
-            <i
-              className="fa-regular fa-bell"
-              aria-hidden="true"
-              style={{ color: !lightMode ? "#fff" : "#000" }}
-            ></i>
-          </div>
-          <div
-            className={style.account}
-            onClick={() => {
-              setShowProfile(true);
-            }}
-            title="account"
-          >
-            <div className={style.profile}>
-              <Image
-                width={200}
-                height={200}
-                alt="profile"
-                src={"/images/wallpaperflare.com_wallpaper (16).jpg"}
-              />
+        {!mobile && (
+          <div className={style.right}>
+            <div className={style.bell} title="notifications">
+              <i
+                className="fa-regular fa-bell"
+                aria-hidden="true"
+                style={{ color: !lightMode ? "#fff" : "#000" }}
+              ></i>
+            </div>
+            <div
+              className={style.account}
+              onClick={() => {
+                setShowProfile(true);
+              }}
+              title="account"
+            >
+              <div className={style.profile}>
+                <Image
+                  width={200}
+                  height={200}
+                  alt="profile"
+                  src={"/images/wallpaperflare.com_wallpaper (16).jpg"}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div
           className={`${style.profileData} ${showProfile && style.showProfile}`}
           style={{
@@ -799,7 +801,7 @@ const Page = () => {
             style={{
               textAlign: "center",
               color: !lightMode ? "#fff" : "#000",
-              height:!mobile ? "70vh" : "50vh",
+              height: !mobile ? "70vh" : "50vh",
               display: "grid",
               placeContent: "center",
               fontSize: "20px",

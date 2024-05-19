@@ -78,7 +78,7 @@ function HomePage() {
               <Recommended
                 title={"Recommended Movies & Tv Shows"}
                 length={18}
-                seeAllTypes={"See All Movies & Tv Shows"}
+                seeAllTypes={"See All"}
                 api={`/myapi/movie`}
               />
               <Trending

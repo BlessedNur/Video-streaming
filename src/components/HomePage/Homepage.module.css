@@ -46,7 +46,8 @@
 }
 /* background-color: red; */
 .movieList {
-  /* padding: 0 1em; */
+  /* padding: 0 10em; */
+  background-color: #c00;
   padding-top: 1em;
   display: flex;
   flex-direction: column;
@@ -187,7 +188,7 @@
 .layer {
   /* background-color: green; */
   width: 100%;
-  /* padding: 1em; */
+  padding: .5em;
   height: 100vh;
   display: flex;
   flex-direction: column;

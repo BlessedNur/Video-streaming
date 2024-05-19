@@ -475,7 +475,16 @@
     padding: 1em;
   }
   .search {
-    width: 20em;
+    width: 30em;
+  }
+  .Note{
+  bottom: -35px;
+  color: white;
+  font-size: 10px;
+
+  }
+  .Note a{
+    font-size: 12px;
   }
   .filters {
     /* display: none; */
