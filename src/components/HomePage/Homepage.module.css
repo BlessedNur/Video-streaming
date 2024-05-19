@@ -46,7 +46,7 @@
 }
 /* background-color: red; */
 .movieList {
-  padding: 0 1em;
+  /* padding: 0 1em; */
   padding-top: 1em;
   display: flex;
   flex-direction: column;
@@ -177,12 +177,17 @@
   }
   to {
     transform: translateY(8px);
+    @media screen and (max-width: 650px) {
+      .scrollDown {
+        display: none;
+      }
+    }
   }
 }
 .layer {
   /* background-color: green; */
   width: 100%;
-  padding: 1em;
+  /* padding: 1em; */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -190,6 +195,12 @@
   overflow: scroll;
 }
 
-@media screen and ( max-width:500px) {
-  
+@media screen and (max-width: 768px) {
+  .contentsDisplay {
+    flex-direction: column;
+    /* background-color: red; */
+  }
+  .scrollDown{
+    display: none;
+  }
 }

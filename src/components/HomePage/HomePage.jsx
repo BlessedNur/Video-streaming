@@ -10,11 +10,13 @@ import Upcoming from "../Upcoming/Upcoming";
 import dynamic from "next/dynamic";
 import Sidebar from "../Sidebar/Sidebar";
 import SideContent from "../SideContent/SideContent";
+import useMediaQuery from "../UseMediaQuery";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
+  const mobile = useMediaQuery("(max-width:768px)");
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
 
   useEffect(() => {
@@ -90,9 +92,10 @@ function HomePage() {
                 api={`/myapi/movie`}
               />
             </div>
+          {mobile && <SideContent />}
           </div>
         </div>
-        <SideContent />
+        {!mobile && <SideContent />}
       </div>
     </main>
   );

@@ -6,11 +6,12 @@ import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { usePathname, useRouter } from "next/navigation";
+import useMediaQuery from "../UseMediaQuery";
 
 function Recommended({ title, seeAllTypes, api, length }) {
   const path = usePathname();
   const navigate = useRouter();
-
+  const mobile = useMediaQuery("(max-width: 600px)");
   // console.log(path);
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [
@@ -73,54 +74,64 @@ function Recommended({ title, seeAllTypes, api, length }) {
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            <Skeleton
-              width={path === "/kids" || path === "/movies" ? 134 : 120}
-              height={160}
-              borderRadius={10}
-            />
-            {(path === "/kids" || path === "/movies") && (
-              <div>
+            {mobile ? (
+              <>
+                <Skeleton width={121} height={180} borderRadius={10} />
+                <Skeleton width={121} height={180} borderRadius={10} />
+                <Skeleton width={121} height={180} borderRadius={10} />
+              </>
+            ) : (
+              <>
                 <Skeleton
                   width={path === "/kids" || path === "/movies" ? 134 : 120}
                   height={160}
                   borderRadius={10}
                 />
-              </div>
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                <Skeleton
+                  width={path === "/kids" || path === "/movies" ? 134 : 120}
+                  height={160}
+                  borderRadius={10}
+                />
+                {(path === "/kids" || path === "/movies") && (
+                  <div>
+                    <Skeleton
+                      width={path === "/kids" || path === "/movies" ? 134 : 120}
+                      height={160}
+                      borderRadius={10}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </SkeletonTheme>

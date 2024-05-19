@@ -121,7 +121,7 @@ function Banner({ BannerApi, bannerWidth }) {
                 />
                 <div className={style.content}>
                   <h2 className={lightMode ? style.contentLight : ""}>
-                    {movie.name}
+                    {movie.title}
                   </h2>
                   <p className={lightMode ? style.contentLight : ""}>
                     {movie.overview.slice(0, 100)}...

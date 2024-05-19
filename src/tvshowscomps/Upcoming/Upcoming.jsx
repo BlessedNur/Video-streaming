@@ -6,11 +6,13 @@ import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useRouter } from "next/navigation";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function Upcoming({ title, api, length }) {
   // const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width:600px)")
   const [
     lightMode,
     setLightMode,
@@ -83,12 +85,21 @@ function Upcoming({ title, api, length }) {
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton width={199} height={100} borderRadius={7} />
-            <Skeleton width={199} height={100} borderRadius={7} />
-            <Skeleton width={199} height={100} borderRadius={7} />
-            <Skeleton width={199} height={100} borderRadius={7} />
-            <Skeleton width={199} height={100} borderRadius={7} />
-            <Skeleton width={199} height={100} borderRadius={7} />
+            {mobile ? (
+              <>
+                <Skeleton width={185} height={100} borderRadius={10} />
+                <Skeleton width={185} height={100} borderRadius={10} />
+              </>
+            ) : (
+              <>
+                <Skeleton width={199} height={100} borderRadius={7} />
+                <Skeleton width={199} height={100} borderRadius={7} />
+                <Skeleton width={199} height={100} borderRadius={7} />
+                <Skeleton width={199} height={100} borderRadius={7} />
+                <Skeleton width={199} height={100} borderRadius={7} />
+                <Skeleton width={199} height={100} borderRadius={7} />
+              </>
+            )}
           </div>
         </SkeletonTheme>
       ) : (
@@ -149,8 +160,8 @@ function Upcoming({ title, api, length }) {
                     </h2>
                   </div>
                   <h1>
-                    {movie.name.length > 20
-                      ? `${movie.name.slice(0, 20)}...`
+                    {movie.title.length > 20
+                      ? `${movie.title.slice(0, 20)}...`
                       : movie.name}
                   </h1>
                   <div className={style.rates}>

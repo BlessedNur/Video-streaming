@@ -6,10 +6,12 @@ import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useRouter } from "next/navigation";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function Recommended({ title, seeAllTypes, api, length }) {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width:600px)")
 
   const [
     lightMode,
@@ -71,15 +73,25 @@ function Recommended({ title, seeAllTypes, api, length }) {
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
-            <Skeleton width={133} height={180} borderRadius={10} />
+            {mobile ? (
+              <>
+                <Skeleton width={121} height={180} borderRadius={10} />
+                <Skeleton width={121} height={180} borderRadius={10} />
+                <Skeleton width={121} height={180} borderRadius={10} />
+              </>
+            ) : (
+              <>
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+                <Skeleton width={133} height={180} borderRadius={10} />
+              </>
+            )}
           </div>
         </SkeletonTheme>
       ) : (

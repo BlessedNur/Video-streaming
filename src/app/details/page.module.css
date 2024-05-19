@@ -186,6 +186,11 @@
   }
   to {
     transform: translateY(8px);
+    @media screen and (max-width: 650px) {
+      .scrollDown {
+        display: none;
+      }
+    }
   }
 }
 .layer {
@@ -356,7 +361,6 @@
   background: #0d0c0c;
   margin: 0.5em 0;
   position: relative;
-  
 }
 .boxes:hover {
   border: 2px solid #272525;
@@ -380,12 +384,11 @@
   /* justify-content: space-between; */
   /* align-items: center; */
 }
-.boxesDark{
-background-color: #e7e6e6fd !important;
+.boxesDark {
+  background-color: #e7e6e6fd !important;
 }
-.boxesDark:hover{
+.boxesDark:hover {
   border: 2px solid #c5bdbdfd;
-
 }
 .rates {
   position: absolute;
@@ -408,20 +411,19 @@ background-color: #e7e6e6fd !important;
 .boxes h3 {
   color: white;
 }
-.budget{
+.budget {
   display: flex;
-  gap: .5em;
+  gap: 0.5em;
   align-items: center;
   position: absolute;
   left: 42%;
   top: 50%;
 }
-.budget h2{
+.budget h2 {
   font-size: 15px;
-
 }
-.budget p{
+.budget p {
   font-size: 12px;
   /* color: green; */
   font-weight: 500;
-  }
+}

@@ -11,12 +11,15 @@ import Recommended from "@/components/Recommended/Recommended";
 import Trending from "@/components/Trending/Trending";
 import TopRated from "@/components/TopRated/Toprated";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
+  const mobile = useMediaQuery("(max-width: 768px)");
+
 
   useEffect(() => {
     const handleScroll = () => {

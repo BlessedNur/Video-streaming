@@ -252,7 +252,7 @@ const Page = () => {
             style={{
               textAlign: "center",
               color: !lightMode ? "#fff" : "#000",
-              height: "80%",
+              height: !mobile ? "80%" : "60%",
               width: "90vw",
               display: "grid",
               placeContent: "center",
@@ -479,7 +479,7 @@ const Page = () => {
           style={{
             backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
             color: lightMode ? "#000" : "#d3d5db",
-            display: "none",
+            // display: "none",
           }}
           // onClick={() => setShowProfile(false)}
         >
@@ -799,7 +799,7 @@ const Page = () => {
             style={{
               textAlign: "center",
               color: !lightMode ? "#fff" : "#000",
-              height: "70vh",
+              height:!mobile ? "70vh" : "50vh",
               display: "grid",
               placeContent: "center",
               fontSize: "20px",

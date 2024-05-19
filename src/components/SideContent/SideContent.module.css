@@ -2,7 +2,7 @@
   /* float: right; */
   height: 200em;
   width: 29%;
-  padding: 2em;
+  padding: 1em;
   padding-top: 5em;
   position: relative;
   /* top: 20em; */
@@ -87,4 +87,10 @@
 .suggestions{
   overflow: hidden;
   /* height: 35.5vh; */
+}
+
+@media screen and (max-width: 768px) {
+  .sider{
+    width: 100%;
+  }
 }

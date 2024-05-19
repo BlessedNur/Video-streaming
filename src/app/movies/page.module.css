@@ -44,7 +44,7 @@
 /* background-color: red; */
 .movieList {
   overflow: scroll;
-  padding: 0 1em;
+
   padding-top: 1em;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@
   gap: 1em;
   /* position: relative; */
   /* background-color: red; */
-  padding: 1em;
+  padding: 0.5em;
 }
 .movieList::-webkit-scrollbar,
 .lists::-webkit-scrollbar {
@@ -153,5 +153,10 @@
   }
   to {
     transform: translateY(8px);
+    @media screen and (max-width: 650px) {
+      .scrollDown {
+        display: none;
+      }
+    }
   }
 }

@@ -6,12 +6,14 @@ import { movieContext } from "@/context/Context";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { usePathname, useRouter } from "next/navigation";
+import useMediaQuery from "../UseMediaQuery";
 
 function TopRated({ title, api, length }) {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const path = usePathname();
   const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width:600px)")
   const [
     lightMode,
     setLightMode,
@@ -77,14 +79,23 @@ function TopRated({ title, api, length }) {
             </div>
           </div>
           <div className={style.movies}>
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            <Skeleton width={204} height={100} borderRadius={7} />
-            {(path === "/kids" || path === "/movies") && (
+            {mobile ? (
+              <>
+                <Skeleton width={185} height={100} borderRadius={10} />
+                <Skeleton width={185} height={100} borderRadius={10} />
+              </>
+            ) : (
               <>
                 <Skeleton width={204} height={100} borderRadius={7} />
+                <Skeleton width={204} height={100} borderRadius={7} />
+                <Skeleton width={204} height={100} borderRadius={7} />
+                <Skeleton width={204} height={100} borderRadius={7} />
+                <Skeleton width={204} height={100} borderRadius={7} />
+                {(path === "/kids" || path === "/movies") && (
+                  <>
+                    <Skeleton width={204} height={100} borderRadius={7} />
+                  </>
+                )}
               </>
             )}
           </div>

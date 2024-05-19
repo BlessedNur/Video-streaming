@@ -309,6 +309,11 @@ aside p {
 #animationWindow svg {
   width: 100% !important;
 }
+@media screen and (max-width: 768px) {
+  #animationWindow {
+    height: 65vh;
+  }
+}
 
 .loading {
   height: 100vh;
@@ -467,8 +472,8 @@ aside p {
   /* background-color: red; */
 }
 
-@media screen and (min-width:450px) {
-  *{
+@media screen and (min-width: 450px) {
+  * {
     font-size: 11px;
   }
 }

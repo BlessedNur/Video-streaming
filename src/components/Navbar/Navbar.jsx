@@ -4,10 +4,14 @@ import style from "./Navbar.module.css";
 import { movieContext } from "@/context/Context";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import useMediaQuery from "../UseMediaQuery";
+import Image from "next/image";
 
 function Navbar() {
   const pathname = usePathname();
-  const navigate = useRouter()
+  const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width: 499px)");
+
   const [countires, setCountries] = useState({
     UK: "UK",
     JAPANESE: "JAPANESE",
@@ -43,133 +47,151 @@ function Navbar() {
         style={{ color: lightMode ? "black" : "#fff" }}
       >
         <div className={style.left}>
-          <ul className={style.ul}>
-            <li>
-              <Link
-                className={`${style.link} ${
-                  pathname === "/" || activeNavLink === "all"
-                    ? style.activeNavLink
-                    : ""
-                } ${lightMode ? style.linkLight : ""}`}
-                href="/"
-                onClick={() => {
-                  handleNavClick("all");
-                  handleSideClick("home");
-                }}
-              >
-                All
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`${style.link} ${
-                  pathname === "/tvshows" || activeNavLink === "series"
-                    ? style.activeNavLink
-                    : ""
-                } ${lightMode ? style.linkLight : ""}`}
-                href="/tvshows"
-                onClick={() => {
-                  handleNavClick("series");
-                  // handleSideClick("home")
-                }}
-              >
-                Series
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`${style.link} ${
-                  pathname === "/movies" || activeNavLink === "movies"
-                    ? style.activeNavLink
-                    : ""
-                } ${lightMode ? style.linkLight : ""}`}
-                href="/movies"
-                onClick={() => {
-                  handleNavClick("movies");
-                }}
-              >
-                Movies
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`${style.link} ${
-                  pathname === "/anime" || activeNavLink === "Anime"
-                    ? style.activeNavLink
-                    : ""
-                } ${lightMode ? style.linkLight : ""}`}
-                href="/anime"
-                onClick={() => {
-                  handleSideClick("anime");
-                  handleNavClick("Anime");
-                }}
-              >
-                Anime
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`${style.link} ${
-                  pathname === "/kids" || activeNavLink === "kids"
-                    ? style.activeNavLink
-                    : ""
-                } ${lightMode ? style.linkLight : ""}`}
-                href="/kids"
-                onClick={() => {
-                  handleNavClick("kids");
-                  handleSideClick("cartoons");
-                }}
-              >
-                Kids
-              </Link>
-            </li>
-          </ul>
-
-          <div className={style.language}>
-            <div className={style.countryIcon}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 60 30"
-                width="35"
-                className={style.languageImage}
-                height="1000"
-              >
-                <clipPath id="s">
-                  <path d="M0,0 v30 h60 v-30 z" />
-                </clipPath>
-                <clipPath id="t">
-                  <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
-                </clipPath>
-                <g clipPath="url(#s)">
-                  <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
-                  <path
-                    d="M0,0 L60,30 M60,0 L0,30"
-                    stroke="#fff"
-                    strokeWidth="6"
-                  />
-                  <path
-                    d="M0,0 L60,30 M60,0 L0,30"
-                    clipPath="url(#t)"
-                    stroke="#C8102E"
-                    strokeWidth="4"
-                  />
-                  <path
-                    d="M30,0 v30 M0,15 h60"
-                    stroke="#fff"
-                    strokeWidth="10"
-                  />
-                  <path
-                    d="M30,0 v30 M0,15 h60"
-                    stroke="#C8102E"
-                    strokeWidth="6"
-                  />
-                </g>
-              </svg>
+          {mobile ? (
+            <div className={style.logo}>
+              <Image
+                src={"/images/New_Project__2_-removebg-preview.png"}
+                width={200}
+                height={200}
+                className={style.logoThree}
+              />
             </div>
-          </div>
+          ) : (
+            <>
+              <ul className={style.ul}>
+                <li>
+                  <Link
+                    className={`${style.link} ${
+                      pathname === "/" || activeNavLink === "all"
+                        ? style.activeNavLink
+                        : ""
+                    } ${lightMode ? style.linkLight : ""}`}
+                    href="/"
+                    onClick={() => {
+                      handleNavClick("all");
+                      handleSideClick("home");
+                    }}
+                  >
+                    All
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${style.link} ${
+                      pathname === "/tvshows" || activeNavLink === "series"
+                        ? style.activeNavLink
+                        : ""
+                    } ${lightMode ? style.linkLight : ""}`}
+                    href="/tvshows"
+                    onClick={() => {
+                      handleNavClick("series");
+                      // handleSideClick("home")
+                    }}
+                  >
+                    Series
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${style.link} ${
+                      pathname === "/movies" || activeNavLink === "movies"
+                        ? style.activeNavLink
+                        : ""
+                    } ${lightMode ? style.linkLight : ""}`}
+                    href="/movies"
+                    onClick={() => {
+                      handleNavClick("movies");
+                    }}
+                  >
+                    Movies
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${style.link} ${
+                      pathname === "/anime" || activeNavLink === "Anime"
+                        ? style.activeNavLink
+                        : ""
+                    } ${lightMode ? style.linkLight : ""}`}
+                    href="/anime"
+                    onClick={() => {
+                      handleSideClick("anime");
+                      handleNavClick("Anime");
+                    }}
+                  >
+                    Anime
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${style.link} ${
+                      pathname === "/kids" || activeNavLink === "kids"
+                        ? style.activeNavLink
+                        : ""
+                    } ${lightMode ? style.linkLight : ""}`}
+                    href="/kids"
+                    onClick={() => {
+                      handleNavClick("kids");
+                      handleSideClick("cartoons");
+                    }}
+                  >
+                    Kids
+                  </Link>
+                </li>
+              </ul>
+
+              <div className={style.language}>
+                <div className={style.countryIcon}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 60 30"
+                    width="35"
+                    className={style.languageImage}
+                    height="1000"
+                  >
+                    <clipPath id="s">
+                      <path d="M0,0 v30 h60 v-30 z" />
+                    </clipPath>
+                    <clipPath id="t">
+                      <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+                    </clipPath>
+                    <g clipPath="url(#s)">
+                      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+                      <path
+                        d="M0,0 L60,30 M60,0 L0,30"
+                        stroke="#fff"
+                        strokeWidth="6"
+                      />
+                      <path
+                        d="M0,0 L60,30 M60,0 L0,30"
+                        clipPath="url(#t)"
+                        stroke="#C8102E"
+                        strokeWidth="4"
+                      />
+                      <path
+                        d="M30,0 v30 M0,15 h60"
+                        stroke="#fff"
+                        strokeWidth="10"
+                      />
+                      <path
+                        d="M30,0 v30 M0,15 h60"
+                        stroke="#C8102E"
+                        strokeWidth="6"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </>
+          )}
         </div>
-        <div className={style.right} >
-          <Link href={"/search"} className={style.search} title="search" style={{color:"inherit"}}>
+        <div className={style.right}>
+          <Link
+            href={"/search"}
+            className={style.search}
+            title="search"
+            style={{ color: "inherit" }}
+          >
             <i className="fa fa-search" aria-hidden="true"></i>
           </Link>
           <div className={style.bell} title="notifications">
@@ -189,12 +211,11 @@ function Navbar() {
         </div>
       </nav>
       <div
-        
         className={`${style.profileData} ${showProfile && style.showProfile}`}
         style={{
           backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
           color: lightMode ? "#000" : "#d3d5db",
-          display:"none"
+          // display:"none"
         }}
         // onClick={() => setShowProfile(false)}
       >
