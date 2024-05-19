@@ -456,7 +456,7 @@ function Page() {
                           />
                         </div>
                         <div className={style.RightIntro}>
-                          {selectedMovie.Logo[0] ? (
+                          {selectedMovie.Logo ? (
                             <div className={style.image}>
                               <Image
                                 src={selectedMovie.Logo[0]}
