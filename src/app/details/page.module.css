@@ -506,8 +506,6 @@
     /* background-color: #c00; */
     text-align: center;
   }
-  .castTwoss {
-  }
   .leftS {
     min-width: 50%;
   }
@@ -519,10 +517,5 @@
     display: flex;
     align-items: center;
     gap: 1em;
-  }
-  .storyLine {
-  }
-
-  .mobiles {
   }
 }
