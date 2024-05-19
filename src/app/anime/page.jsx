@@ -12,6 +12,7 @@ import Recommended from "@/animecomps/Recommended/Recommended";
 import Trending from "@/animecomps/Trending/Trending";
 import TopRated from "@/animecomps/TopRated/Toprated";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);

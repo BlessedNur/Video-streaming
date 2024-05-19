@@ -13,10 +13,10 @@ function Navigation() {
     }
     list.forEach((item) => item.addEventListener("click", activeLink));
 
-    // Clean up event listeners on component unmount
-    return () => {
-      list.forEach((item) => item.removeEventListener("click", activeLink));
-    };
+    // // Clean up event listeners on component unmount
+    // return () => {
+    //   list.forEach((item) => item.removeEventListener("click", activeLink));
+    // };
   }, []);
   return (
     <div className="navigation">
@@ -30,6 +30,9 @@ function Navigation() {
               ? "active"
               : ""
           }`}
+          onClick={() => {
+            navigate.push("/");
+          }}
         >
           <a href="#">
             <span className="icon">
@@ -38,7 +41,12 @@ function Navigation() {
             <span className="text">Home</span>
           </a>
         </li>
-        <li className={`list ${path === "/search" && "active"}`}>
+        <li
+          className={`list ${path === "/search" && "active"}`}
+          onClick={() => {
+            navigate.push("/search");
+          }}
+        >
           <a href="#">
             <span className="icon">
               <i className="fa fa-search" aria-hidden="true"></i>{" "}
@@ -54,7 +62,12 @@ function Navigation() {
             <span className="text">Profile</span>
           </a>
         </li>
-        <li className={`list ${path === "watchlist" && "active"}`}>
+        <li
+          className={`list ${path === "/watchlist" && "active"}`}
+          onClick={() => {
+            navigate.push("/watchlist");
+          }}
+        >
           <a href="#">
             <span className="icon">
               <i className="fa fa-bookmark" aria-hidden="true"></i>{" "}

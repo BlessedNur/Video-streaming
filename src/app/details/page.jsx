@@ -8,12 +8,13 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Banner from "@/components/DetailsBanner/Banner";
 import Navbar from "@/components/DetailsNavbar/Navbar";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
   const mobile = useMediaQuery("(max-width:500px)");
-  ("(max-width:768px)");
+  
   const [
     lightMode,
     setLightMode,

@@ -12,6 +12,7 @@ import Recommended from "@/tvshowscomps/Recommended/Recommended";
 import Trending from "@/tvshowscomps/Trending/Trending";
 import TopRated from "@/tvshowscomps/TopRated/Toprated";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);

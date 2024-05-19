@@ -9,6 +9,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 const Page = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -20,7 +21,7 @@ const Page = () => {
   const [note, setNote] = useState(false);
   const navigate = useRouter();
   const mobile = useMediaQuery("(max-width:500px)");
-  ("(max-width: 768px)");
+
 
   const [
     lightMode,
@@ -850,6 +851,7 @@ const Page = () => {
           </>
         )}
       </div>
+      {mobile && <Navigation/>}
     </section>
   );
 };

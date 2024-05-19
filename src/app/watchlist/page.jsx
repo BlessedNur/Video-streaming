@@ -6,11 +6,13 @@ import { movieContext } from "@/context/Context";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Navbar from "@/components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
+import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function Page() {
   const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width:500px)");
 
-  
   const [
     lightMode,
     setLightMode,
@@ -128,7 +130,7 @@ function Page() {
               fontSize: "20px",
               background: lightMode ? "#fff" : "#000",
             }}
-            >
+          >
             <h1 className={style.watcher}>Watchlist</h1>
             <dotlottie-player
               src="https://lottie.host/a1d6e94d-b2bd-4a7d-9529-55d0e08b014b/e6QbYU4gAC.json"
@@ -142,6 +144,7 @@ function Page() {
           </div>
         </>
       )}
+      {mobile && <Navigation/>}
     </>
   );
 }

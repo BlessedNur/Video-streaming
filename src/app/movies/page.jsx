@@ -10,6 +10,7 @@ import Recommended from "@/components/Recommended/Recommended";
 import Trending from "@/components/Trending/Trending";
 import TopRated from "@/components/TopRated/Toprated";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
