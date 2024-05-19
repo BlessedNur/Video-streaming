@@ -12,14 +12,14 @@ import Trending from "@/components/Trending/Trending";
 import TopRated from "@/components/TopRated/Toprated";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import useMediaQuery from "@/components/UseMediaQuery";
+import Navigation from "@/components/Navigation/Navigation";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
-  const mobile = useMediaQuery("(max-width: 768px)");
-
+  const mobile = useMediaQuery("(max-width: 500px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,62 +41,64 @@ function HomePage() {
   }, []);
 
   return (
-    <main className={`${style.main} `}>
-      <Sidebar />
-      <Navbar />
-      <div
-        className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
-      >
-        <div className={`${style.movieList} scroller`}>
-          <div
-            ref={movieListRef}
-            className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
-              style.lineThree
-            } ${style.lineTwo} ${
-              !showScrollDown ? style.lineTwoShow : style.lineTwoHide
-            } ${lightMode && style.lineTwoLight} ${
-              showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
-            }`}
-          >
-            <Banner BannerApi={`/myapi/cartoon`} bannerWidth={"100%"} />
+    <>
+      <main className={`${style.main} `}>
+        <Sidebar />
+        <Navbar />
+        <div
+          className={`${style.contentsDisplay} ${lightMode ? "mainLight" : ""}`}
+        >
+          <div className={`${style.movieList} scroller`}>
             <div
-              className={`${style.scrollDown} ${
-                !showScrollAllDown && style.hiddenScroller
+              ref={movieListRef}
+              className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
+                style.lineThree
+              } ${style.lineTwo} ${
+                !showScrollDown ? style.lineTwoShow : style.lineTwoHide
+              } ${lightMode && style.lineTwoLight} ${
+                showScrollAllDown ? style.lineThreeShow : style.lineThreeHide
               }`}
             >
-              <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
-              <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
+              <Banner BannerApi={`/myapi/cartoon`} bannerWidth={"100%"} />
+              <div
+                className={`${style.scrollDown} ${
+                  !showScrollAllDown && style.hiddenScroller
+                }`}
+              >
+                <h3 style={{ color: lightMode && "#000" }}>Scroll Down</h3>
+                <i className={`fas fa-chevron-down ${style.scrollBtn}`}></i>
+              </div>
+              <Upcoming
+                title={"Latest Cartoons"}
+                length={15}
+                containerWidth={"100%"}
+                api={`/myapi/cartoon`}
+              />
+              <Recommended
+                title={"Recommended Cartoons"}
+                containerWidth={"100%"}
+                length={10}
+                seeAllTypes={"See All Cartoons"}
+                api={`/myapi/cartoon`}
+              />
+              <Trending
+                containerWidth={"100%"}
+                api={`/myapi/cartoon`}
+                title={"Popular Cartoons"}
+                length={19}
+              />
+              <TopRated
+                title={"Toprated Cartoons"}
+                length={8}
+                containerWidth={"100%"}
+                api={`/myapi/cartoon`}
+              />
             </div>
-
-            <Upcoming
-              title={"Latest Cartoons"}
-              length={15}
-              containerWidth={"100%"}
-              api={`/myapi/cartoon`}
-            />
-            <Recommended
-              title={"Recommended Cartoons"}
-              containerWidth={"100%"}
-              length={10}
-              seeAllTypes={"See All Cartoons"}
-              api={`/myapi/cartoon`}
-            />
-            <Trending
-              containerWidth={"100%"}
-              api={`/myapi/cartoon`}
-              title={"Popular Cartoons"}
-              length={19}
-            />
-            <TopRated
-              title={"Toprated Cartoons"}
-              length={8}
-              containerWidth={"100%"}
-              api={`/myapi/cartoon`}
-            />
           </div>
         </div>
-      </div>
-    </main>
+        {mobile && <Navigation />}
+      </main>
+    </>
   );
 }
 

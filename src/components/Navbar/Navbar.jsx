@@ -46,22 +46,22 @@ function Navbar() {
         className={style.nav}
         style={{ color: lightMode ? "black" : "#fff" }}
       >
-        <div className="menu">
-          <label class="hamburger">
-            <input type="checkbox" />
-            <svg viewBox="0 0 32 32">
-              <path
-                class="line line-top-bottom"
-                fill={lightMode && "#000"}
-                d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
-              ></path>
-              <path class="line" d="M7 16 27 16"></path>
-            </svg>
-          </label>
-          <div className="mobile-menu">
-            
+        {mobile && (
+          <div className="menu">
+            <label class="hamburger">
+              <input type="checkbox" />
+              <svg viewBox="0 0 32 32">
+                <path
+                  class="line line-top-bottom"
+                  fill={lightMode && "#000"}
+                  d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                ></path>
+                <path class="line" d="M7 16 27 16"></path>
+              </svg>
+            </label>
+            <div className="mobile-menu"></div>
           </div>
-        </div>
+        )}
         <div className={style.left}>
           {mobile ? (
             <>
@@ -204,21 +204,25 @@ function Navbar() {
           )}
         </div>
         <div className={style.right}>
-          <Link
-            href={"/search"}
-            className={style.search}
-            title="search"
-            style={{ color: "inherit" }}
-          >
-            <i className="fa fa-search" aria-hidden="true"></i>
-          </Link>
-          <div className={style.bell} title="notifications">
-            {mobile ? (
-              <i class="fa fa-bookmark" aria-hidden="true"></i>
-            ) : (
-              <i className="fa-regular fa-bell" aria-hidden="true"></i>
-            )}
-          </div>
+          {
+            <>
+              <Link
+                href={"/search"}
+                className={style.search}
+                title="search"
+                style={{ color: "inherit" }}
+              >
+                <i className="fa fa-search" aria-hidden="true"></i>
+              </Link>
+              <div className={style.bell} title="notifications">
+                {mobile ? (
+                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                ) : (
+                  <i className="fa-regular fa-bell" aria-hidden="true"></i>
+                )}
+              </div>
+            </>
+          }
           <div
             className={style.account}
             onClick={() => {

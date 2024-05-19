@@ -6,11 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useRouter } from "next/navigation";
+import useMediaQuery from "../UseMediaQuery";
 
 function SideContent() {
   const [movies, setMovies] = useState([]);
   const [moviesTrailers, setMoviesTrailers] = useState([]);
   const navigate = useRouter();
+  const mobile = useMediaQuery("(max-width: 768px)");
   const [
     lightMode,
     setLightMode,
@@ -61,9 +63,15 @@ function SideContent() {
         const filterMovies = data.filter((movie) => {
           const releaseYear = movie.first_air_date.split("-")[0];
           console.log(releaseYear);
-          return releaseYear == 2024 || releaseYear == 2020;
+          return (
+            releaseYear == 2024 ||
+            releaseYear == 2019 ||
+            releaseYear == 2018 ||
+            releaseYear == 2017 ||
+            releaseYear == 2016
+          );
         });
-        setMovies(filterMovies.slice(1, 3));
+        mobile ? setMovies(filterMovies) : setMovies(filterMovies.slice(1, 3));
 
         // setUpcomingMovies(data);
       } catch (error) {
@@ -73,7 +81,7 @@ function SideContent() {
 
     fetchUpcomingMovies();
   }, []);
-  console.log(movies)
+  console.log(movies);
   useEffect(() => {
     const fetchTrailersMovies = async () => {
       try {
@@ -222,55 +230,62 @@ function SideContent() {
             </>
           )}
         </div>
-        {movies.length === 0 ? (
-          <SkeletonTheme
-            baseColor={lightMode ? "#eee" : "#202020"}
-            highlightColor={lightMode ? "#b2b5bd" : "#444"}
-          >
-            <Skeleton height={90} width={330} borderRadius={10} />
-            <Skeleton height={90} width={330} borderRadius={10} />
-          </SkeletonTheme>
-        ) : (
-          movies.map((movie) => (
-            <div
-              key={movie.id}
-              className="boxes"
-              style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
+        <div className="latests">
+          {movies.length === 0 ? (
+            <SkeletonTheme
+              baseColor={lightMode ? "#eee" : "#202020"}
+              highlightColor={lightMode ? "#b2b5bd" : "#444"}
             >
-              <div className="left">
-                <Image
-                  src={movie.backdrop_path}
-                  alt={movie.title}
-                  width={300}
-                  height={190}
-                />
-              </div>
-              <div className="right">
-                <div className="top">
-                  <h3>{movie.name}</h3>
-                  <div className="detail">
-                    <p>{movie.number_of_seasons} season - </p>
-                    <p>{movie.number_of_episodes} episodes</p>
-                  </div>
+              <Skeleton height={90} width={330} borderRadius={10} />
+              <Skeleton height={90} width={330} borderRadius={10} />
+            </SkeletonTheme>
+          ) : (
+            movies.map((movie) => (
+              <div
+                key={movie.id}
+                className="boxes"
+                style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
+              >
+                <div className="left">
+                  <Image
+                    src={mobile ? movie.poster_path : movie.backdrop_path}
+                    alt={movie.title}
+                    width={300}
+                    height={190}
+                  />
                 </div>
-                <p className="bot" style={{ color: "#c00", fontWeight: "600" }}>
-                  {movie.episode_run_time.length > 0
-                    ? `${movie.episode_run_time} mins | episode`
-                    : "unconfirmed"}
-                </p>
+                {!mobile && (
+                  <div className="right">
+                    <div className="top">
+                      <h3>{movie.name}</h3>
+                      <div className="detail">
+                        <p>{movie.number_of_seasons} season - </p>
+                        <p>{movie.number_of_episodes} episodes</p>
+                      </div>
+                    </div>
+                    <p
+                      className="bot"
+                      style={{ color: "#c00", fontWeight: "600" }}
+                    >
+                      {movie.episode_run_time.length > 0
+                        ? `${movie.episode_run_time} mins | episode`
+                        : "unconfirmed"}
+                    </p>
+                  </div>
+                )}
+                <div className={style.rates}>
+                  <i className="fa fa-star" aria-hidden="true"></i>
+                  <p style={{ fontWeight: "600", color: lightMode && "#000" }}>
+                    {movie.vote_average !== 0
+                      ? ((movie.vote_average / 100) * 5).toFixed(1)
+                      : "Not rated"}
+                  </p>
+                </div>
+                <h2 className={style.movieBan}>New</h2>
               </div>
-              <div className={style.rates}>
-                <i className="fa fa-star" aria-hidden="true"></i>
-                <p style={{ fontWeight: "600", color: lightMode && "#000" }}>
-                  {movie.vote_average !== 0
-                    ? ((movie.vote_average / 100 )*5).toFixed(1)
-                    : "Not rated"}
-                </p>
-              </div>
-              <h2 className={style.movieBan}>New</h2>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
       <div className="videos">
         {moviesTrailers.length === 0 ? (

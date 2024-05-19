@@ -188,7 +188,7 @@
 .layer {
   /* background-color: green; */
   width: 100%;
-  padding: .5em;
+  padding: 0.5em;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -199,9 +199,12 @@
 @media screen and (max-width: 768px) {
   .contentsDisplay {
     flex-direction: column;
+    margin-top: -70px;
     /* background-color: red; */
   }
-  .scrollDown{
+  .layer {
+  }
+  .scrollDown {
     display: none;
   }
 }

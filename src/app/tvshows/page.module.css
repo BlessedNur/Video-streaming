@@ -44,6 +44,7 @@
 /* background-color: red; */
 .movieList {
   overflow: scroll;
+  padding-bottom: 4em;
 
   padding-top: 1em;
   display: flex;
@@ -161,6 +162,11 @@
   }
 }
 @media screen and (max-width: 650px) {
+}
+@media screen and (max-width: 768px) {
+  .contentsDisplay {
+    margin-top: -70px;
+  }
   .scrollDown {
     display: none;
   }
