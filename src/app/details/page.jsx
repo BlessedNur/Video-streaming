@@ -128,7 +128,6 @@ function Page() {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-      
     }).format(number);
   };
 
@@ -339,7 +338,7 @@ function Page() {
                       <div className={style.castTwoss}>
                         <h1>More like this</h1>
                         <div className={style.vids}>
-                            <div className={style.likeThis}>
+                          <div className={style.likeThis}>
                             {filteredArray.map((items, index) => (
                               <div
                                 className={`${style.boxes} ${
@@ -470,10 +469,15 @@ function Page() {
                             <h1>{selectedMovie.title || selectedMovie.name}</h1>
                           )}
                           <div className={style.genres}>
-                            {selectedMovie.genreNames.map((name, index) => (
-                              <p key={index}>{name} </p>
-                            ))}
+                            {selectedMovie && selectedMovie.genreNames ? (
+                              selectedMovie.genreNames.map((name, index) => (
+                                <p key={index}>{name}</p>
+                              ))
+                            ) : (
+                              <p>No genres available</p>
+                            )}
                           </div>
+
                           <div className={style.actions}>
                             <button>Watch</button>{" "}
                             <button
@@ -519,15 +523,21 @@ function Page() {
                           <h3>
                             {selectedMovie.release_date
                               ? selectedMovie.release_date.split("-")[0]
-                              : selectedMovie.first_air_date.split("-")[0]}
+                              : selectedMovie.first_air_date
+                              ? selectedMovie.first_air_date.split("-")[0]
+                              : "missing"}
                           </h3>
                           <h3>
-                            {selectedMovie.genreNames.find(
-                              (name) => name === "Horror"
-                            ) ? (
-                              <h3>PG 16</h3>
+                            {selectedMovie.genreNames ? (
+                              selectedMovie.genreNames.find(
+                                (name) => name === "Horror"
+                              ) ? (
+                                <h3>PG 16</h3>
+                              ) : (
+                                <h3>PG 13</h3>
+                              )
                             ) : (
-                              <h3>PG 13</h3>
+                              ""
                             )}
                           </h3>
                         </div>
