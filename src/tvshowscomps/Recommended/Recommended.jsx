@@ -11,7 +11,8 @@ import useMediaQuery from "@/components/UseMediaQuery";
 function Recommended({ title, seeAllTypes, api, length }) {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width:600px)")
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width:600px)");
 
   const [
     lightMode,

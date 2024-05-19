@@ -10,7 +10,8 @@ import Image from "next/image";
 function Navbar() {
   const pathname = usePathname();
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width: 499px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width: 499px)");
 
   const [countires, setCountries] = useState({
     UK: "UK",

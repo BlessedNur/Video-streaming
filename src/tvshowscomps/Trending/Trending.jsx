@@ -11,7 +11,8 @@ import useMediaQuery from "@/components/UseMediaQuery";
 function Trending({ title, api, length }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width:600px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width:600px)");
   const [
     lightMode,
     setLightMode,

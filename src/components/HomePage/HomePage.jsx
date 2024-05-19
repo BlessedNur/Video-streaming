@@ -11,12 +11,14 @@ import dynamic from "next/dynamic";
 import Sidebar from "../Sidebar/Sidebar";
 import SideContent from "../SideContent/SideContent";
 import useMediaQuery from "../UseMediaQuery";
+import Navigation from "../Navigation/Navigation";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
-  const mobile = useMediaQuery("(max-width:768px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
 
   useEffect(() => {
@@ -92,11 +94,12 @@ function HomePage() {
                 api={`/myapi/movie`}
               />
             </div>
-          {mobile && <SideContent />}
+            {mobile && <SideContent />}
           </div>
         </div>
         {!mobile && <SideContent />}
       </div>
+      {mobile && <Navigation />}
     </main>
   );
 }

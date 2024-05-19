@@ -19,7 +19,8 @@ const Page = () => {
   const path = usePathname();
   const [note, setNote] = useState(false);
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width: 768px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width: 768px)");
 
   const [
     lightMode,

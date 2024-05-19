@@ -11,12 +11,14 @@ import Upcoming from "@/tvshowscomps/Upcoming/Upcoming";
 import Recommended from "@/tvshowscomps/Recommended/Recommended";
 import Trending from "@/tvshowscomps/Trending/Trending";
 import TopRated from "@/tvshowscomps/TopRated/Toprated";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
+  const mobile = useMediaQuery("(max-width:500px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,6 +94,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      {mobile && <Navigation />}
     </main>
   );
 }

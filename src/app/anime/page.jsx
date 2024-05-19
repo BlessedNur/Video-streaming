@@ -11,13 +11,14 @@ import Upcoming from "@/animecomps/Upcoming/Upcoming";
 import Recommended from "@/animecomps/Recommended/Recommended";
 import Trending from "@/animecomps/Trending/Trending";
 import TopRated from "@/animecomps/TopRated/Toprated";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
-
+  const mobile = useMediaQuery("(max-width:500px)");
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = movieListRef.current.scrollTop;
@@ -92,6 +93,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      {mobile && <Navigation />}
     </main>
   );
 }

@@ -12,7 +12,8 @@ function Upcoming({ title, api, length }) {
   // const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width:600px)")
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width:600px)");
   const [
     lightMode,
     setLightMode,

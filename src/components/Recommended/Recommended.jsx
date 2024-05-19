@@ -11,7 +11,8 @@ import useMediaQuery from "../UseMediaQuery";
 function Recommended({ title, seeAllTypes, api, length }) {
   const path = usePathname();
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width: 600px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width: 600px)");
   // console.log(path);
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [

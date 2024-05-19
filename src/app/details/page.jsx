@@ -12,7 +12,8 @@ import useMediaQuery from "@/components/UseMediaQuery";
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
-  const mobile = useMediaQuery("(max-width:768px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width:768px)");
   const [
     lightMode,
     setLightMode,
@@ -432,6 +433,7 @@ function Page() {
           </div>
         </section>
       )}
+      {mobile && <Navigation />}
     </>
   );
 }

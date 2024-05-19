@@ -12,7 +12,8 @@ function SideContent() {
   const [movies, setMovies] = useState([]);
   const [moviesTrailers, setMoviesTrailers] = useState([]);
   const navigate = useRouter();
-  const mobile = useMediaQuery("(max-width: 768px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width: 768px)");
   const [
     lightMode,
     setLightMode,

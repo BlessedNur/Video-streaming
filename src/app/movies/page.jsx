@@ -9,6 +9,7 @@ import Upcoming from "@/components/Upcoming/Upcoming";
 import Recommended from "@/components/Recommended/Recommended";
 import Trending from "@/components/Trending/Trending";
 import TopRated from "@/components/TopRated/Toprated";
+import useMediaQuery from "@/components/UseMediaQuery";
 
 function HomePage() {
   const [lightMode, setLightMode] = useContext(movieContext);
@@ -33,7 +34,7 @@ function HomePage() {
       }
     };
   }, []);
-
+  const mobile = useMediaQuery("(max-width:500px)");
   return (
     <main className={`${style.main} `}>
       <Sidebar />
@@ -45,9 +46,9 @@ function HomePage() {
           className={`${style.movieList} scroller ${
             lightMode ? style.movieListLight : style.movieListDark
           }`}
-          >
+        >
           <div
-          ref={movieListRef}
+            ref={movieListRef}
             className={`${style.lists} ${lightMode ? style.lineDark : ""} ${
               style.lineThree
             } ${style.lineTwo} ${
@@ -90,6 +91,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      {mobile && <Navigation />}
     </main>
   );
 }

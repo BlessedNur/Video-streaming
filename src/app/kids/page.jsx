@@ -19,7 +19,8 @@ function HomePage() {
   const movieListRef = useRef(null);
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [showScrollAllDown, setShowScrollAllDown] = useState(true);
-  const mobile = useMediaQuery("(max-width: 500px)");
+  const mobile = useMediaQuery("(max-width:500px)");
+  ("(max-width: 500px)");
 
   useEffect(() => {
     const handleScroll = () => {
