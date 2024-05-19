@@ -293,3 +293,30 @@
   border-radius: 0 0 5px 0;
   background-color: #1c1d1d !important;
 }
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.button1 {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.button2 {
+  padding: 0.6em 1em;
+  white-space: nowrap;
+  border-radius: 8px;
+  background-color: #c00;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.button1:hover,
+.button2:hover {
+  scale: 1.05;
+}

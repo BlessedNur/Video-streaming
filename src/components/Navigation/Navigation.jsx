@@ -1,8 +1,39 @@
 "use client";
+import { movieContext } from "@/context/Context";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 function Navigation() {
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
+    watchlist,
+    setWatchlist,
+  ] = useContext(movieContext);
+
   const navigate = useRouter();
   const path = usePathname();
   useEffect(() => {
@@ -36,9 +67,22 @@ function Navigation() {
         >
           <a href="#">
             <span className="icon">
-              <i className="fa fa-home" aria-hidden="true"></i>{" "}
+              <i
+                style={{
+                  color: lightMode && "#000",
+                }}
+                className="fa fa-home"
+                aria-hidden="true"
+              ></i>{" "}
             </span>
-            <span className="text">Home</span>
+            <span
+              className="text"
+              style={{
+                color: lightMode && "#000",
+              }}
+            >
+              Home
+            </span>
           </a>
         </li>
         <li
@@ -49,17 +93,39 @@ function Navigation() {
         >
           <a href="#">
             <span className="icon">
-              <i className="fa fa-search" aria-hidden="true"></i>{" "}
+              <i
+                style={{
+                  color: lightMode && "#000",
+                }}
+                className="fa fa-search"
+                aria-hidden="true"
+              ></i>{" "}
             </span>
-            <span className="text">Search</span>
+            <span
+              className="text"
+              style={{
+                color: lightMode && "#000",
+              }}
+            >
+              Search
+            </span>
           </a>
         </li>
         <li className={`list`}>
           <a href="#">
             <span className="icon">
-              <i className="fa fa-user" aria-hidden="true"></i>{" "}
+              <i
+                style={{
+                  color: lightMode && "#000",
+                }}
+                className="fa fa-user"
+                aria-hidden="true"
+              ></i>{" "}
             </span>
-            <span className="text">Profile</span>
+            <span className="text" 
+                style={{
+                  color: lightMode && "#000",
+                }}>Profile</span>
           </a>
         </li>
         <li
@@ -70,17 +136,35 @@ function Navigation() {
         >
           <a href="#">
             <span className="icon">
-              <i className="fa fa-bookmark" aria-hidden="true"></i>{" "}
+              <i
+                style={{
+                  color: lightMode && "#000",
+                }}
+                className="fa fa-bookmark"
+                aria-hidden="true"
+              ></i>{" "}
             </span>
-            <span className="text">Watchlist</span>
+            <span className="text" 
+                style={{
+                  color: lightMode && "#000",
+                }}>Watchlist</span>
           </a>
         </li>
         <li className={`list`}>
           <a href="#">
             <span className="icon">
-              <i className="fa fa-gear" aria-hidden="true"></i>{" "}
+              <i
+                style={{
+                  color: lightMode && "#000",
+                }}
+                className="fa fa-gear"
+                aria-hidden="true"
+              ></i>{" "}
             </span>
-            <span className="text">Settings</span>
+            <span className="text" 
+                style={{
+                  color: lightMode && "#000",
+                }}>Settings</span>
           </a>
         </li>
         <div className="indicator"></div>

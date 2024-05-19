@@ -66,6 +66,7 @@ function Page() {
   return (
     <>
       <Sidebar />
+      {mobile && <Navbar/>}
       {watchlist.length > 0 ? (
         <section
           className={style.watch}

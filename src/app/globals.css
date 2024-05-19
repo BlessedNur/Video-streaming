@@ -56,6 +56,7 @@ body {
   width: 100%;
   text-align: center;
   font-weight: 500;
+  text-decoration: none;
 }
 .navigation ul li a .icon {
   position: relative;
@@ -73,12 +74,15 @@ body {
 .navigation ul li.active a .icon {
   transform: translate(0px, -19px);
   color: #fff;
-  background-color: rgb(165, 4, 4);
+  background-color: #c00;
   /* display: grid; */
   /* place-content: center; */
 }
 .icon i {
   font-size: 15px;
+}
+li.active .icon i {
+  color: white !important;
 }
 .navigation ul li a .text {
   position: absolute;
@@ -477,13 +481,17 @@ aside p {
 
 .loading {
   height: 100vh;
-  width: 120vw;
-  display: grid;
-  place-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* place-content: center; */
   background: black !important;
 }
 .loaderLight {
-  background: white !important;
+  background: black !important;
+}
+.lightMenu svg path {
+  stroke: black;
 }
 
 .spinner {
@@ -677,9 +685,12 @@ aside p {
   stroke-dashoffset: -32.42;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 500px) {
   * {
     font-size: 11px;
+  }
+  .trailer-box {
+    height: 10vh;
   }
 }
 @media screen and (max-width: 768px) {

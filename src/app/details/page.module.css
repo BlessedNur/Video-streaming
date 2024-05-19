@@ -42,21 +42,22 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-top: -56px;
+  margin-top: -70px;
   transition: 0.1s linear;
 }
 /* background-color: red; */
 .movieList {
-  overflow: hidden;
-  padding: 0 1em;
+  overflow: scroll;
+  padding: 0 0.2em;
   padding-top: 1em;
   /* display: flex; */
-  justify-content: none !important;
+  /* justify-content: none !important; */
   /* flex-direction: column; */
   /* background-color: red; */
   /* align-items: flex-start; */
   gap: 1em;
-  /* height: 50vh; */
+  height: 100vh;
+  width: 100%;
   transition: 0.4s;
   /* width: 100%; */
   /* background-color: green; */
@@ -66,13 +67,13 @@
   content: "";
   position: absolute;
   left: 0;
-  /* bottom: 0; */
+  bottom: 0;
   top: 0;
   width: 100%;
   opacity: 0;
   height: 10%;
   transition: 0.4s;
-  background: linear-gradient(rgb(0, 0, 0) 20%, transparent);
+  /* background: linear-gradient(rgb(0, 0, 0) 20%, transparent); */
   background: red;
 
   /* z-index: 1; */
@@ -139,10 +140,10 @@
 }
 .lists {
   width: 102%;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   border-radius: 10px;
-  overflow-x: hidden;
-  height: 50vh;
+  /* overflow-x: hidden; */
+  /* height: 50vh; */
   position: relative;
   /* background-color: red; */
   /* padding: 1em; */
@@ -170,7 +171,7 @@
   background: linear-gradient(to right, transparent, rgba(0, 0, 0) 50%);
   /* z-index: 2; */
 }
-.movieList::-webkit-scrollbar,
+/* .movieList::-webkit-scrollbar, */
 .storyLine::-webkit-scrollbar {
   display: none;
 }
@@ -196,6 +197,8 @@
 .layer {
   /* background-color: green; */
   width: 100%;
+  height: 50vh;
+  overflow: scroll;
   position: relative;
 }
 
@@ -229,6 +232,7 @@
   display: flex;
   gap: 1em;
   max-height: 15em;
+  margin-top: 1em;
   /* background-color: red; */
 }
 .intro h1 {
@@ -277,6 +281,7 @@
 .overview {
   height: 55vh;
   /* width: 40em; */
+  padding: 0.3em;
   display: flex;
   justify-content: space-between;
   /* gap: 2em; */
@@ -427,6 +432,97 @@
   /* color: green; */
   font-weight: 500;
 }
-@media screen and (max-width:768px) {
-  
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 900px) {
+  .cast {
+    /* height: 100% !important; */
+    transform: translateY(0) !important;
+  }
+  .budget {
+    position: static !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .budget {
+  }
+  .overview {
+    /* background-color: red; */
+    /* flex-direction: column; */
+    gap: 5em;
+    height: fit-content;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .cast {
+    flex-direction: row !important;
+  }
+  .movieList {
+    padding-top: 2em;
+    padding-bottom: 7em;
+  }
+  .storyLine {
+    height: fit-content !important;
+    width: 100% !important;
+  }
+  .layer {
+    /* height: 100%; */
+    /* background-color: greenyellow; */
+    /* overflow: scroll; */
+  }
+  .caster {
+    width: 100vw;
+    overflow-x: scroll;
+  }
+  .caster::-webkit-scrollbar {
+    display: none;
+  }
+  .boxes {
+    min-width: 20em;
+  }
+  .mobileCast {
+    display: flex;
+    /* flex-direction: row !important; */
+
+    /* background-color: red; */
+  }
+  .castProfile {
+    /* width: fit-content !important; */
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .castProfileTwos {
+    /* background-color: green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 10em;
+  }
+  .dr {
+    width: 100%;
+    margin: auto;
+    /* background-color: #c00; */
+    text-align: center;
+  }
+  .castTwoss {
+  }
+  .leftS {
+    min-width: 50%;
+  }
+  .vids {
+    width: 100vw;
+    overflow-x: scroll;
+  }
+  .likeThis {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+  .storyLine {
+  }
+
+  .mobiles {
+  }
 }

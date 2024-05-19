@@ -78,6 +78,7 @@
   font-size: 11px;
 }
 .filts {
+  /* background-color: red; */
   width: fit-content;
   position: relative;
 }
@@ -448,7 +449,6 @@
 .filtersTwo {
   display: flex;
   align-items: center;
-  background-color: #ebebeb;
   cursor: pointer;
   padding: 0.5em;
   transition: 0.3s;
@@ -488,7 +488,7 @@
   }
   .filters {
     /* display: none; */
-    position: absolute;
+    /* position: absolute; */
   }
   .left {
     max-width: 10em;

@@ -56,14 +56,14 @@ function Navbar() {
           <p>{selectedMovie.title}</p>
         </div>
         <div className={style.right}>
-          <Link
+          {/* <Link
             href={"/search"}
             className={style.search}
             title="search"
             style={{ color: "inherit" }}
           >
             <i className="fa fa-search" aria-hidden="true"></i>
-          </Link>
+          </Link> */}
           <div className={style.bell} title="notifications">
             <i className="fa-regular fa-bell" aria-hidden="true"></i>
           </div>

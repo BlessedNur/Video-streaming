@@ -17,6 +17,7 @@ function Context({ children }) {
   const [filteredType, setFilteredType] = useState("Default");
   const [cat, setCat] = useState(0);
   const [genre, setGenre] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
 
   // const [watchlist, setWatchlist] = useState([]);
 
@@ -28,7 +29,7 @@ function Context({ children }) {
         : [];
       return Array.isArray(watchlistArray) ? watchlistArray : [];
     } else {
-      return [] ;
+      return [];
     }
   });
 
@@ -138,6 +139,8 @@ function Context({ children }) {
         setSelectedMovie,
         watchlist,
         setWatchlist,
+        currentUser,
+        setCurrentUser,
       ]}
     >
       {children}

@@ -22,7 +22,6 @@ const Page = () => {
   const navigate = useRouter();
   const mobile = useMediaQuery("(max-width:500px)");
 
-
   const [
     lightMode,
     setLightMode,
@@ -668,11 +667,19 @@ const Page = () => {
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </div>
             {mobile ? (
-              <div className={style.filts}>
+              <div
+                className={style.filts}
+                style={{
+                  background: !lightMode && "#ebebeb15",
+                }}
+              >
                 <button
-                  className={` ${!lightMode && style.filtersDark} ${
+                  className={` ${!lightMode && style.filterListDark} ${
                     style.filtersTwo
-                  }`}
+                    }`}
+                  style={{
+                    // background:!lightMode &&  "#ebebeb"
+                  }}
                   onClick={() =>
                     !showFilter ? setShowFilter(true) : setShowFilter(false)
                   }
@@ -851,7 +858,7 @@ const Page = () => {
           </>
         )}
       </div>
-      {mobile && <Navigation/>}
+      {mobile && <Navigation />}
     </section>
   );
 };
