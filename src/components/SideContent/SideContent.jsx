@@ -89,7 +89,7 @@ function SideContent() {
         const response = await fetch(`myapi/movie`);
         const data = await response.json();
 
-        const filterMovies = data.slice(1, 10).filter((movie) => {
+        const filterMovies = data.slice(0, 1).filter((movie) => {
           const releaseYear = movie.release_date.split("-")[0];
           console.log(releaseYear);
           return releaseYear == 2024;
@@ -248,7 +248,7 @@ function SideContent() {
                 style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
               >
                 <div className="left">
-                  <Image
+                  <img
                     src={mobile ? movie.poster_path : movie.backdrop_path}
                     alt={movie.title}
                     width={300}
@@ -301,116 +301,116 @@ function SideContent() {
         ) : (
           <h2 style={{ margin: ".5em 0" }}>Trailers</h2>
         )}
-        <div className="trailers">
-          <div className="trailer-box">
-            <div className="vid">
-              {moviesTrailers.length === 0 ? (
-                <SkeletonTheme
-                  baseColor={lightMode ? "#eee" : "#202020"}
-                  highlightColor={lightMode ? "#b2b5bd" : "#444"}
+        {/* <div className="trailers"> */}
+        <div className="trailer-box">
+          <div className="vid">
+            {moviesTrailers.length === 0 ? (
+              <SkeletonTheme
+                baseColor={lightMode ? "#eee" : "#202020"}
+                highlightColor={lightMode ? "#b2b5bd" : "#444"}
+              >
+                <Skeleton height={130} width={330} borderRadius={10} />
+                <div
+                  className="view"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <Skeleton height={130} width={330} borderRadius={10} />
-                  <div
-                    className="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Skeleton height={20} width={120} />
-                    <Skeleton height={20} width={70} />
-                  </div>
-                  <Skeleton height={130} width={330} borderRadius={10} />
-                  <div
-                    className="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Skeleton height={20} width={120} />
-                    <Skeleton height={20} width={70} />
-                  </div>
-                  <Skeleton height={130} width={330} borderRadius={10} />
-                  <div
-                    className="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Skeleton height={20} width={120} />
-                    <Skeleton height={20} width={70} />
-                  </div>
-                  <Skeleton height={130} width={330} borderRadius={10} />
-                  <div
-                    className="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Skeleton height={20} width={120} />
-                    <Skeleton height={20} width={70} />
-                  </div>
-                  <Skeleton height={130} width={330} borderRadius={10} />
-                  <div
-                    className="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Skeleton height={20} width={120} />
-                    <Skeleton height={20} width={70} />
-                  </div>
-                </SkeletonTheme>
-              ) : (
-                <>
-                  {moviesTrailers.map((movie) => (
-                    <>
-                      <iframe
-                        width="4p00"
-                        height="400"
-                        src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
-                        frameBorder="0"
-                        className={style.trailer}
-                        allowFullScreen
-                        title=""
-                      ></iframe>
-                      <div
-                        className="view"
+                  <Skeleton height={20} width={120} />
+                  <Skeleton height={20} width={70} />
+                </div>
+                <Skeleton height={130} width={330} borderRadius={10} />
+                <div
+                  className="view"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Skeleton height={20} width={120} />
+                  <Skeleton height={20} width={70} />
+                </div>
+                <Skeleton height={130} width={330} borderRadius={10} />
+                <div
+                  className="view"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Skeleton height={20} width={120} />
+                  <Skeleton height={20} width={70} />
+                </div>
+                <Skeleton height={130} width={330} borderRadius={10} />
+                <div
+                  className="view"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Skeleton height={20} width={120} />
+                  <Skeleton height={20} width={70} />
+                </div>
+                <Skeleton height={130} width={330} borderRadius={10} />
+                <div
+                  className="view"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Skeleton height={20} width={120} />
+                  <Skeleton height={20} width={70} />
+                </div>
+              </SkeletonTheme>
+            ) : (
+              <>
+                {moviesTrailers.map((movie) => (
+                  <>
+                    <iframe
+                      width="4p00"
+                      height="600"
+                      src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
+                      frameBorder="0"
+                      className={style.trailer}
+                      allowFullScreen
+                      title=""
+                    ></iframe>
+                    <div
+                      className="view"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <h5>{movie.title}</h5>
+                      <Link
+                        href={""}
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
+                          color: "#626364",
+                          textDecoration: "none",
+                          cursor: "pointer",
                         }}
                       >
-                        <h5>{movie.title}</h5>
-                        <Link
-                          href={""}
-                          style={{
-                            color: "#626364",
-                            textDecoration: "none",
-                            cursor: "pointer",
-                          }}
-                        >
-                          view more
-                        </Link>
-                      </div>
-                    </>
-                  ))}
-                </>
-              )}
-            </div>
+                        view more
+                      </Link>
+                    </div>
+                  </>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 }

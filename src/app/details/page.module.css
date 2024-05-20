@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-top: -70px;
+  margin-top: -56px;
   transition: 0.1s linear;
 }
 /* background-color: red; */
@@ -510,7 +510,7 @@
   .leftS {
     min-width: 50%;
   }
-  .movieList{
+  .movieList {
     height: 100vh;
     overflow: scroll;
   }
@@ -518,7 +518,7 @@
     width: 100%;
     overflow-x: scroll;
   }
-  .vids::-webkit-scrollbar{
+  .vids::-webkit-scrollbar {
     display: none;
   }
   .likeThis {
