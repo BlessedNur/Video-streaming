@@ -203,6 +203,7 @@
     /* background-color: red; */
   }
   .layer {
+    padding-bottom: 10em;
   }
   .scrollDown {
     display: none;

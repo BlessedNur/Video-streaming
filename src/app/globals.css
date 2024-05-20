@@ -314,6 +314,7 @@ aside p {
   height: 100%;
 }
 .trailer-box {
+  margin-top: 3em;
   height: 100%;
 }
 .ytp-title-text {
@@ -689,7 +690,9 @@ aside p {
   }
   .trailer-box {
     height: 10vh;
+    margin-top: 0;
   }
+  
 }
 @media screen and (max-width: 768px) {
   .latests {

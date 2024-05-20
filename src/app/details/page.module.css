@@ -204,7 +204,7 @@
 }
 
 .RightIntro button:first-child {
-  padding: 0.7em 1.7em;
+  padding: 0.7em 4em;
   border: none;
   background-color: #c00;
   color: white;
@@ -214,6 +214,9 @@
 }
 .RightIntro button:last-child {
   padding: 0.7em 1.7em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
   border: none;
   background-color: rgba(255, 255, 255, 0.122);
   backdrop-filter: blur(10px);
@@ -230,30 +233,81 @@
 }
 
 .intro {
-  display: flex;
-  gap: 1em;
-  max-height: 15em;
   margin-top: 1em;
   /* background-color: red; */
+  position: relative;
 }
+.budgetM {
+  position: relative;
+}
+.budgetM h2 {
+  font-weight: normal;
+  color: #f2f2f2;
+  font-size: 12px;
+}
+.budgetM p {
+  font-weight: normal;
+  color: #c2d1d1;
+  font-size: 12px;
+}
+.trailer {
+  /* background-color: red; */
+  /* height: 30em; */
+  width: 100%;
+  padding: 0.5em 0;
+  box-sizing: border-box;
+}
+.trailer iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+.intro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  backdrop-filter: blur(5px); /* Blurry effect */
+  /* z-index: -1; */
+}
+
 .intro h1 {
   font-size: 20px;
 }
+.storyLine h1 {
+  display: none;
+}
+.storyLine p {
+  color: #7f8388;
+  font-size: 13px;
+}
+
 .overview h3 {
   font-size: 15px;
-  color: #909396;
+  color: #bcc5cd;
+  font-style: italic;
+  padding: 0 1em 0 0;
   font-weight: normal;
+  border-right: 1px solid #909396;
 }
+.overview h3:last-child {
+  border: none;
+}
+
 .RightIntro {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   gap: 0.5em;
+  position: relative;
   /* background-color: red; */
 }
-.leftIntro {
-  height: 40em;
-  width: 10em;
+.lefttop {
+  position: relative;
 }
 .movieImage {
   width: 100%;
@@ -275,16 +329,14 @@
   display: grid;
   /* place-content:; */
 }
-.ImageMovie {
-  height: 100%;
-  min-width: 60%;
-}
+
 .overview {
-  height: 55vh;
+  /* height: 55vh; */
   /* width: 40em; */
   padding: 0.3em;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 1em;
   /* gap: 2em; */
 }
 .storyLine {
@@ -329,7 +381,6 @@
   height: 100%;
   object-fit: cover;
 }
-
 .leftCast {
   width: 5em;
   height: 5em;
@@ -351,20 +402,24 @@
   /* color:white; */
   font-size: 12px;
 }
+.castThree {
+  position: relative;
+}
 .boxes {
-  display: flex;
-  gap: 1em;
-  width: 20em;
-  height: 9.5em;
+  /* display: flex; */
+  /* gap: 1em; */
+  min-width: 30%;
+  /* height: 9.5em; */
   /* flex-direction: column-reverse; */
   /* margin: 0.5em 0; */
   cursor: pointer;
   /* width:30em; */
-  padding: 0.5em;
+  /* padding: 0.5em; */
   border-radius: 8px;
   border: 2px solid transparent;
   transition: 0.3s;
   background: #0d0c0c;
+  /* background-color: red; */
   margin: 0.5em 0;
   position: relative;
 }
@@ -377,9 +432,35 @@
   object-fit: cover;
   border-radius: 8px;
 }
+.storyLine p {
+  color: white;
+  padding: 0.3em;
+  position: relative;
+}
+.trailer {
+  position: relative;
+  height: 20em !important;
+  /* padding: .3em; */
+}
+.overview {
+  position: relative;
+  /* background-color: red; */
+}
+.storyLine {
+  /* background-color: green; */
+  margin-top: 0 !important;
+}
+.intro {
+  height: fit-content !important;
+}
+.top {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
 
 .leftS {
-  width: 30%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -420,8 +501,8 @@
 .budget {
   display: flex;
   gap: 0.5em;
+  padding: 0.5em;
   align-items: center;
-  position: absolute;
   left: 42%;
   top: 50%;
 }
@@ -449,11 +530,7 @@
   .budget {
   }
   .overview {
-    /* background-color: red; */
-    /* flex-direction: column; */
-    gap: 5em;
-    height: fit-content;
-    justify-content: space-between;
+    gap: 1em;
     align-items: start;
   }
   .cast {
@@ -480,13 +557,17 @@
     display: none;
   }
   .boxes {
-    min-width: 20em;
+    /* min-width: 20em; */
   }
   .mobileCast {
     display: flex;
+    gap: 1em !important;
     /* flex-direction: row !important; */
 
     /* background-color: red; */
+  }
+  .caster {
+    margin: 1em 0;
   }
   .castProfile {
     /* width: fit-content !important; */
@@ -499,7 +580,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-width: 10em;
+    /* min-width: 10em; */
   }
   .dr {
     width: 100%;
@@ -526,4 +607,125 @@
     align-items: center;
     gap: 1em;
   }
+  .storyLine {
+    margin-top: 8em;
+    width: 50%;
+  }
+  .intro {
+    /* transform: translateY(3em); */
+    padding: 2em !important;
+    padding-top: 5em !important;
+    transform: translateY(-45px);
+  }
+  .movieList {
+    z-index: 10;
+  }
+}
+.layers {
+  /* background-color: red; */
+  height: 100vh;
+  /* padding: 3em; */
+  /* width: 100%; */
+  /* overflow: scroll; */
+}
+.introL {
+  color: black !important;
+  /* display: flex; */
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 2;
+  align-items: center;
+}
+.intro::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  left: 0;
+  background: linear-gradient(to top, #000, transparent);
+  /* background-color: red; */
+}
+.Light::after {
+  background-image: linear-gradient(to top, #ffffff 2%, transparent 99%);
+}
+.Dark::after {
+  background-image: linear-gradient(to top, #000000 1%, transparent 99%);
+}
+.lefttopL {
+  width: 100%;
+}
+.backImage .bk {
+  position: absolute;
+  transform: translateX(5em);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  object-fit: contain;
+  object-position: right;
+}
+.layers::-webkit-scrollbar {
+  display: none;
+}
+
+.backImage::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  transition: .3s;
+  height: 101vh;
+  background: linear-gradient(to right, black 30%, rgba(0, 0, 0, 0.192));
+}
+.Lighter::before {
+  color:  black !important;
+  background: linear-gradient(to right, white 30%, rgba(0, 0, 0, 0.192)) !important;
+}
+.backImage::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  height: 101vh;
+  background: linear-gradient(to right, black 30%, rgba(0, 0, 0, 0.192));
+}
+.introL .RightIntro {
+  /* justify-content: space-between; */
+  display: flex;
+  transform: translateY(5%);
+  height: 100% !important;
+  flex-direction: column;
+  width: 60%;
+  /* gap: 1em; */
+  padding: 1em;
+  /* background-color: turquoise; */
+}
+.Dlogo {
+  width: 30%;
+  display: grid;
+  place-content: center;
+  height: 11em;
+}
+.ImageMovie {
+  position: static !important;
+  height: 100%;
+  width: 100%;
+}
+.storyLineTwo {
+  color: white;
+}
+.Dcast {
+  display: flex;
+  gap: 1em;
+  width: 96.5%;
+  overflow: scroll;
+}
+.Dcast::-webkit-scrollbar {
+  display: none;
+}
+.castTwoss img{
+  position: static !important;
+
 }

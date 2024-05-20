@@ -6,7 +6,9 @@
   /* transform: translateX(1em); */
   /* background-color: red; */
   /* margin: 0 10em; */
-  /* overflow: hidden; */
+  /* overflow: hidden; 
+  */
+  /* z-index: -1; */
 }
 .list {
   position: relative;
@@ -76,9 +78,25 @@
   color: black !important;
   /* text-shadow: 5px 5px 10px rgba(0, 0, 0); */
 }
-.movieImage{
+.movieImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+@media screen and (max-width: 500px) {
+  .slider {
+    position: fixed;
+    margin-bottom: 3em;
+    /* z-index: -1; */
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    height: 100%;
+    z-index: 1;
+    
+  }
+  .list{
+    height: 100%;
+    /* z-index: -1; */
+  }
 }

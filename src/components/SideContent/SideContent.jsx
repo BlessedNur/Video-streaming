@@ -248,7 +248,7 @@ function SideContent() {
                 style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
               >
                 <div className="left">
-                  <img
+                  <Image
                     src={mobile ? movie.poster_path : movie.backdrop_path}
                     alt={movie.title}
                     width={300}

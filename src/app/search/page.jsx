@@ -363,7 +363,7 @@ const Page = () => {
                 onClick={() =>
                   !showFilter ? setShowFilter(true) : setShowFilter(false)
                 }
-                disabled={searchValue || genre ? true : false}
+                disabled={searchValue ? true : false}
               >
                 <p
                   className={`${!lightMode && style.DarkSvg} ${

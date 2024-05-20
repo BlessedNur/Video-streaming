@@ -14,6 +14,7 @@ function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
   const mobile = useMediaQuery("(max-width:900px)");
+  const [viewMore, setViewMore] = useState(false);
 
   const [
     lightMode,
@@ -177,60 +178,70 @@ function Page() {
                     } ${style.lineThree} ${style.lineTwo}`}
                   >
                     <div className={`${style.movieList} scroller `} id="top">
-                      <Banner bannerWidth={"100%"} />
-                      <div className={style.intro}>
-                        <div className={style.leftIntro}>
-                          {/* <div className={style.image}>
+                      {/* <Banner bannerWidth={"100%"} /> */}
+
+                      <div
+                        style={{
+                          background:
+                            mobile &&
+                            `url("${
+                              selectedMovie.backdrop_path ||
+                              "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
+                            }") no-repeat center center / cover`,
+                        }}
+                        className={`${style.intro} ${lightMode && style.Light}`}
+                      >
+                        <div className={style.top}>
+                          <div className={style.lefttop}>
+                            {/* <div className={style.image}>
                       </div> */}
-                          <img
-                            src={selectedMovie.poster_path}
-                            // width={200}
-                            // height={200}
-                            className={style.movieImage}
-                          />
-                        </div>
-                        <div className={style.RightIntro}>
-                          {selectedMovie.Logo[0] ? (
-                            <div className={style.image}>
-                              <img
-                                src={selectedMovie.Logo[0]}
-                                width={200}
-                                height={30}
-                                className={style.ImageMovie}
-                              />
+                            <img
+                              src={selectedMovie.poster_path}
+                              // width={200}
+                              // height={200}
+                              className={style.movieImage}
+                            />
+                          </div>
+                          <div className={style.RightIntro}>
+                            {selectedMovie.Logo[0] ? (
+                              <div className={style.image}>
+                                <img
+                                  src={selectedMovie.Logo[0]}
+                                  width={200}
+                                  height={30}
+                                  className={style.ImageMovie}
+                                />
+                              </div>
+                            ) : (
+                              <h1>
+                                {selectedMovie.title || selectedMovie.name}
+                              </h1>
+                            )}
+
+                            <div className={style.actions}>
+                              <button>Watch</button>{" "}
+                              <button
+                                onMouseOver={() => setHoverB(true)}
+                                onMouseLeave={() => setHoverB(false)}
+                                onClick={() => {
+                                  addToWatchlist(selectedMovie);
+                                }}
+                                title={"Add to watchlist"}
+                                className={lightMode ? style.contentLight : ""}
+                                style={{ color: lightMode && "#000" }}
+                              >
+                                <i
+                                  className={`${
+                                    !hoverB ? "fa-regular" : "fa"
+                                  } fa-bookmark`}
+                                  aria-hidden="true"
+                                ></i>
+                              </button>
                             </div>
-                          ) : (
-                            <h1>{selectedMovie.title || selectedMovie.name}</h1>
-                          )}
-                          <div className={style.genres}>
-                            {selectedMovie.genreNames.map((name, index) => (
-                              <p key={index}>{name} </p>
-                            ))}
-                          </div>
-                          <div className={style.actions}>
-                            <button>Watch</button>{" "}
-                            <button
-                              onMouseOver={() => setHoverB(true)}
-                              onMouseLeave={() => setHoverB(false)}
-                              onClick={() => {
-                                addToWatchlist(selectedMovie);
-                              }}
-                              title={"Add to watchlist"}
-                              className={lightMode ? style.contentLight : ""}
-                              style={{ color: lightMode && "#000" }}
-                            >
-                              <i
-                                className={`${
-                                  !hoverB ? "fa-regular" : "fa"
-                                } fa-bookmark`}
-                                aria-hidden="true"
-                              ></i>
-                            </button>
                           </div>
                         </div>
-                      </div>
-                      <div className={style.overview}>
-                        <div className="info">
+                        <div className={style.overview}>
+                          {/* <div className="info"> */}
                           <h3 style={{ whiteSpace: "nowrap" }}>
                             {selectedMovie.runtime
                               ? convertRuntime(selectedMovie.runtime) ||
@@ -253,32 +264,81 @@ function Page() {
                               <h3>PG 13</h3>
                             )}
                           </h3>
+                          {/* </div> */}
                         </div>
-                        <div className={style.budget}>
-                          <h2>Budget:</h2>
+                        <div
+                          className={`${style.storyLine} ${
+                            showScrollAllDown
+                              ? style.lineThreeShow
+                              : style.lineThreeHide
+                          }`}
+                          ref={movieListRef}
+                        >
+                          <h1 style={{ fontSize: "20px" }}>Overview</h1>
                           <p>
-                            {selectedMovie.budget
-                              ? selectedMovie.budget != 0
-                                ? formatCurrency(selectedMovie.budget)
-                                : "Unconfirmed"
-                              : "Unconfirmed"}
+                            {!viewMore
+                              ? `${selectedMovie.overview.slice(0, 100)}...`
+                              : selectedMovie.overview}
+                            <span
+                              style={{
+                                color: "#c00",
+                                fontWeight: "800",
+                                margin: "0 1em",
+                                cursor: "pointer",
+                              }}
+                              onClick={() =>
+                                !viewMore
+                                  ? setViewMore(true)
+                                  : setViewMore(false)
+                              }
+                            >
+                              {viewMore ? "view less" : "view more"}
+                            </span>
                           </p>
                         </div>
-                      </div>
+                        <div className={style.budgetM}>
+                          <div className={style.budget}>
+                            <h2>Genre:</h2>
+                            <div className={style.genres}>
+                              {selectedMovie.genreNames.map((name, index) => (
+                                <p key={index}>{name} </p>
+                              ))}
+                            </div>
+                          </div>
 
-                      <div
-                        className={`${style.storyLine} ${
-                          showScrollAllDown
-                            ? style.lineThreeShow
-                            : style.lineThreeHide
-                        }`}
-                        ref={movieListRef}
-                      >
-                        <h1 style={{ fontSize: "20px" }}>Overview</h1>
-                        <p>{selectedMovie.overview}</p>
+                          <div className={style.budget}>
+                            <h2>Director:</h2>
+                            <p>
+                              {selectedMovie.director
+                                ? selectedMovie.director.name
+                                : ""}
+                            </p>
+                          </div>
+
+                          <div className={style.budget}>
+                            <h2>Revenue:</h2>
+                            <p>
+                              {selectedMovie.revenue
+                                ? selectedMovie.revenue != 0
+                                  ? formatCurrency(selectedMovie.revenue)
+                                  : "Unconfirmed"
+                                : "Unconfirmed"}
+                            </p>
+                          </div>
+                          <div className={style.budget}>
+                            <h2>Budget:</h2>
+                            <p>
+                              {selectedMovie.budget
+                                ? selectedMovie.budget != 0
+                                  ? formatCurrency(selectedMovie.budget)
+                                  : "Unconfirmed"
+                                : "Unconfirmed"}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                       <div className={style.castThree} style={{}}>
-                        {selectedMovie.director ? (
+                        {/* {selectedMovie.director ? (
                           <>
                             <div className={style.castProfile}>
                               <h1 className={style.dr}>Director</h1>
@@ -303,10 +363,15 @@ function Page() {
                           </>
                         ) : (
                           <></>
-                        )}
-                        <h1>Casts</h1>
+                        )} */}
                         <div className={style.caster}>
-                          <div className={style.mobileCast}>
+                          <h1>Casts</h1>
+                          <div
+                            className={style.mobileCast}
+                            style={{
+                              padding: "1em",
+                            }}
+                          >
                             {selectedMovie.cast.map((items, index) => (
                               <div
                                 className={`${style.castProfileTwos} `}
@@ -324,12 +389,17 @@ function Page() {
                                     height={100}
                                   />
                                 </div>
-                                <div className={style.rightCast}>
-                                  <h3 style={{ color: lightMode && "#000" }}>
+                                {/* <div className={style.rightCast}>
+                                  <h3
+                                    style={{
+                                      color: lightMode && "#000",
+                                      fontSize: "11px",
+                                    }}
+                                  >
                                     {items.name}
                                   </h3>
                                   <h3>As {items.character}</h3>
-                                </div>
+                                </div> */}
                               </div>
                             ))}
                           </div>
@@ -363,11 +433,12 @@ function Page() {
                                   <div className={style.topS}>
                                     <h3
                                       style={{
-                                        fontSize: "14px",
+                                        fontSize: "12px",
+                                        fontWeight: "normal",
                                         color: lightMode && "#000",
                                       }}
                                     >
-                                      {items.name || items.title.slice(0, 25)}
+                                      {items.name || items.title.slice(0, 15)}
                                     </h3>
                                     <div className="detail">
                                       <p>
@@ -415,6 +486,22 @@ function Page() {
                           </div>
                         </div>
                       </div>
+                      <>
+                        <h1>Trailer</h1>
+                        {mobile && (
+                          <div className={style.trailer}>
+                            <iframe
+                              width="100"
+                              height="100"
+                              src={`https://www.youtube.com/embed/${selectedMovie.trailers[1].key}`}
+                              frameBorder="0"
+                              className={style.trailer}
+                              allowFullScreen
+                              title=""
+                            ></iframe>
+                          </div>
+                        )}
+                      </>
                       <div
                         className={`${style.scrollDown}  ${
                           selectedMovie.overview.length > 200 &&
@@ -436,82 +523,42 @@ function Page() {
               </>
             ) : (
               <>
-                <Banner bannerWidth={"100%"} />
-                <div className={style.layer}>
+                <div className={style.layers}>
                   <div
-                    className={`${style.lists} ${
-                      lightMode ? style.lineDark : ""
-                    } ${style.lineThree} ${style.lineTwo}`}
+                    className={`${style.backImage} ${
+                      lightMode && style.Lighter
+                    }`}
                   >
-                    <div className={`${style.movieList} scroller `}>
-                      <div className={style.intro}>
-                        <div className={style.leftIntro}>
-                          {/* <div className={style.image}>
-                      </div> */}
-                          <img
-                            src={selectedMovie.poster_path}
-                            width={200}
-                            height={200}
-                            className={style.movieImage}
-                          />
-                        </div>
-                        <div className={style.RightIntro}>
-                          {selectedMovie.Logo ? (
-                            <div className={style.image}>
-                              <img
-                                src={selectedMovie.Logo[0]}
-                                width={200}
-                                height={30}
-                                className={style.ImageMovie}
-                              />
-                            </div>
-                          ) : (
-                            <h1>{selectedMovie.title || selectedMovie.name}</h1>
-                          )}
-                          <div className={style.genres}>
-                            {selectedMovie && selectedMovie.genreNames ? (
-                              selectedMovie.genreNames.map((name, index) => (
-                                <p key={index}>{name}</p>
-                              ))
-                            ) : (
-                              <p>No genres available</p>
-                            )}
+                    <div
+                      className={`${style.introL} ${lightMode && style.Light}`}
+                    >
+                      <div className={style.RightIntro}>
+                        {selectedMovie.Logo[0] ? (
+                          <div className={style.Dlogo}>
+                            <img
+                              src={selectedMovie.Logo[0]}
+                              width={200}
+                              height={30}
+                              className={style.ImageMovie}
+                            />
                           </div>
-
-                          <div className={style.actions}>
-                            <button>Watch</button>{" "}
-                            <button
-                              onMouseOver={() => setHoverB(true)}
-                              onMouseLeave={() => setHoverB(false)}
-                              onClick={() => {
-                                addToWatchlist(selectedMovie);
-                              }}
-                              title={"Add to watchlist"}
-                              className={lightMode ? style.contentLight : ""}
-                              style={{ color: lightMode && "#000" }}
-                            >
-                              <i
-                                className={`${
-                                  !hoverB ? "fa-regular" : "fa"
-                                } fa-bookmark`}
-                                aria-hidden="true"
-                              ></i>
-                            </button>
-                          </div>
-                        </div>
-                        <div className={style.budget}>
-                          <h2>Budget:</h2>
-                          <p>
-                            {selectedMovie.budget
-                              ? selectedMovie.budget != 0
-                                ? formatCurrency(selectedMovie.budget)
-                                : "Unconfirmed"
-                              : "Unconfirmed"}
+                        ) : (
+                          <h1>{selectedMovie.title || selectedMovie.name}</h1>
+                        )}
+                        <div
+                          className={`${style.storyLineTwo} ${
+                            showScrollAllDown
+                              ? style.lineThreeShow
+                              : style.lineThreeHide
+                          }`}
+                          ref={movieListRef}
+                        >
+                          <p style={{ color: lightMode && "#000" }}>
+                            {selectedMovie.overview}
                           </p>
                         </div>
-                      </div>
-                      <div className={style.overview}>
-                        <div className="info">
+                        <div className={style.overview}>
+                          {/* <div className="info"> */}
                           <h3 style={{ whiteSpace: "nowrap" }}>
                             {selectedMovie.runtime
                               ? convertRuntime(selectedMovie.runtime) ||
@@ -523,72 +570,42 @@ function Page() {
                           <h3>
                             {selectedMovie.release_date
                               ? selectedMovie.release_date.split("-")[0]
-                              : selectedMovie.first_air_date
-                              ? selectedMovie.first_air_date.split("-")[0]
-                              : "missing"}
+                              : selectedMovie.first_air_date.split("-")[0]}
                           </h3>
                           <h3>
-                            {selectedMovie.genreNames ? (
-                              selectedMovie.genreNames.find(
-                                (name) => name === "Horror"
-                              ) ? (
-                                <h3>PG 16</h3>
-                              ) : (
-                                <h3>PG 13</h3>
-                              )
+                            {selectedMovie.genreNames.find(
+                              (name) => name === "Horror"
+                            ) ? (
+                              <h3>PG 16</h3>
                             ) : (
-                              ""
+                              <h3>PG 13</h3>
                             )}
                           </h3>
+                          {/* </div> */}
                         </div>
-                        <div
-                          className={`${style.storyLine} ${
-                            showScrollAllDown
-                              ? style.lineThreeShow
-                              : style.lineThreeHide
-                          }`}
-                          ref={movieListRef}
-                        >
-                          <h1 style={{ fontSize: "20px" }}>Overview</h1>
-                          <p>{selectedMovie.overview}</p>
+                        <div className={style.genres}>
+                          {selectedMovie.genreNames.map((name, index) => (
+                            <p
+                              style={{ color: !lightMode && "#fff" }}
+                              key={index}
+                            >
+                              {name}{" "}
+                            </p>
+                          ))}
                         </div>
-                        <div
-                          className={style.cast}
-                          style={{
-                            borderRight: lightMode && "2px solid #e7e6e6fd",
-                          }}
-                        >
-                          {selectedMovie.director ? (
-                            <>
-                              <h1>Director</h1>
-                              <div className={style.castProfile}>
-                                <div className={style.leftCast}>
-                                  <img
-                                    src={
-                                      selectedMovie.director.profile_path
-                                        ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
-                                        : "/images/blank-profile-picture-973460_960_720.webp"
-                                    }
-                                    width={100}
-                                    className={style.castimage}
-                                    height={100}
-                                  />
-                                </div>
-                                <div className={style.rightCast}>
-                                  <h3 style={{ color: lightMode && "#000" }}>
-                                    {selectedMovie.director.name}
-                                  </h3>
-                                </div>
-                              </div>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                          <h1>Casts</h1>
-
-                          {selectedMovie.cast ? (
-                            selectedMovie.cast.map((items, index) => (
-                              <div className={style.castProfile} key={index}>
+                        <h1 style={{ color: !lightMode && "#fff" }}>Casts :</h1>
+                        <div className={style.caster}>
+                          <div
+                            className={style.Dcast}
+                            style={{
+                              padding: "1em",
+                            }}
+                          >
+                            {selectedMovie.cast.map((items, index) => (
+                              <div
+                                className={`${style.castProfileTwos} `}
+                                key={index}
+                              >
                                 <div className={style.leftCast}>
                                   <img
                                     src={
@@ -601,113 +618,154 @@ function Page() {
                                     height={100}
                                   />
                                 </div>
-                                <div className={style.rightCast}>
-                                  <h3 style={{ color: lightMode && "#000" }}>
-                                    {items.name}
-                                  </h3>
-                                  <h3>As {items.character}</h3>
-                                </div>
-                              </div>
-                            ))
-                          ) : (
-                            <h1>No Cast Available</h1>
-                          )}
-                        </div>
-                        <div className={style.castTwo}>
-                          <h1>More like this</h1>
-                          <div>
-                            {filteredArray.map((items, index) => (
-                              <div
-                                className={`${style.boxes} ${
-                                  lightMode && style.boxesDark
-                                }`}
-                                key={index}
-                                onClick={() => setSelectedMovie(items)}
-                              >
-                                <div className={style.leftS}>
-                                  <Image
-                                    src={
-                                      items.poster_path ||
-                                      items.images.jpg.image_url
-                                    }
-                                    alt={items.title || items.name}
-                                    width={300}
-                                    height={190}
-                                    className={style.Imager}
-                                  />
-                                </div>
-                                <div className="right">
-                                  <div className={style.topS}>
-                                    <h3
-                                      style={{
-                                        fontSize: "14px",
-                                        color: lightMode && "#000",
-                                      }}
-                                    >
-                                      {items.name || items.title.slice(0, 25)}
-                                    </h3>
-                                    <div className="detail">
-                                      <p>
-                                        {" "}
-                                        {selectedMovie.release_date
-                                          ? selectedMovie.release_date.split(
-                                              "-"
-                                            )[0]
-                                          : selectedMovie.first_air_date.split(
-                                              "-"
-                                            )[0]}
-                                      </p>
-                                      <p>
-                                        {items.runtime
-                                          ? convertRuntime(items.runtime) ||
-                                            items.year
-                                          : items.episode_run_time !== 0
-                                          ? `${items.episode_run_time}mins/episode`
-                                          : ""}
-                                      </p>
-                                    </div>
-                                    <div className={style.rates}>
-                                      <i
-                                        className="fa fa-star"
-                                        aria-hidden="true"
-                                      ></i>
-                                      <h4
-                                        style={{
-                                          fontWeight: "600",
-                                          color: lightMode && "#000",
-                                        }}
-                                      >
-                                        {items.vote_average != 0
-                                          ? (
-                                              (items.vote_average / 100) *
-                                              5
-                                            ).toFixed(1)
-                                          : "Not rated"}
-                                      </h4>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             ))}
                           </div>
                         </div>
+                        <div className={style.actions}>
+                          <button>Watch</button>{" "}
+                          <button
+                            onMouseOver={() => setHoverB(true)}
+                            onMouseLeave={() => setHoverB(false)}
+                            onClick={() => {
+                              addToWatchlist(selectedMovie);
+                            }}
+                            title={"Add to watchlist"}
+                            className={lightMode ? style.contentLight : ""}
+                            style={{ color: lightMode && "#000" }}
+                          >
+                            <p>Add to watchlist</p>
+                            <i
+                              className={`${
+                                !hoverB ? "fa-regular" : "fa"
+                              } fa-bookmark`}
+                              aria-hidden="true"
+                            ></i>
+                          </button>
+                        </div>
+                        <div className={style.castTwossD}>
+                          <h1>More like this</h1>
+                          <div className={style.vidsD}>
+                            <div className={style.likeThis}>
+                              {filteredArray.map((items, index) => (
+                                <div
+                                  className={`${style.boxes} ${
+                                    lightMode && style.boxesDark
+                                  }`}
+                                  key={index}
+                                  onClick={() => setSelectedMovie(items)}
+                                >
+                                  <div className={style.leftS}>
+                                    <img
+                                      src={
+                                        items.backdrop_path ||
+                                        items.images.jpg.large_url
+                                      }
+                                      alt={items.title || items.name}
+                                      width={300}
+                                      height={190}
+                                      className={style.Imager}
+                                    />
+                                  </div>
+                                  <div className="right">
+                                    <div className={style.topS}>
+                                      <h3
+                                        style={{
+                                          fontSize: "12px",
+                                          fontWeight: "normal",
+                                          color: lightMode && "#000",
+                                        }}
+                                      >
+                                        {items.name || items.title.slice(0, 15)}
+                                      </h3>
+                                      <div className="detail">
+                                        <p>
+                                          {" "}
+                                          {selectedMovie.release_date
+                                            ? selectedMovie.release_date.split(
+                                                "-"
+                                              )[0]
+                                            : selectedMovie.first_air_date.split(
+                                                "-"
+                                              )[0]}
+                                        </p>
+                                        <p>
+                                          {items.runtime
+                                            ? convertRuntime(items.runtime) ||
+                                              items.year
+                                            : items.episode_run_time !== 0
+                                            ? `${items.episode_run_time}mins/episode`
+                                            : ""}
+                                        </p>
+                                      </div>
+                                      <div className={style.rates}>
+                                        <i
+                                          className="fa fa-star"
+                                          aria-hidden="true"
+                                        ></i>
+                                        <h4
+                                          style={{
+                                            fontWeight: "600",
+                                            color: lightMode && "#000",
+                                          }}
+                                        >
+                                          {items.vote_average != 0
+                                            ? (
+                                                (items.vote_average / 100) *
+                                                5
+                                              ).toFixed(1)
+                                            : "Not rated"}
+                                        </h4>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div
-                        className={`${style.scrollDown}  ${
-                          selectedMovie?.overview &&
-                          selectedMovie.overview.length > 200 &&
-                          !showScrollAllDown
-                            ? style.hiddenScroller
-                            : ""
-                        }`}
-                      >
-                        <h3 style={{ color: lightMode && "#000" }}>
-                          Scroll Down
-                        </h3>
-                        <i
-                          className={`fas fa-chevron-down ${style.scrollBtn}`}
-                        ></i>
-                      </div>
+                    </div>
+                    <img
+                      className={style.bk}
+                      src={selectedMovie.backdrop_path}
+                      alt=""
+                    />
+                  </div>
+
+                  <div className={style.budgetM}>
+                    <div className={style.budget}>
+                      <h2>Genre:</h2>
+                    </div>
+
+                    <div className={style.budget}>
+                      <h2>Director:</h2>
+                      <p>
+                        {selectedMovie.director
+                          ? selectedMovie.director.name
+                          : ""}
+                      </p>
+                    </div>
+
+                    <div className={style.budget}>
+                      <h2>Revenue:</h2>
+                      <p>
+                        {selectedMovie.revenue
+                          ? selectedMovie.revenue != 0
+                            ? formatCurrency(selectedMovie.revenue)
+                            : "Unconfirmed"
+                          : "Unconfirmed"}
+                      </p>
+                    </div>
+                    <div className={style.budget}>
+                      <h2>Budget:</h2>
+                      <p>
+                        {selectedMovie.budget
+                          ? selectedMovie.budget != 0
+                            ? formatCurrency(selectedMovie.budget)
+                            : "Unconfirmed"
+                          : "Unconfirmed"}
+                      </p>
                     </div>
                   </div>
                 </div>

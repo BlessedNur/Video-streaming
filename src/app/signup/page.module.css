@@ -1,0 +1,76 @@
+.signup {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/mv-bg.png");
+  background-position: center;
+  background-size: cover;
+}
+.form {
+  height: 100vh;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.209);
+  backdrop-filter: blur(5px);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+.form p {
+  color: black;
+}
+
+.holders {
+  position: relative;
+  margin: 0.2em 0;
+}
+
+.holders label,
+.holders i {
+  position: absolute;
+}
+.holders input {
+  background: none;
+  border: none;
+  overflow: hidden;
+  padding: 1.5em 1em;
+  padding-left: 1.5em;
+  /* background-color: red; */
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+.holders {
+  background-color: white;
+  border-radius: 8px;
+  color: black;
+  border: 1px solid black;
+}
+.holders label {
+  left: 5%;
+  top: 35%;
+  transition: 0.3s;
+}
+.holders i {
+  right: 5%;
+  top: 40%;
+}
+.registerBtn {
+  padding: 1em 4em;
+  width: fit-content;
+  border-radius: 8px;
+  border: none;
+  background-color: #c00;
+  color: white;
+  margin: 0 auto;
+}
+.holders input:focus + label,
+.holders input:valid + label {
+  top: -8px;
+  font-size: 11px;
+  color: #000;
+  font-weight: 600;
+  background-color: white;
+}
