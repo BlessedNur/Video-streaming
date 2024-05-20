@@ -348,7 +348,7 @@ function Page() {
                                 onClick={() => setSelectedMovie(items)}
                               >
                                 <div className={style.leftS}>
-                                  <Image
+                                  <img
                                     src={
                                       items.poster_path ||
                                       items.images.jpg.image_url
@@ -448,7 +448,7 @@ function Page() {
                         <div className={style.leftIntro}>
                           {/* <div className={style.image}>
                       </div> */}
-                          <Image
+                          <img
                             src={selectedMovie.poster_path}
                             width={200}
                             height={200}
@@ -458,7 +458,7 @@ function Page() {
                         <div className={style.RightIntro}>
                           {selectedMovie.Logo ? (
                             <div className={style.image}>
-                              <Image
+                              <img
                                 src={selectedMovie.Logo[0]}
                                 width={200}
                                 height={30}
@@ -563,7 +563,7 @@ function Page() {
                               <h1>Director</h1>
                               <div className={style.castProfile}>
                                 <div className={style.leftCast}>
-                                  <Image
+                                  <img
                                     src={
                                       selectedMovie.director.profile_path
                                         ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
@@ -590,7 +590,7 @@ function Page() {
                             selectedMovie.cast.map((items, index) => (
                               <div className={style.castProfile} key={index}>
                                 <div className={style.leftCast}>
-                                  <Image
+                                  <img
                                     src={
                                       items.profile_path
                                         ? items.profile_path
