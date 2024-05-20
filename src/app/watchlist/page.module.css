@@ -14,7 +14,7 @@
   display: none;
 }
 .watch {
-  height: 100vh;
+  height: 100%;
   padding: 2em;
   /* transform: translateX(2em); */
 }

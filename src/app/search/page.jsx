@@ -237,11 +237,9 @@ const Page = () => {
               title={item.title || item.name}
             >
               <div className={style.thumbnail}>
-                <Image
+                <img
                   src={item.poster_path || item.images.jpg.image_url}
                   alt={`Poster for ${item.title}`}
-                  width={110}
-                  height={165}
                   className={style.movieImage}
                 />
               </div>
@@ -676,10 +674,12 @@ const Page = () => {
                 <button
                   className={` ${!lightMode && style.filterListDark} ${
                     style.filtersTwo
-                    }`}
-                  style={{
-                    // background:!lightMode &&  "#ebebeb"
-                  }}
+                  }`}
+                  style={
+                    {
+                      // background:!lightMode &&  "#ebebeb"
+                    }
+                  }
                   onClick={() =>
                     !showFilter ? setShowFilter(true) : setShowFilter(false)
                   }
