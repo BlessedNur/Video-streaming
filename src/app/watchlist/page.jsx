@@ -72,7 +72,7 @@ function Page() {
           className={style.watch}
           style={{ background: lightMode ? "#fff" : "#000" }}
         >
-          <h1 style={{ color: !lightMode && "#fff" }}>Watchlist</h1>
+          <h1 style={{ color: !lightMode && "#fff",position:"absolute",top:"5px" }}>Watchlist</h1>
           <section className={`${style.Lists} ${style}}`}>
             {watchlist.map((item) => (
               <div className={style.movieBox} key={item.id}>
