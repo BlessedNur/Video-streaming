@@ -86,6 +86,8 @@ function Page() {
     }
   });
 
+  const matchFound = filteredArray.find((movie) => selectedMovie === movie);
+
   // console.log(movieArray);
   console.log(filteredArray);
 
@@ -602,25 +604,27 @@ function Page() {
                               padding: "1em",
                             }}
                           >
-                            {selectedMovie.cast? selectedMovie.cast.map((items, index) => (
-                              <div
-                                className={`${style.castProfileTwos} `}
-                                key={index}
-                              >
-                                <div className={style.leftCast}>
-                                  <img
-                                    src={
-                                      items.profile_path
-                                        ? items.profile_path
-                                        : "/images/blank-profile-picture-973460_960_720.webp"
-                                    }
-                                    width={100}
-                                    className={style.castimage}
-                                    height={100}
-                                  />
-                                </div>
-                              </div>
-                            )):"Unknown"}
+                            {selectedMovie.cast
+                              ? selectedMovie.cast.map((items, index) => (
+                                  <div
+                                    className={`${style.castProfileTwos} `}
+                                    key={index}
+                                  >
+                                    <div className={style.leftCast}>
+                                      <img
+                                        src={
+                                          items.profile_path
+                                            ? items.profile_path
+                                            : "/images/blank-profile-picture-973460_960_720.webp"
+                                        }
+                                        width={100}
+                                        className={style.castimage}
+                                        height={100}
+                                      />
+                                    </div>
+                                  </div>
+                                ))
+                              : "Unknown"}
                           </div>
                         </div>
                         <div className={style.actions}>
@@ -648,80 +652,123 @@ function Page() {
                           <h1>More like this</h1>
                           <div className={style.vidsD}>
                             <div className={style.likeThis}>
-                              {filteredArray.map((items, index) => (
-                                <div
-                                  className={`${style.boxes} ${
-                                    lightMode && style.boxesDark
-                                  }`}
-                                  key={index}
-                                  onClick={() => setSelectedMovie(items)}
+                              {filteredArray.length === 0 ? (
+                                <SkeletonTheme
+                                  baseColor={lightMode ? "#eee" : "#202020"}
+                                  highlightColor={
+                                    lightMode ? "#b2b5bd" : "#444"
+                                  }
                                 >
-                                  <div className={style.leftS}>
-                                    <img
-                                      src={
-                                        items.backdrop_path ||
-                                        items.images.jpg.large_url
-                                      }
-                                      alt={items.title || items.name}
-                                      width={300}
-                                      height={190}
-                                      className={style.Imager}
+                                  <div className={style.movies}>
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
+                                    />
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
+                                    />
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
+                                    />
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
+                                    />
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
+                                    />
+                                    <Skeleton
+                                      width={204}
+                                      height={100}
+                                      borderRadius={7}
                                     />
                                   </div>
-                                  <div className="right">
-                                    <div className={style.topS}>
-                                      <h3
-                                        style={{
-                                          fontSize: "12px",
-                                          fontWeight: "normal",
-                                          color: lightMode && "#000",
-                                        }}
-                                      >
-                                        {items.name || items.title.slice(0, 15)}
-                                      </h3>
-                                      <div className="detail">
-                                        <p>
-                                          {" "}
-                                          {selectedMovie.release_date
-                                            ? selectedMovie.release_date.split(
-                                                "-"
-                                              )[0]
-                                            : selectedMovie.first_air_date.split(
-                                                "-"
-                                              )[0]}
-                                        </p>
-                                        <p>
-                                          {items.runtime
-                                            ? convertRuntime(items.runtime) ||
-                                              items.year
-                                            : items.episode_run_time !== 0
-                                            ? `${items.episode_run_time}mins/episode`
-                                            : ""}
-                                        </p>
-                                      </div>
-                                      <div className={style.rates}>
-                                        <i
-                                          className="fa fa-star"
-                                          aria-hidden="true"
-                                        ></i>
-                                        <h4
+                                </SkeletonTheme>
+                              ) : (
+                                filteredArray.map((items, index) => (
+                                  <div
+                                    className={`${style.boxes} ${
+                                      lightMode && style.boxesDark
+                                    } ${style.hovered}`}
+                                    key={index}
+                                    onClick={() => setSelectedMovie(items)}
+                                  >
+                                    <div className={style.leftS}>
+                                      <img
+                                        src={
+                                          items.backdrop_path ||
+                                          items.images.jpg.large_url
+                                        }
+                                        alt={items.title || items.name}
+                                        width={300}
+                                        height={190}
+                                        className={style.Imager}
+                                      />
+                                    </div>
+                                    <div className="right">
+                                      <div className={style.topS}>
+                                        <h3
                                           style={{
-                                            fontWeight: "600",
+                                            fontSize: "12px",
+                                            fontWeight: "normal",
                                             color: lightMode && "#000",
                                           }}
                                         >
-                                          {items.vote_average != 0
-                                            ? (
-                                                (items.vote_average / 100) *
-                                                5
-                                              ).toFixed(1)
-                                            : "Not rated"}
-                                        </h4>
+                                          {items.name ||
+                                            items.title.slice(0, 15)}
+                                        </h3>
+                                        <div className="detail">
+                                          <p>
+                                            {" "}
+                                            {selectedMovie.release_date
+                                              ? selectedMovie.release_date.split(
+                                                  "-"
+                                                )[0]
+                                              : selectedMovie.first_air_date.split(
+                                                  "-"
+                                                )[0]}
+                                          </p>
+                                          <p>
+                                            {items.runtime
+                                              ? convertRuntime(items.runtime) ||
+                                                items.year
+                                              : items.episode_run_time !== 0
+                                              ? `${items.episode_run_time}mins/episode`
+                                              : ""}
+                                          </p>
+                                        </div>
+                                        <div className={style.rates}>
+                                          <i
+                                            className="fa fa-star"
+                                            aria-hidden="true"
+                                          ></i>
+                                          <h4
+                                            style={{
+                                              fontWeight: "600",
+                                              color: lightMode && "#000",
+                                            }}
+                                          >
+                                            {items.vote_average != 0
+                                              ? (
+                                                  (items.vote_average / 100) *
+                                                  5
+                                                ).toFixed(1)
+                                              : "Not rated"}
+                                          </h4>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              ))}
+                                ))
+                              )}
                             </div>
                           </div>
                         </div>
