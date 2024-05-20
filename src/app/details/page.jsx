@@ -194,8 +194,8 @@ function Page() {
                             <div className={style.image}>
                               <img
                                 src={selectedMovie.Logo[0]}
-                                // width={200}
-                                // height={30}
+                                width={200}
+                                height={30}
                                 className={style.ImageMovie}
                               />
                             </div>
