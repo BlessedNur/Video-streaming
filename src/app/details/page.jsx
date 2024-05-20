@@ -182,20 +182,20 @@ function Page() {
                         <div className={style.leftIntro}>
                           {/* <div className={style.image}>
                       </div> */}
-                          <Image
+                          <img
                             src={selectedMovie.poster_path}
-                            width={200}
-                            height={200}
+                            // width={200}
+                            // height={200}
                             className={style.movieImage}
                           />
                         </div>
                         <div className={style.RightIntro}>
                           {selectedMovie.Logo[0] ? (
                             <div className={style.image}>
-                              <Image
+                              <img
                                 src={selectedMovie.Logo[0]}
-                                width={200}
-                                height={30}
+                                // width={200}
+                                // height={30}
                                 className={style.ImageMovie}
                               />
                             </div>
@@ -283,15 +283,15 @@ function Page() {
                             <div className={style.castProfile}>
                               <h1 className={style.dr}>Director</h1>
                               <div className={style.leftCast}>
-                                <Image
+                                <img
                                   src={
                                     selectedMovie.director.profile_path
                                       ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
                                       : "/images/blank-profile-picture-973460_960_720.webp"
                                   }
-                                  width={100}
+                                  // width={100}
                                   className={style.castimage}
-                                  height={100}
+                                  // height={100}
                                 />
                               </div>
                               <div className={style.rightCast}>
@@ -313,7 +313,7 @@ function Page() {
                                 key={index}
                               >
                                 <div className={style.leftCast}>
-                                  <Image
+                                  <img
                                     src={
                                       items.profile_path
                                         ? items.profile_path

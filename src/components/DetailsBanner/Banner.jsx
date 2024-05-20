@@ -57,8 +57,8 @@ function Banner({ bannerWidth }) {
             "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
           }
           alt={selectedMovie.title || selectedMovie.name}
-          width={1000}
-          height={1000}
+          // width={1000}
+          // height={1000}
           className={style.movieImage}
         />
         <div className={style.rates}>
