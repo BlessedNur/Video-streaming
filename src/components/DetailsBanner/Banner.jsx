@@ -50,7 +50,7 @@ function Banner({ bannerWidth }) {
         className={`${style.list} ${lightMode ? style.Light : style.Dark}`}
         // key={selectedMovie.id}
       >
-        <Image
+        <img
           src={
             selectedMovie.backdrop_path ||
             selectedMovie.images?.jpg?.large_image_url ||

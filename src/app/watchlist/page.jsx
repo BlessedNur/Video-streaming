@@ -91,7 +91,9 @@ function Page() {
                   />
                 </div>
                 <div className="tit">
-                  <p>
+                  <p style={{
+                    color:!lightMode  && "#fff"
+                  }}>
                     {item.title.length > 20
                       ? `${
                           item.title.slice(0, 20) || item.name.slice(0, 20)
