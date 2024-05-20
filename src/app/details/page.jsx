@@ -192,7 +192,7 @@ function Page() {
                         <div className={style.RightIntro}>
                           {selectedMovie.Logo[0] ? (
                             <div className={style.image}>
-                              <img
+                              <Image
                                 src={selectedMovie.Logo[0]}
                                 width={200}
                                 height={30}
@@ -283,7 +283,7 @@ function Page() {
                             <div className={style.castProfile}>
                               <h1 className={style.dr}>Director</h1>
                               <div className={style.leftCast}>
-                                <img
+                                <Image
                                   src={
                                     selectedMovie.director.profile_path
                                       ? `https://image.tmdb.org/t/p/original${selectedMovie.director.profile_path}`
@@ -313,7 +313,7 @@ function Page() {
                                 key={index}
                               >
                                 <div className={style.leftCast}>
-                                  <img
+                                  <Image
                                     src={
                                       items.profile_path
                                         ? items.profile_path
