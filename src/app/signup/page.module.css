@@ -99,3 +99,7 @@
 .holders input:focus {
   outline: 2px solid #00a0df;
 }
+.holders input:-webkit-autofill {
+  background-color: white !important;
+  -webkit-text-fill-color: #000 !important;
+}

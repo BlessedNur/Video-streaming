@@ -75,7 +75,7 @@
   height: 10%;
   transition: 0.4s;
   /* background: linear-gradient(rgb(0, 0, 0) 20%, transparent); */
-  background: red;
+  /* background: red; */
 
   /* z-index: 1; */
 }
@@ -233,7 +233,7 @@
 }
 
 .intro {
-  margin-top: 1em;
+  /* margin-top: 1em; */
   /* background-color: red; */
   position: relative;
 }
@@ -452,6 +452,7 @@
 }
 .intro {
   height: fit-content !important;
+  /* background-color: red; */
 }
 .top {
   display: flex;
@@ -593,9 +594,10 @@
   }
   .movieList {
     height: 100vh;
+    padding-bottom: 10em !important;
     overflow: scroll;
   }
-  
+
   .storyLine {
     margin-top: 8em;
     width: 50%;
@@ -604,6 +606,7 @@
     /* transform: translateY(3em); */
     padding: 2em !important;
     padding-top: 5em !important;
+    /* display: none; */
     transform: translateY(-45px);
   }
   .movieList {
@@ -637,7 +640,7 @@
   /* background-color: red; */
 }
 .Light::after {
-  background-image: linear-gradient(to top, #ffffff 2%, transparent 99%);
+  /* background-image: linear-gradient(to top, #ffffff 2%, transparent 99%); */
 }
 .Dark::after {
   background-image: linear-gradient(to top, #000000 1%, transparent 99%);
@@ -665,13 +668,17 @@
   position: absolute;
   width: 100%;
   z-index: 1;
-  transition: .3s;
+  transition: 0.3s;
   height: 101vh;
   background: linear-gradient(to right, black 30%, rgba(0, 0, 0, 0.192));
 }
 .Lighter::before {
-  color:  black !important;
-  background: linear-gradient(to right, white 30%, rgba(0, 0, 0, 0.192)) !important;
+  color: black !important;
+  background: linear-gradient(
+    to right,
+    white 30%,
+    rgba(0, 0, 0, 0.192)
+  ) !important;
 }
 .backImage::after {
   content: "";
@@ -715,13 +722,13 @@
 .Dcast::-webkit-scrollbar {
   display: none;
 }
-.castTwoss{
-  background-color: red;
+.castTwoss {
+  /* background-color: red; */
 }
-.castTwoss img{
+.castTwoss img {
   position: static !important;
-
-}.vids {
+}
+.vids {
   width: 100%;
   overflow-x: scroll;
 }
@@ -734,18 +741,16 @@
   gap: 1em;
 }
 
-@media screen and (min-width:900px) {
-  .introL{
-    padding-bottom: 20em;
+@media screen and (min-width: 900px) {
+  .introL {
+    padding-bottom: 10em;
   }
-  
 }
-.hovered{
+.hovered {
   box-shadow: 3px 5px 10px rgb(0, 0, 0);
   transition: 0.3s;
   scale: 1.2;
 }
-.hoveredDark{
+.hoveredDark {
   box-shadow: 3px 5px 10px rgba(255, 255, 255);
-
 }

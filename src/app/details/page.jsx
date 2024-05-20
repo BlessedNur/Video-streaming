@@ -774,7 +774,9 @@ function Page() {
                         </div>
                       </div>
                     </div>
-                    <img
+                        <Image
+                       width={200}   
+                       height={200}
                       className={style.bk}
                       src={selectedMovie.backdrop_path}
                       alt=""
