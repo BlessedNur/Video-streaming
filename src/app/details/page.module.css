@@ -657,14 +657,14 @@
   width: 100%;
 }
 .backImage .bk {
-  position: absolute;
-  transform: translateX(5em);
+  position: fixed;
+  transform: translateX(10em);
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   left: 0;
-  object-fit: contain;
-  object-position: right;
+  object-fit: cover;
+  object-position: center;
 }
 .layers::-webkit-scrollbar {
   display: none;

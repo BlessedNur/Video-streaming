@@ -13,7 +13,7 @@ import Navigation from "@/components/Navigation/Navigation";
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
-  const mobile = useMediaQuery("(max-width:900px)");
+  const mobile = useMediaQuery("(max-width:650px)");
   const [viewMore, setViewMore] = useState(false);
 
   const [
@@ -131,6 +131,12 @@ function Page() {
       currency: "USD",
     }).format(number);
   };
+
+  const releaseYear = selectedMovie.release_date
+    ? selectedMovie.release_date.split("-")[0]
+    : selectedMovie.first_air_date
+    ? selectedMovie.first_air_date.split("-")[0]
+    : "Unknown";
 
   const addToWatchlist = (movie) => {
     const alreadyInWatchlist = watchlist.some((item) => item.id === movie.id);
@@ -250,11 +256,7 @@ function Page() {
                               ? `${selectedMovie.episode_run_time}mins/episode`
                               : ""}{" "}
                           </h3>
-                          <h3>
-                            {selectedMovie.release_date
-                              ? selectedMovie.release_date.split("-")[0]
-                              : selectedMovie.first_air_date.split("-")[0]}
-                          </h3>
+                          <h3>{releaseYear}</h3>
                           <h3>
                             {selectedMovie.genreNames.find(
                               (name) => name === "Horror"
@@ -533,7 +535,7 @@ function Page() {
                       className={`${style.introL} ${lightMode && style.Light}`}
                     >
                       <div className={style.RightIntro}>
-                        {selectedMovie.Logo[0] ? (
+                        {selectedMovie.Logo ? (
                           <div className={style.Dlogo}>
                             <img
                               src={selectedMovie.Logo[0]}
@@ -567,13 +569,10 @@ function Page() {
                               ? `${selectedMovie.episode_run_time}mins/episode`
                               : ""}{" "}
                           </h3>
+                          <h3>{releaseYear}</h3>
                           <h3>
-                            {selectedMovie.release_date
-                              ? selectedMovie.release_date.split("-")[0]
-                              : selectedMovie.first_air_date.split("-")[0]}
-                          </h3>
-                          <h3>
-                            {selectedMovie.genreNames.find(
+                            {selectedMovie.genreNames &&
+                            selectedMovie.genreNames.find(
                               (name) => name === "Horror"
                             ) ? (
                               <h3>PG 16</h3>
@@ -584,14 +583,16 @@ function Page() {
                           {/* </div> */}
                         </div>
                         <div className={style.genres}>
-                          {selectedMovie.genreNames.map((name, index) => (
-                            <p
-                              style={{ color: !lightMode && "#fff" }}
-                              key={index}
-                            >
-                              {name}{" "}
-                            </p>
-                          ))}
+                          {selectedMovie.genreNames
+                            ? selectedMovie.genreNames.map((name, index) => (
+                                <p
+                                  style={{ color: !lightMode && "#fff" }}
+                                  key={index}
+                                >
+                                  {name}{" "}
+                                </p>
+                              ))
+                            : ""}
                         </div>
                         <h1 style={{ color: !lightMode && "#fff" }}>Casts :</h1>
                         <div className={style.caster}>
@@ -601,7 +602,7 @@ function Page() {
                               padding: "1em",
                             }}
                           >
-                            {selectedMovie.cast.map((items, index) => (
+                            {selectedMovie.cast? selectedMovie.cast.map((items, index) => (
                               <div
                                 className={`${style.castProfileTwos} `}
                                 key={index}
@@ -619,7 +620,7 @@ function Page() {
                                   />
                                 </div>
                               </div>
-                            ))}
+                            )):"Unknown"}
                           </div>
                         </div>
                         <div className={style.actions}>
