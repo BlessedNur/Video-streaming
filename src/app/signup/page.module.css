@@ -105,6 +105,7 @@
   /* width: 100%; */
   margin: 1em 0;
   background-color: #c00;
+  cursor: pointer;
   color: white;
   /* margin: 0 auto; */
 }
@@ -151,6 +152,10 @@
   display: grid;
   place-content: center;
   background: url("/images/mv-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+
   height: 100vh;
   .form {
     background-color: rgba(255, 255, 255, 0.115);
@@ -158,12 +163,35 @@
     width: 100%;
     border-radius: 8px;
   }
-  .holders input {
-    background: transparent !important;
+  .form {
+    /* display: flex; */
+    backdrop-filter: blur(10px);
+    /* gap: 1em; */
+    scale: 0.99;
+  }
+  .Or {
+    margin: 0 auto;
+  }
+  .intro {
     color: white;
+  }
+  .error {
+    color: red !important;
+  }
+  .holders input {
+    /* background: transparent !important; */
+    color: white;
+    border: none;
+    font-size: 13px;
+    background-color: #92868670;
+    padding: 1.5em;
+  }
+  .holders {
+    /* margin: 0 !important; */
   }
   .holders label {
     color: silver;
+    display: none;
   }
   .holders {
     background-color: transparent;
@@ -179,7 +207,63 @@
     background-color: transparent;
     padding: 0.1em;
   }
-  .google {
-    background-color: #d3d6dc;
+  .intro p {
+    color: white;
+    /* display: none; */
+    width: 70%;
+    margin: 0 auto;
   }
+  .intro {
+    margin: 0.5em 0;
+  }
+  .google {
+    background-color: #efefef;
+  }
+  .form h2,
+  .form h1 {
+    color: white;
+    margin: 0 auto;
+  }
+  .Or h2 {
+    background-color: transparent;
+  }
+  .holders input::placeholder {
+    font-size: 140px !important;
+    color: white !important;
+  }
+  .Or hr {
+    /* position: relative; */
+    /* display: block; */
+    display: none !important;
+  }
+  .holders input {
+    border: 1px solid white !important;
+    display: none;
+  }
+}
+
+.holders input::placeholder {
+  color: white;
+  font-size: 13px;
+}
+@media screen and (min-width: 500px) {
+  .holders input:-webkit-autofill {
+    background-color: white !important; /* Change this to your desired color */
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #ffff !important;
+  }
+}
+
+.loading {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  /* background-color: red; */
+
 }

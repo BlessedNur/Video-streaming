@@ -249,7 +249,7 @@ function SideContent() {
               >
                 <div className="left">
                   <Image
-                    src={mobile ? movie.poster_path : movie.backdrop_path}
+                    src={mobile ? movie.backdrop_path_path : movie.backdrop_path}
                     alt={movie.title}
                     width={300}
                     height={190}

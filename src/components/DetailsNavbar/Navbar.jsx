@@ -92,7 +92,7 @@ function Navbar() {
             title="account"
           >
             <div className={style.profile}>
-              <img src={"/images/wallpaperflare.com_wallpaper (16).jpg"} />
+              <img src={"/images/blank-profile-picture-973460_960_720.webp"} />
             </div>
           </div>
         </div>

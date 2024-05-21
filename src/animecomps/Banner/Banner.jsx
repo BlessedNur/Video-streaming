@@ -5,12 +5,15 @@ import Image from "next/image";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { movieContext } from "@/context/Context";
 import { useRouter } from "next/navigation";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 function Banner({ BannerApi, bannerWidth }) {
   const [itemActive, setItemActive] = useState(0);
   const [movies, setMovies] = useState([]);
-  const [hoverB, setHoverB] = useState(false)
-   const [
+  const [hoverB, setHoverB] = useState(false);
+
+  const [
     lightMode,
     setLightMode,
     activeNavLink,
@@ -36,6 +39,8 @@ function Banner({ BannerApi, bannerWidth }) {
     setSearchValue,
     selectedMovie,
     setSelectedMovie,
+    watchlist,
+    setWatchlist,
   ] = useContext(movieContext);
   const navigate = useRouter();
 
@@ -53,6 +58,23 @@ function Banner({ BannerApi, bannerWidth }) {
     fetchData();
   }, []);
 
+  const addToWatchlist = (movie) => {
+    const notyf = new Notyf({
+      position: {
+        x: "right",
+        y: "top",
+      },
+    });
+    const alreadyInWatchlist = watchlist.some((item) => item.id === movie.id);
+
+    if (alreadyInWatchlist) {
+      notyf.error("Already added to watchlist");
+    } else {
+      setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
+      notyf.success("Added to watchlist");
+
+    }
+  };
   console.log(movies);
   let interval;
   useEffect(() => {
@@ -139,7 +161,7 @@ function Banner({ BannerApi, bannerWidth }) {
                       onMouseOver={() => setHoverB(true)}
                       onMouseLeave={() => setHoverB(false)}
                       onClick={() => {
-                        addToWatchlist(selectedMovie);
+                        addToWatchlist(movie);
                       }}
                       title={"Add to watchlist"}
                       className={lightMode ? style.contentLight : ""}

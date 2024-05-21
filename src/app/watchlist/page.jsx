@@ -8,6 +8,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 import useMediaQuery from "@/components/UseMediaQuery";
 import Navigation from "@/components/Navigation/Navigation";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 function Page() {
   const navigate = useRouter();
@@ -44,6 +46,14 @@ function Page() {
   ] = useContext(movieContext);
 
   function removeFromWatchlist(movieId) {
+    const notyf = new Notyf({
+      position: {
+        x: "right",
+        y: "top",
+      },
+      duration: 3000,
+    });
+
     // Find the index of the movie in the watchlist
     const index = watchlist.findIndex((movie) => movie.id === movieId);
 
@@ -52,7 +62,7 @@ function Page() {
         ...watchlist.slice(0, index),
         ...watchlist.slice(index + 1),
       ];
-
+      notyf.success("Successfully removed frm watchlist");
       // Update the state with the modified watchlist
       setWatchlist(updatedWatchlist);
 
@@ -72,7 +82,15 @@ function Page() {
           className={style.watch}
           style={{ background: lightMode ? "#fff" : "#000" }}
         >
-          <h1 style={{ color: !lightMode && "#fff",position:"absolute",top:"5px" }}>Watchlist</h1>
+          <h1
+            style={{
+              color: !lightMode && "#fff",
+              position: "absolute",
+              top: "5px",
+            }}
+          >
+            Watchlist
+          </h1>
           <section className={`${style.Lists} ${style}}`}>
             {watchlist.map((item) => (
               <div className={style.movieBox} key={item.id}>
@@ -91,9 +109,11 @@ function Page() {
                   />
                 </div>
                 <div className="tit">
-                  <p style={{
-                    color:!lightMode  && "#fff"
-                  }}>
+                  <p
+                    style={{
+                      color: !lightMode && "#fff",
+                    }}
+                  >
                     {item.title.length > 20
                       ? `${
                           item.title.slice(0, 20) || item.name.slice(0, 20)
@@ -147,7 +167,7 @@ function Page() {
           </div>
         </>
       )}
-      {mobile && <Navigation/>}
+      {mobile && <Navigation />}
     </>
   );
 }

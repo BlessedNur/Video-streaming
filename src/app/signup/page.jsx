@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 import { movieContext } from "@/context/Context";
 import useMediaQuery from "@/components/UseMediaQuery";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 function Page() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -17,6 +19,7 @@ function Page() {
     errorEmail: "",
     errorPassword: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showCPassword, setShowCPassword] = useState(false);
@@ -69,6 +72,13 @@ function Page() {
     e.preventDefault();
     let valid = true;
 
+    const notyf = new Notyf({
+      position: {
+        x: "right",
+        y: "top",
+      },
+    });
+
     if (!username) {
       setErrorMessage((prev) => ({
         ...prev,
@@ -98,30 +108,44 @@ function Page() {
     } else {
       setErrorMessage((prev) => ({ ...prev, errorPassword: "" }));
     }
+    if (password === "" && cPassword === "") {
+      setErrorMessage((prev) => ({
+        ...prev,
+        errorPassword: "Password is required",
+      }));
+      valid = false;
+    }
+    console.log(valid);
+
+    if (valid) {
+      try {
+        setIsLoading(true);
+        const res = await fetch("/myapi/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        });
+        if (res.status === 400) {
+          setIsLoading(false);
+          notyf.error("User already exists");
+        } else if (res.status === 201) {
+          setIsLoading(false);
+          notyf.success("Account Successfully created");
+          router.push("/");
+          setCurrentUser(username);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     if (!valid) return;
-
-    // try {
-    //   const res = await fetch("/myapi/auth/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       email,
-    //       password,
-    //     }),
-    //   });
-    //   if (res.status === 400) {
-    //     alert("User already exists");
-    //   } else if (res.status === 201) {
-    //     alert("Account created");
-    //     router.push("/signin?success=Account has been created");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const desktop = useMediaQuery("(min-width:500px)");
@@ -130,6 +154,18 @@ function Page() {
     // <section className={style.signup}>
     <>
       {!desktop && <Navbar />}
+      {isLoading && (
+        <div className={style.loading}>
+          <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+      )}
       {!desktop ? (
         <form className={style.form} onSubmit={handleSubmit}>
           <div className={style.intro}>
@@ -283,7 +319,14 @@ function Page() {
           </div>
 
           <button className={style.registerBtn}>Sign up</button>
-          <div style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
+          <div
+            style={{
+              margin: "0 auto",
+              display: "flex",
+              alignItems: "center",
+              gap: ".3em",
+            }}
+          >
             <p>{"Already have an account?"}</p>
             <Link href={"/signin"}>Login</Link>
           </div>
@@ -297,7 +340,7 @@ function Page() {
                   fontSize: "20px",
                 }}
               >
-                Sign Up
+                Get started with quanMovies
               </h1>
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -341,29 +384,73 @@ function Page() {
               </svg>
               <p>Sign up with Google</p>
             </button>
-            <h2>Or</h2>
+            <div className={style.Or}>
+              <h2>Or</h2>
+              <hr
+                style={{
+                  display: "none",
+                }}
+              />
+            </div>
             <div className={style.holders}>
-              <label htmlFor="">Username</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorUsername && "#c00",
+                }}
+              >
+                Username
+              </label>
               <input
+                className={style.input}
+                placeholder="Username"
+                style={{
+                  outline: errorMessage.errorUsername && " 2px solid #c00",
+                }}
                 type="text"
                 name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 autoFocus
               />
+              <p className={style.error}>{errorMessage.errorUsername}</p>
             </div>
             <div className={style.holders}>
-              <label htmlFor="">Email Address</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorEmail && "#c00",
+                }}
+              >
+                Email Address
+              </label>
               <input
+                placeholder="Email"
+                style={{
+                  outline: errorMessage.errorEmail && " 2px solid #c00",
+                }}
                 type="email"
                 name="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <p className={style.error}>{errorMessage.errorEmail}</p>
             </div>
+
             <div className={style.holders}>
-              <label htmlFor="">Password</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorPassword && "#c00",
+                }}
+              >
+                Password
+              </label>
               <input
+                placeholder="Password"
+                style={{
+                  outline: errorMessage.errorPassword && " 2px solid #c00",
+                }}
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={password}
@@ -378,8 +465,19 @@ function Page() {
               ></i>
             </div>
             <div className={style.holders}>
-              <label htmlFor="">Confirm password</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorPassword && "#c00",
+                }}
+              >
+                Confirm password
+              </label>
               <input
+                placeholder="Confirm password"
+                style={{
+                  outline: errorMessage.errorPassword && " 2px solid #c00",
+                }}
                 type={showCPassword ? "text" : "password"}
                 name="confirm password"
                 value={cPassword}
@@ -394,12 +492,27 @@ function Page() {
                     : setShowCPassword(true)
                 }
               ></i>
+              <p className={style.error}>{errorMessage.errorPassword}</p>
             </div>
+
             <button className={style.registerBtn}>Sign up</button>
-          div<p style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
-              <p>{"Already have an account?"}</p>
+            <div
+              style={{
+                margin: "0 auto",
+                display: "flex",
+                alignItems: "center",
+                gap: ".3em",
+              }}
+            >
+              <p
+                style={{
+                  color: "white",
+                }}
+              >
+                {"Already have an account?"}
+              </p>
               <Link href={"/signin"}>Login</Link>
-            </p>
+            </div>
           </form>
         </section>
       )}

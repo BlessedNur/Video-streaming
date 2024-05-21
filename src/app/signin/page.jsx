@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 import { movieContext } from "@/context/Context";
 import useMediaQuery from "@/components/UseMediaQuery";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 function Page() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ function Page() {
   const [showPassword, setShowPassword] = useState(false);
   const [showCPassword, setShowCPassword] = useState(false);
   const { data: session } = useSession();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [
     lightMode,
     setLightMode,
@@ -68,18 +70,15 @@ function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let valid = true;
+    console.log(email, password);
+    const notyf = new Notyf({
+      position: {
+        x: "right",
+        y: "top",
+      },
+    });
 
-    if (!username) {
-      setErrorMessage((prev) => ({
-        ...prev,
-        errorUsername: "Username is required",
-      }));
-      valid = false;
-    } else {
-      setErrorMessage((prev) => ({ ...prev, errorUsername: "" }));
-    }
-
-    if (!email || !validateEmail(email)) {
+   if (!email || !validateEmail(email)) {
       setErrorMessage((prev) => ({
         ...prev,
         errorEmail: "Valid email is required",
@@ -89,39 +88,43 @@ function Page() {
       setErrorMessage((prev) => ({ ...prev, errorEmail: "" }));
     }
 
-    if (password !== cPassword) {
+    if (password == "") {
       setErrorMessage((prev) => ({
         ...prev,
-        errorPassword: "Passwords do not match",
+        errorPassword: "Password is required",
       }));
       valid = false;
-    } else {
-      setErrorMessage((prev) => ({ ...prev, errorPassword: "" }));
+    }
+
+    console.log(valid);
+    if (valid) {
+      try {
+        setIsLoading(true);
+        const res = await fetch("myapi/auth/authentication", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+        console.log(res.status);
+        if (res.status === 200) {
+          setIsLoading(false);
+          // router.push("/");
+          notyf.success("Successfully Logged in");
+        } else if (res.status === 400) {
+          setIsLoading(false);
+          return notyf.error("user does not exist");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (!valid) return;
-
-    // try {
-    //   const res = await fetch("/myapi/auth/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       email,
-    //       password,
-    //     }),
-    //   });
-    //   if (res.status === 400) {
-    //     alert("User already exists");
-    //   } else if (res.status === 201) {
-    //     alert("Account created");
-    //     router.push("/signin?success=Account has been created");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const desktop = useMediaQuery("(min-width:500px)");
@@ -130,6 +133,18 @@ function Page() {
     // <section className={style.signup}>
     <>
       {!desktop && <Navbar />}
+      {isLoading && (
+        <div className={style.loading}>
+          <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+      )}
       {!desktop ? (
         <form className={style.form} onSubmit={handleSubmit}>
           <div className={style.intro}>
@@ -233,6 +248,7 @@ function Page() {
                 showPassword ? setShowPassword(false) : setShowPassword(true)
               }
             ></i>
+            <p className={style.error}>{errorMessage.errorPassword}</p>
           </div>
 
           <button className={style.registerBtn}>Login</button>
@@ -257,7 +273,7 @@ function Page() {
                   fontSize: "20px",
                 }}
               >
-                Sign Up
+                Welcome back
               </h1>
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -299,31 +315,53 @@ function Page() {
                   d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
                 ></path>
               </svg>
-              <p>Sign up with Google</p>
+              <p>Sign in with Google</p>
             </button>
-            <h2>Or</h2>
-            <div className={style.holders}>
-              <label htmlFor="">Username</label>
-              <input
-                type="text"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoFocus
+            <div className={style.Or}>
+              <h2>Or</h2>
+              <hr
+                style={{
+                  display: "none",
+                }}
               />
             </div>
+
             <div className={style.holders}>
-              <label htmlFor="">Email Address</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorEmail && "#c00",
+                }}
+              >
+                Email Address
+              </label>
               <input
+                placeholder="Email"
+                style={{
+                  outline: errorMessage.errorEmail && " 2px solid #c00",
+                }}
                 type="email"
                 name="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <p className={style.error}>{errorMessage.errorEmail}</p>
             </div>
+
             <div className={style.holders}>
-              <label htmlFor="">Password</label>
+              <label
+                htmlFor=""
+                style={{
+                  color: errorMessage.errorPassword && "#c00",
+                }}
+              >
+                Password
+              </label>
               <input
+                placeholder="Password"
+                style={{
+                  outline: errorMessage.errorPassword && " 2px solid #c00",
+                }}
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={password}
@@ -336,26 +374,10 @@ function Page() {
                   showPassword ? setShowPassword(false) : setShowPassword(true)
                 }
               ></i>
+              <p className={style.error}>{errorMessage.errorPassword}</p>
             </div>
-            <div className={style.holders}>
-              <label htmlFor="">Confirm password</label>
-              <input
-                type={showCPassword ? "text" : "password"}
-                name="confirm password"
-                value={cPassword}
-                onChange={(e) => setCPassword(e.target.value)}
-              />
-              <i
-                class={`fa ${showCPassword ? "fa-eye-slash" : "fa-eye"}`}
-                aria-hidden="true"
-                onClick={() =>
-                  showCPassword
-                    ? setShowCPassword(false)
-                    : setShowCPassword(true)
-                }
-              ></i>
-            </div>
-            <button className={style.registerBtn}>Sign up</button>
+
+            <button className={style.registerBtn}>Login</button>
             <div
               style={{
                 margin: "0 auto",
@@ -364,8 +386,14 @@ function Page() {
                 gap: ".3em",
               }}
             >
-              <p>{"Don't have an account?"}</p>
-              <Link href={"/signup"}>Login</Link>
+              <p
+                style={{
+                  color: "white",
+                }}
+              >
+                {"Don't have an account?"}
+              </p>
+              <Link href={"/signup"}>Sign up</Link>
             </div>
           </form>
         </section>

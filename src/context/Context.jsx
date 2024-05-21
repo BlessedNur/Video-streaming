@@ -41,8 +41,9 @@ function Context({ children }) {
       return [];
     }
   });
-  console.log(selectedMovie);
+  // console.log(selectedMovie);
 
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("movie", JSON.stringify(selectedMovie));

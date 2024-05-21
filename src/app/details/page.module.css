@@ -60,7 +60,7 @@
   height: 50vh;
 
   /* margin-top:5em; */
-  position:static;
+  position: static;
   width: 100%;
   transition: 0.4s;
   /* width: 100%; */
@@ -212,7 +212,6 @@
   align-items: center;
   gap: 1em;
 }
-
 
 .budgetM {
   position: relative;
@@ -680,13 +679,14 @@
   min-width: 19%;
   display: none;
   display: grid;
-  transform:translateX(2em);
+  transform: translateX(2em);
   place-content: center;
   height: 11em;
 }
 .ImageMovie {
   position: static !important;
-  min-height: 8em;
+  min-height: 6em;
+  max-height: 8em;
   min-width: 100%;
 }
 .storyLineTwo {
@@ -710,7 +710,7 @@
 .vids {
   width: 100%;
   overflow-x: scroll;
-  height:20em;
+  height: 20em;
 }
 .vids::-webkit-scrollbar {
   display: none;
