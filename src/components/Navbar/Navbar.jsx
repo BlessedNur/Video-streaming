@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import useMediaQuery from "../UseMediaQuery";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 function Navbar() {
   const pathname = usePathname();
@@ -13,6 +14,8 @@ function Navbar() {
   const mobile = useMediaQuery("(max-width:500px)");
   ("(max-width: 499px)");
 
+  const { data: session } = useSession();
+  console.log(session);
   const [countires, setCountries] = useState({
     UK: "UK",
     JAPANESE: "JAPANESE",
@@ -51,6 +54,8 @@ function Navbar() {
     setCurrentUser,
   ] = useContext(movieContext);
 
+  // setCurrentUser(session.user);
+  console.log(currentUser);
   useEffect(() => {
     setActiveNavLink(storedNavLink);
   }, [storedNavLink]);

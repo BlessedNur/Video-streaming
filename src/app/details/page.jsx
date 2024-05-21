@@ -86,7 +86,15 @@ function Page() {
     }
   });
 
-  const matchFound = filteredArray.find((movie) => selectedMovie === movie);
+  const matchIndex = filteredArray.findIndex(
+    (movie) => movie.id === selectedMovie.id
+  ); // or compare other relevant properties
+
+  const matchFound = matchIndex !== -1;
+  if (matchFound) {
+    filteredArray.splice(matchIndex, 1);
+  }
+  console.log(matchFound);
 
   // console.log(movieArray);
   console.log(filteredArray);
@@ -411,7 +419,7 @@ function Page() {
                       </div>
                       <div className={style.castTwoss}>
                         <h1>More like this</h1>
-                        <div className={style.vids}>
+                        <div className={`${style.vids} ${style.related}`}>
                           <div className={style.likeThis}>
                             {filteredArray.map((items, index) => (
                               <div
@@ -494,15 +502,28 @@ function Page() {
                         <h1>Trailer</h1>
                         {mobile && (
                           <div className={style.trailer}>
-                            <iframe
-                              width="100"
-                              height="100"
-                              src={`https://www.youtube.com/embed/${selectedMovie.trailers[1].key}`}
-                              frameBorder="0"
-                              className={style.trailer}
-                              allowFullScreen
-                              title=""
-                            ></iframe>
+                            {selectedMovie.trailer ? (
+                              <iframe
+                                width="100"
+                                height="100"
+                                src={`https://www.youtube.com/embed/${selectedMovie.trailers[0].key}`}
+                                frameBorder="0"
+                                className={style.trailer}
+                                allowFullScreen
+                                title=""
+                              ></iframe>
+                            ) : (
+                              <div
+                                style={{
+                                  height: "100%",
+                                  width: "100%",
+                                  display: "grid",
+                                  placeContent: "center",
+                                }}
+                              >
+                                <p>No Trailer</p>
+                              </div>
+                            )}
                           </div>
                         )}
                       </>
@@ -547,7 +568,9 @@ function Page() {
                             />
                           </div>
                         ) : (
-                          <h1>{selectedMovie.title || selectedMovie.name}</h1>
+                          <h1 style={{ color: "#fff" }}>
+                            {selectedMovie.title || selectedMovie.name}
+                          </h1>
                         )}
                         <div
                           className={`${style.storyLineTwo} ${
@@ -649,8 +672,8 @@ function Page() {
                           </button>
                         </div>
                         <div className={style.castTwossD}>
-                          <h1>More like this</h1>
-                          <div className={style.vidsD}>
+                          <h1 style={{color:!lightMode && "#fff"}}>More like this</h1>
+                          <div className={`${style.vidsD} ${lightMode && style.vidsDL}`}>
                             <div className={style.likeThis}>
                               {filteredArray.length === 0 ? (
                                 <SkeletonTheme
@@ -697,7 +720,7 @@ function Page() {
                                   <div
                                     className={`${style.boxes} ${
                                       lightMode && style.boxesDark
-                                    } ${style.hovered}`}
+                                    }`}
                                     key={index}
                                     onClick={() => setSelectedMovie(items)}
                                   >
@@ -774,9 +797,7 @@ function Page() {
                         </div>
                       </div>
                     </div>
-                        <Image
-                       width={200}   
-                       height={200}
+                    <img
                       className={style.bk}
                       src={selectedMovie.backdrop_path}
                       alt=""

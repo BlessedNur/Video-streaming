@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import useMediaQuery from "../UseMediaQuery";
+import { signOut } from "next-auth/react";
 
 function Sidebar() {
   const tablet = useMediaQuery("(max-width: 900px)");
@@ -502,7 +503,12 @@ function Sidebar() {
             {lightMode ? "Dark Mode" : "Light Mode"}
           </p>
         </li>
-        <div className={style.signOut}>
+        <div 
+            onClick={()=> {
+              
+              signOut()
+              navigate.push("/signup")
+            }} className={style.signOut}>
           <i className="fa fa-sign-out" style={{ color: "red" }}></i>
           <p
             style={{

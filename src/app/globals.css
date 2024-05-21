@@ -690,7 +690,7 @@ aside p {
   }
   .trailer-box {
     height: 10vh;
-    margin-top: 0;
+    margin-top: 0y;
   }
   
 }
@@ -703,3 +703,23 @@ aside p {
     width: fit-content !important;
   }
 }
+/* Change the background color when the input is autofilled */
+input:-webkit-autofill {
+    background-color: yellow !important; /* Change this to your desired color */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    background-color: yellow !important; /* Ensure the color stays when focused or hovered */
+}
+
+/* For other browsers, you may need additional vendor prefixes */
+input:-moz-autofill {
+    background-color: yellow !important;
+}
+
+input:-ms-autofill {
+    background-color: yellow !important;
+}
+

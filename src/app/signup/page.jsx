@@ -1,8 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./page.module.css";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar/Navbar";
+import { useRouter } from "next/navigation";
+import { movieContext } from "@/context/Context";
 function Page() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -12,23 +15,77 @@ function Page() {
     errorUsername: "",
     errorEmail: "",
   });
+  const navigate = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showCPassword, setShowCPassword] = useState(false);
+  const { data: session } = useSession();
 
-  const handleSumbit = (e) => {
+  const [
+    lightMode,
+    setLightMode,
+    activeNavLink,
+    setActiveNavLink,
+    activeSideLink,
+    setActiveSideLink,
+    storedNavLink,
+    setStoredNavLink,
+    storedSideLink,
+    setStoredSideLink,
+    handleNavClick,
+    handleSideClick,
+    toggleLightMode,
+    showProfile,
+    setShowProfile,
+    filteredType,
+    setFilteredType,
+    cat,
+    setCat,
+    genre,
+    setGenre,
+    searchValue,
+    setSearchValue,
+    selectedMovie,
+    setSelectedMovie,
+    watchlist,
+    setWatchlist,
+    currentUser,
+    setCurrentUser,
+  ] = useContext(movieContext);
+
+  console.log(session);
+  console.log(currentUser);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      username: username,
-      email: email,
-      password: password,
-      cPassword: cPassword,
-    });
+    console.log(username, email, password);
+    try {
+      const res = await fetch("/myapi/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      });
+      console.log(res.status);
+      if (res.status === 400) {
+        alert("user already exits");
+      } else if (res.status === 201) {
+        // navigation.push("/signin?success=Account has been created");
+        alert("acoount created");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     // <section className={style.signup}>
     <>
       <Navbar />
-      <form className={style.form} onSubmit={handleSumbit}>
+      <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.intro}>
           <h1
             style={{
@@ -42,7 +99,16 @@ function Page() {
             Praesentium, pariatur?
           </p>
         </div>
-        <button className={style.google}>
+        <button
+          className={style.google}
+          onClick={() => {
+            signIn();
+            if (session) {
+              navigate.push("/");
+              setCurrentUser(session.user);
+            }
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={"24"}
