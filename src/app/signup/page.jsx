@@ -283,10 +283,10 @@ function Page() {
           </div>
 
           <button className={style.registerBtn}>Sign up</button>
-          <p style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
-            <p>Already have an account?</p>
+          <div style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
+            <p>{"Already have an account?"}</p>
             <Link href={"/signin"}>Login</Link>
-          </p>
+          </div>
         </form>
       ) : (
         <section className={style.mainForm}>
@@ -396,8 +396,8 @@ function Page() {
               ></i>
             </div>
             <button className={style.registerBtn}>Sign up</button>
-            <p style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
-              <p>Already have an account?</p>
+          div<p style={{ margin: "0 auto",display:"flex",alignItems:"center",gap:".3em" }}>
+              <p>{"Already have an account?"}</p>
               <Link href={"/signin"}>Login</Link>
             </p>
           </form>
