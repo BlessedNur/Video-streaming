@@ -18,7 +18,7 @@
   /* overflow-y: scroll; */
   flex-direction: column;
   /* justify-content: center; */
-  gap: 0.5em;
+  /* gap: 0.2em; */
 
   padding: 1em;
 }
@@ -34,7 +34,7 @@
 
 .holders {
   position: relative;
-  margin: 0.5em 0;
+  margin: 1em 0;
   display: flex;
   flex-direction: column;
   /* gap: 0.5em; */
@@ -121,6 +121,7 @@
   font-weight: 600;
   bottom: -20px;
   z-index: 10;
+  font-size: 11.5px;
   right: 0;
   color: #c00 !important;
 }

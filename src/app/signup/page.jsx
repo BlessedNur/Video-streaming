@@ -187,7 +187,14 @@ function Page() {
             <hr />
           </div>
           <div className={style.holders}>
-            <label htmlFor="">Username</label>
+            <label
+              htmlFor=""
+              style={{
+                color: errorMessage.errorUsername && "#c00",
+              }}
+            >
+              Username
+            </label>
             <input
               style={{
                 outline: errorMessage.errorUsername && " 2px solid #c00",
@@ -201,7 +208,14 @@ function Page() {
             <p className={style.error}>{errorMessage.errorUsername}</p>
           </div>
           <div className={style.holders}>
-            <label htmlFor="">Email Address</label>
+            <label
+              htmlFor=""
+              style={{
+                color: errorMessage.errorEmail && "#c00",
+              }}
+            >
+              Email Address
+            </label>
             <input
               style={{
                 outline: errorMessage.errorEmail && " 2px solid #c00",
@@ -215,7 +229,14 @@ function Page() {
           </div>
 
           <div className={style.holders}>
-            <label htmlFor="">Password</label>
+            <label
+              htmlFor=""
+              style={{
+                color: errorMessage.errorPassword && "#c00",
+              }}
+            >
+              Password
+            </label>
             <input
               style={{
                 outline: errorMessage.errorPassword && " 2px solid #c00",
@@ -234,7 +255,14 @@ function Page() {
             ></i>
           </div>
           <div className={style.holders}>
-            <label htmlFor="">Confirm password</label>
+            <label
+              htmlFor=""
+              style={{
+                color: errorMessage.errorPassword && "#c00",
+              }}
+            >
+              Confirm password
+            </label>
             <input
               style={{
                 outline: errorMessage.errorPassword && " 2px solid #c00",
