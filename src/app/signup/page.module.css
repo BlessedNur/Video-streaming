@@ -10,79 +10,121 @@
 .form {
   height: 100vh;
   color: black;
-  text-align: center;
+  /* text-align: center; */
   background-color: rgba(255, 255, 255, 0.209);
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(5px); */
   color: white;
   display: flex;
+  /* overflow-y: scroll; */
   flex-direction: column;
   /* justify-content: center; */
-  gap: 1em;
+  gap: 0.5em;
 
   padding: 1em;
 }
 .form p {
   color: black;
 }
+.intro {
+  text-align: center;
+}
+.intro h1 {
+  text-transform: capitalize;
+}
 
 .holders {
   position: relative;
-  margin: 0.2em 0;
+  margin: 0.5em 0;
+  display: flex;
+  flex-direction: column;
+  /* gap: 0.5em; */
 }
-
-.holders label,
+.Or {
+  /* background-color: red; */
+  width: 90%;
+  text-align: center;
+  /* border-bottom: 1px solid black; */
+  position: relative;
+  margin: 1em auto;
+}
+.Or h2 {
+  /* position: absolute; */
+  left: 0;
+  top: -10px;
+  background-color: white;
+  padding: 0.2em 0.5em;
+  z-index: 2;
+  width: fit-content;
+  margin: 0 auto;
+}
+.Or hr {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  top: 50%;
+}
 .holders i {
   position: absolute;
 }
 .holders input {
   background: none;
   border: none;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 1.5em 1em;
   padding-left: 1.5em;
   /* background-color: red; */
-  border-radius: 15px;
+  border-radius: 10px;
   width: 100%;
   outline: none;
+  border: 1px solid black;
 }
 .holders {
   background-color: white;
-  border-radius: 15px;
+  border-radius: 5px;
   color: black;
-  border: 1px solid black;
+  /* margin: 1em 0; */
 }
 .form h2,
 .form h1 {
   color: black;
   margin: 0 auto;
 }
-.holders label {
-  left: 5%;
-  top: 35%;
-  transition: 0.2s;
-}
+
 .holders i {
   right: 5%;
-  top: 40%;
+  top: 38%;
+  font-size: 16px;
+}
+.form a {
+  color: #00a0df;
 }
 .registerBtn {
   padding: 1.5em 4em;
   border-radius: 30px;
   border: none;
   /* width: 100%; */
+  margin: 1em 0;
   background-color: #c00;
   color: white;
   /* margin: 0 auto; */
 }
-.holders input:focus + label,
-.holders input:valid + label {
-  top: -10px;
-  font-size: 12px;
-  color: #000;
+.holders label {
   font-weight: 600;
+  color: #2b2b2b;
+  position: absolute;
+  top: -10px;
+  left: 15px;
   background-color: white;
-  padding: 0.1em;
 }
+.error {
+  position: absolute;
+  font-weight: 600;
+  bottom: -20px;
+  z-index: 10;
+  right: 0;
+  color: #c00 !important;
+}
+
 .google {
   padding: 1.5em 4em;
   border-radius: 30px;
@@ -102,4 +144,41 @@
 .holders input:-webkit-autofill {
   background-color: white !important;
   -webkit-text-fill-color: #000 !important;
+}
+
+.mainForm {
+  display: grid;
+  place-content: center;
+  background: url("/images/mv-bg.png");
+  height: 100vh;
+  .form {
+    background-color: rgba(255, 255, 255, 0.115);
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+  }
+  .holders input {
+    background: transparent !important;
+    color: white;
+  }
+  .holders label {
+    color: silver;
+  }
+  .holders {
+    background-color: transparent;
+    color: silver;
+    border-color: silver;
+  }
+  .holders input:focus + label,
+  .holders input:valid + label {
+    top: -10px;
+    font-size: 12px;
+    color: silver;
+    font-weight: 600;
+    background-color: transparent;
+    padding: 0.1em;
+  }
+  .google {
+    background-color: #d3d6dc;
+  }
 }

@@ -49,9 +49,6 @@
 }
 /* background-color: red; */
 .movieList {
-  /* overflow: scroll; */
-  padding: 0 0.2em;
-  padding-top: 1em;
   overflow-y: hidden;
 
   /* display: flex; */
@@ -61,6 +58,9 @@
   /* align-items: flex-start; */
   gap: 1em;
   height: 50vh;
+
+  /* margin-top:5em; */
+  position:static;
   width: 100%;
   transition: 0.4s;
   /* width: 100%; */
@@ -153,28 +153,6 @@
   /* padding: 1em; */
   /* padding-right: 0; */
 }
-.movieListLight::after {
-  content: "";
-  position: absolute;
-  right: -35px;
-  top: 0;
-  transition: 0.4s;
-  width: 10%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, rgb(255, 255, 255) 50%);
-  /* z-index: 2; */
-}
-.movieListDark::after {
-  content: "";
-  position: absolute;
-  right: -35px;
-  top: 0;
-  width: 10%;
-  transition: 0.4s;
-  height: 100%;
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0) 50%);
-  /* z-index: 2; */
-}
 .movieList::-webkit-scrollbar,
 .storyLine::-webkit-scrollbar {
   display: none;
@@ -235,11 +213,7 @@
   gap: 1em;
 }
 
-.intro {
-  /* margin-top: 1em; */
-  /* background-color: red; */
-  position: relative;
-}
+
 .budgetM {
   position: relative;
 }
@@ -541,7 +515,7 @@
     flex-direction: row !important;
   }
   .movieList {
-    padding-top: 2em;
+    /* padding-top: 2em; */
     padding-bottom: 7em;
   }
   .storyLine {
@@ -610,10 +584,8 @@
     padding: 2em !important;
     padding-top: 5em !important;
     /* display: none; */
+    z-index: -1;
     transform: translateY(-45px);
-  }
-  .movieList {
-    z-index: 10;
   }
 }
 .layers {
@@ -627,6 +599,7 @@
   color: black !important;
   /* display: flex; */
   width: 100%;
+  /* display: none; */
   height: 101vh;
   position: relative;
   z-index: 2;
@@ -635,7 +608,7 @@
 .intro::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   width: 100%;
   height: 10%;
   left: 0;
@@ -643,10 +616,10 @@
   /* background-color: red; */
 }
 .Light::after {
-  background-image: linear-gradient(to top, #ffffff 2%, transparent 99%);
+  background: linear-gradient(to top, #ffffff 2%, transparent 99%);
 }
 .Dark::after {
-  background-image: linear-gradient(to top, #000000 1%, transparent 99%);
+  background: linear-gradient(to top, #000000 1%, transparent 99%);
 }
 .lefttopL {
   width: 100%;
@@ -707,13 +680,14 @@
   min-width: 19%;
   display: none;
   display: grid;
+  transform:translateX(2em);
   place-content: center;
   height: 11em;
 }
 .ImageMovie {
   position: static !important;
-  height: 100%;
-  width: 100%;
+  min-height: 8em;
+  min-width: 100%;
 }
 .storyLineTwo {
   color: white;
@@ -735,8 +709,8 @@
 }
 .vids {
   width: 100%;
-  padding: 4em;
   overflow-x: scroll;
+  height:20em;
 }
 .vids::-webkit-scrollbar {
   display: none;
@@ -756,12 +730,11 @@
   width: 10%;
   right: 0;
   top: 0;
-  background: linear-gradient(to left, #0d0c0c 30%, transparent);
+  /* background: linear-gradient(to left, #0d0c0c 30%, transparent); */
   border-radius: 0 8px 8px 0;
 }
-.vidsDL::after{
-  background: linear-gradient(to left, #fff 30%, transparent);
-
+.vidsDL::after {
+  /* background: linear-gradient(to left, #fff 30%, transparent); */
 }
 .likeThis::-webkit-scrollbar {
   display: none;

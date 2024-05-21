@@ -28,11 +28,11 @@
   display: flex;
   align-items: center;
   padding: 1em;
-  z-index: 10;
+  /* margin-bottom: 20em; */
   position: relative;
   background-color: transparent !important;
   backdrop-filter: blur(4px);
-  background-color: red;
+  /* background-color: red; */
   justify-content: space-between;
 }
 .left {

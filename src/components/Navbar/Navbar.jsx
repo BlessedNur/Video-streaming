@@ -59,7 +59,6 @@ function Navbar() {
   useEffect(() => {
     setActiveNavLink(storedNavLink);
   }, [storedNavLink]);
-
   return (
     <>
       <nav
@@ -67,7 +66,13 @@ function Navbar() {
         style={{ color: lightMode ? "black" : "#fff" }}
       >
         {mobile && (
-          <div className={`menu  ${lightMode && "lightMenu"}`}>
+          <div
+            className={`menu  ${lightMode && "lightMenu"}`}
+            style={{
+              display:
+                pathname === "/signup" || pathname === "/signin" ? "none" : "",
+            }}
+          >
             <label class="hamburger">
               <input type="checkbox" />
               <svg viewBox="0 0 32 32">
@@ -256,8 +261,27 @@ function Navbar() {
             </div>
           ) : (
             <div className={style.buttons}>
-              <button className={style.button1}>Sign Up</button>
-              <button className={style.button2}>Login</button>
+              {pathname === "/signup" || pathname === "/signin" ? (
+                <button
+                  className={style.button1}
+                  style={{
+                    background: "none",
+                  }}
+                >
+                  <i
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    class="fa fa-headphones"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              ) : (
+                <>
+                  <button className={style.button1}>Sign Up</button>
+                  <button className={style.button2}>Login</button>
+                </>
+              )}
             </div>
           )}
         </div>

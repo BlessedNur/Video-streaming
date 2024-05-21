@@ -187,13 +187,9 @@ function Page() {
           >
             {mobile ? (
               <>
-                <section className={style.mobiles}>
-                  <div
-                    className={`${style.lists} ${
-                      lightMode ? style.lineDark : ""
-                    } ${style.lineThree} ${style.lineTwo}`}
-                  >
-                    <div className={`${style.movieList} scroller `} id="top">
+                {/* <section className={style.mobiles}> */}
+                 
+                    <div className={`${style.movieList}`} id="top">
                       {/* <Banner bannerWidth={"100%"} /> */}
 
                       <div
@@ -502,15 +498,15 @@ function Page() {
                         <h1>Trailer</h1>
                         {mobile && (
                           <div className={style.trailer}>
-                            {selectedMovie.trailer ? (
+                            {!selectedMovie.trailer ? (
                               <iframe
                                 width="100"
                                 height="100"
                                 src={`https://www.youtube.com/embed/${selectedMovie.trailers[0].key}`}
                                 frameBorder="0"
                                 className={style.trailer}
-                                allowFullScreen
-                                title=""
+                                // allowFullScreen
+                                // title=""
                               ></iframe>
                             ) : (
                               <div
@@ -543,8 +539,8 @@ function Page() {
                         ></i>
                       </div>
                     </div>
-                  </div>
-                </section>
+                  {/* </div> */}
+                {/* </section> */}
               </>
             ) : (
               <>
