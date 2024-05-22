@@ -51,8 +51,9 @@ function Page() {
     currentUser,
     setCurrentUser,
   ] = useContext(movieContext);
-
-  path === "/details" && !currentUser.name ? navigate.push("/signup") : "";
+  useEffect(() => {
+    path === "/details" && !currentUser.name ? navigate.push("/signup") : "";
+  });
   useEffect(() => {
     const getAllCats = async () => {
       try {

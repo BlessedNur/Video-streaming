@@ -54,8 +54,7 @@ const Page = () => {
     setCurrentUser,
   ] = useContext(movieContext);
 
-  path === "/search" && !currentUser.name ? navigate.push("/signup") : "";
-
+  
   genre && setFilteredType("Default");
   path === "/search" && handleSideClick("");
   const previousCat = useRef(cat);
@@ -68,7 +67,10 @@ const Page = () => {
       }, 5000);
     }
   };
+useEffect(()=>{
+  path === "/search" && !currentUser.name ? navigate.push("/signup") : "";
 
+})
   useEffect(() => {
     if (previousCat.current !== cat) {
       handleNote();
