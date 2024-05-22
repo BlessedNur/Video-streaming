@@ -534,10 +534,7 @@ function Sidebar() {
           </p>
         </div>
       </div>
-      <div
-        className={`${style.dark} ${showProfile && style.showDark}`}
-        onClick={() => setShowProfile(false)}
-      ></div>
+      
     </aside>
   );
 }
