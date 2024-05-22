@@ -437,6 +437,7 @@ function Navbar() {
                   <i
                     style={{
                       fontSize: "20px",
+                      color: "black",
                     }}
                     class="fa fa-headphones"
                     aria-hidden="true"
@@ -447,6 +448,9 @@ function Navbar() {
                   <button
                     onClick={() => navigate.push("/signup")}
                     className={style.button1}
+                    style={{
+                      color: "black",
+                    }}
                   >
                     Sign Up
                   </button>
