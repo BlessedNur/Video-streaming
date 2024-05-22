@@ -67,6 +67,7 @@ function Navbar() {
         className={style.nav}
         style={{ color: lightMode ? "black" : "#fff" }}
       >
+        <div className={style.left}>
         {mobile && (
           <>
             <div
@@ -128,7 +129,7 @@ function Navbar() {
                     />
                   </div>
                   <div className={style.info}>
-                    {!currentUser.user ? (
+                    {!currentUser.name ? (
                       <h2>Unknown</h2>
                     ) : (
                       <h2>{currentUser.name}</h2>
@@ -193,15 +194,14 @@ function Navbar() {
                   // flexDirection: "column",
                   gap: "3.5em",
                 }}
+                onClick={()=>!lightMode ? setLightMode(true):setLightMode(false)}
               >
-                <p>Dark Mode</p>
-                <input
-                  type="checkbox"
-                  class={`theme-checkbox ${!lightMode && "theme-checkboxD"}`}
-                  onClick={() =>
-                    lightMode ? setLightMode(false) : setLightMode(true)
-                  }
-                />{" "}
+                {lightMode ? <p>Dark Mode</p> : <p>Light Mode</p>}
+                {lightMode ? (
+                  <i class="fas fa-moon    "></i>
+                ) : (
+                  <i class="fas fa-sun    "></i>
+                )}
               </div>
               <div className="botP">
                 <button class="cta">
@@ -246,7 +246,6 @@ function Navbar() {
             </div>
           </>
         )}
-        <div className={style.left}>
           {mobile ? (
             <>
               <div className={style.logo}>
