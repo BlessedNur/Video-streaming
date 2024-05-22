@@ -41,6 +41,8 @@ function Banner({ BannerApi, bannerWidth }) {
     setSelectedMovie,
     watchlist,
     setWatchlist,
+    currentUser,
+    setCurrentUser,
   ] = useContext(movieContext);
 
   const path = usePathname();
@@ -159,7 +161,9 @@ function Banner({ BannerApi, bannerWidth }) {
                       onMouseOver={() => setHoverB(true)}
                       onMouseLeave={() => setHoverB(false)}
                       onClick={() => {
-                        addToWatchlist(movie);
+                        currentUser.name
+                          ? addToWatchlist(movie)
+                          : navigate.push("/signup");
                       }}
                       title={"Add to watchlist"}
                       className={lightMode ? style.contentLight : ""}

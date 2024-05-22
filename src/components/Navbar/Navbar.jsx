@@ -94,72 +94,155 @@ function Navbar() {
                 </svg>
               </label>
             </div>
-            <div className={`drawer ${showProfile && "showDraw"}`}>
-              <div className="topAcc">
-                {currentUser && (
-                  <>
-                    <div className="leftTop">
-                      <Image
-                        onClick={() =>
-                          lightMode ? setLightMode(false) : setLightMode(true)
-                        }
-                        src={
-                          "/images/blank-profile-picture-973460_960_720.webp"
-                        }
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                    <div className="rightTop">
-                      <h3>{currentUser}</h3>
-                    </div>
-                  </>
-                )}
+            <div
+              className={`drawer ${showProfile && "showDraw"}`}
+              style={{
+                background: !lightMode && "#000",
+                color: !lightMode && "#fff",
+              }}
+            >
+              <div className={style.header}>
+                <h1>My Profile</h1>
+
+                <div
+                  className={style.edit}
+                  style={{
+                    border: !lightMode && "1px solid #62636450",
+                    // color: !lightMode && "#626364",
+                  }}
+                >
+                  <p>Edit profile Details</p>
+                  <i class="fas fa-edit    "></i>
+                </div>
               </div>
-              <div className="feautures">
-                <h1>Features</h1>
-                <ul>
-                  <li>
-                    <Link href={""}>Movies</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Tv shows</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Cartoons</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Anime</Link>
-                  </li>
-                </ul>
+              <div
+                className={style.picSection}
+                style={{
+                  border: !lightMode && "1px solid #62636450",
+                }}
+              >
+                <div className={style.flex}>
+                  <div className={style.profilePic}>
+                    <img
+                      src={"/images/blank-profile-picture-973460_960_720.webp"}
+                    />
+                  </div>
+                  <div className={style.info}>
+                    {!currentUser.user ? (
+                      <h2>Unknown</h2>
+                    ) : (
+                      <h2>{currentUser.name}</h2>
+                    )}
+                    <p style={{ color: !lightMode && "#626364" }}>
+                      {/* Member since */}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="genresM">
-                <h1>Features</h1>
-                <ul>
-                  <li>
-                    <Link href={""}>Action</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Tv shows</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Cartoons</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Anime</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Anime</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Anime</Link>
-                  </li>
-                  <li>
-                    <Link href={""}>Anime</Link>
-                  </li>
-                </ul>
+              {/* <hr /> */}
+              <p>Personal info</p>
+              <div
+                className={style.mainInfo}
+                style={{
+                  border: !lightMode && "1px solid #62636450",
+                  justifyContent: "space-between",
+                }}
+              >
+                {/* <div className={style.personalInfo}> */}
+                <div className={style.rowOne}>
+                  <div className={style.box}>
+                    <h4>FirstNamw</h4>
+                    {!currentUser.name ? (
+                      <h5>Unknown</h5>
+                    ) : (
+                      <h5>{currentUser.name}</h5>
+                    )}
+                  </div>
+                  <div className={style.box}>
+                    <h4>Email Address</h4>
+                    {!currentUser.email ? (
+                      <h5>Unknown</h5>
+                    ) : (
+                      <h5>{currentUser.email}</h5>
+                    )}
+                  </div>
+                  <div className={style.box}>
+                    <h4>Bio</h4>
+                    <h5>Uknown</h5>
+                  </div>
+                </div>
+                <div className={style.rowTwo}>
+                  <div className={style.box}>
+                    <h4>LastName</h4>
+                    <h5>Uknown</h5>
+                  </div>
+                  <div className={style.box}>
+                    <h4>Phone</h4>
+                    <h5>Uknown</h5>
+                  </div>
+                </div>
+                {/* </div> */}
               </div>
-              <div className="logs"></div>
+              <div
+                className={style.picSection}
+                style={{
+                  border: !lightMode && "1px solid #62636450",
+                  // height: "11em",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  // flexDirection: "column",
+                  gap: "3.5em",
+                }}
+              >
+                <p>Dark Mode</p>
+                <input
+                  type="checkbox"
+                  class={`theme-checkbox ${!lightMode && "theme-checkboxD"}`}
+                  onClick={() =>
+                    lightMode ? setLightMode(false) : setLightMode(true)
+                  }
+                />{" "}
+              </div>
+              <div className="botP">
+                <button class="cta">
+                  <span class="hover-underline-animation"> Contact us</span>
+                  <svg
+                    id="arrow-horizontal"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="10"
+                    viewBox="0 0 46 16"
+                  >
+                    <path
+                      id="Path_10"
+                      data-name="Path 10"
+                      d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                      transform="translate(30)"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  className={`Btn ${lightMode && "btn"}`}
+                  onClick={() => {
+                    setCurrentUser((prev) => ({
+                      ...prev,
+                      name: "",
+                    }));
+                    navigate.push("/signup");
+                  }}
+                >
+                  <div class="sign">
+                    <svg
+                      viewBox="0 0 512 512"
+                      className={lightMode && "btnSvg"}
+                    >
+                      <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                  </div>
+
+                  <div class={`text ${lightMode && "textx"}`}>Logout</div>
+                </button>
+              </div>
             </div>
           </>
         )}
@@ -324,7 +407,7 @@ function Navbar() {
               </div>
             </>
           )}
-          {currentUser ? (
+          {currentUser.name ? (
             <div
               className={style.account}
               onClick={() => {
@@ -361,8 +444,18 @@ function Navbar() {
                 </button>
               ) : (
                 <>
-                  <button className={style.button1}>Sign Up</button>
-                  <button className={style.button2}>Login</button>
+                  <button
+                    onClick={() => navigate.push("/signup")}
+                    className={style.button1}
+                  >
+                    Sign Up
+                  </button>
+                  <button
+                    onClick={() => navigate.push("/signin")}
+                    className={style.button2}
+                  >
+                    Login
+                  </button>
                 </>
               )}
             </div>

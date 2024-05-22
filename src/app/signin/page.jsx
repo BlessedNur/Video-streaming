@@ -78,7 +78,7 @@ function Page() {
       },
     });
 
-   if (!email || !validateEmail(email)) {
+    if (!email || !validateEmail(email)) {
       setErrorMessage((prev) => ({
         ...prev,
         errorEmail: "Valid email is required",
@@ -113,7 +113,13 @@ function Page() {
         console.log(res.status);
         if (res.status === 200) {
           setIsLoading(false);
-          // router.push("/");
+          router.push("/");
+          setCurrentUser((prev) => ({
+            ...prev,
+            email: email,
+            name:"user"
+          }));
+          
           notyf.success("Successfully Logged in");
         } else if (res.status === 400) {
           setIsLoading(false);
@@ -135,13 +141,19 @@ function Page() {
       {!desktop && <Navbar />}
       {isLoading && (
         <div className={style.loading}>
-          <div class="wrapper">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
+          <div class="loader">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+            <div class="bar4"></div>
+            <div class="bar5"></div>
+            <div class="bar6"></div>
+            <div class="bar7"></div>
+            <div class="bar8"></div>
+            <div class="bar9"></div>
+            <div class="bar10"></div>
+            <div class="bar11"></div>
+            <div class="bar12"></div>
           </div>
         </div>
       )}
@@ -282,6 +294,7 @@ function Page() {
             </div>
             <button
               className={style.google}
+              type="button"
               onClick={() => {
                 signIn();
                 if (session) {
@@ -377,7 +390,9 @@ function Page() {
               <p className={style.error}>{errorMessage.errorPassword}</p>
             </div>
 
-            <button className={style.registerBtn}>Login</button>
+            <button type="submit" className={style.registerBtn}>
+              Login
+            </button>
             <div
               style={{
                 margin: "0 auto",

@@ -48,7 +48,13 @@ const Page = () => {
     setSearchValue,
     selectedMovie,
     setSelectedMovie,
+    watchlist,
+    setWatchlist,
+    currentUser,
+    setCurrentUser,
   ] = useContext(movieContext);
+
+  path === "/search" && !currentUser.name ? navigate.push("/signup") : "";
 
   genre && setFilteredType("Default");
   path === "/search" && handleSideClick("");

@@ -11,13 +11,15 @@ import useMediaQuery from "@/components/UseMediaQuery";
 import Navigation from "@/components/Navigation/Navigation";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
+import { usePathname, useRouter } from "next/navigation";
 
 function Page() {
   const [movieArray, setMovieArray] = useState([]);
   const [hoverB, setHoverB] = useState(false);
   const mobile = useMediaQuery("(max-width:650px)");
   const [viewMore, setViewMore] = useState(false);
-
+  const path = usePathname();
+  const navigate = useRouter();
   const [
     lightMode,
     setLightMode,
@@ -49,6 +51,8 @@ function Page() {
     currentUser,
     setCurrentUser,
   ] = useContext(movieContext);
+
+  path === "/details" && !currentUser.name ? navigate.push("/signup") : "";
   useEffect(() => {
     const getAllCats = async () => {
       try {

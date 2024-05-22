@@ -232,6 +232,7 @@
 .mainInfo {
   border: 1px solid #d3d5db50;
   padding: 1em;
+  display: flex;
   border-radius: 10px;
 }
 .rowOne,
@@ -240,12 +241,12 @@
   flex-direction: column;
   gap: 1em;
 }
-.personalInfo h4,
+.mainInfo h4,
 .picSection h4 {
   color: #626364;
   font-weight: 500;
 }
-.personalInfo h5,
+.mainInfo h5,
 .picSection h4 {
   /* color: #6f7377; */
   font-weight: 600;

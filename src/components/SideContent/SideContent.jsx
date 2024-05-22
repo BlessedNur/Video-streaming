@@ -231,62 +231,71 @@ function SideContent() {
             </>
           )}
         </div>
-        <div className="latests">
-          {movies.length === 0 ? (
-            <SkeletonTheme
-              baseColor={lightMode ? "#eee" : "#202020"}
-              highlightColor={lightMode ? "#b2b5bd" : "#444"}
-            >
-              <Skeleton height={90} width={330} borderRadius={10} />
-              <Skeleton height={90} width={330} borderRadius={10} />
-            </SkeletonTheme>
-          ) : (
-            movies.map((movie) => (
-              <div
-                key={movie.id}
-                className="boxes"
-                style={{ backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c" }}
+        {!mobile && (
+          <div className="latests">
+            {movies.length === 0 ? (
+              <SkeletonTheme
+                baseColor={lightMode ? "#eee" : "#202020"}
+                highlightColor={lightMode ? "#b2b5bd" : "#444"}
               >
-                <div className="left">
-                  <Image
-                    src={mobile ? movie.backdrop_path_path : movie.backdrop_path}
-                    alt={movie.title}
-                    width={300}
-                    height={190}
-                  />
-                </div>
-                {!mobile && (
-                  <div className="right">
-                    <div className="top">
-                      <h3>{movie.name}</h3>
-                      <div className="detail">
-                        <p>{movie.number_of_seasons} season - </p>
-                        <p>{movie.number_of_episodes} episodes</p>
-                      </div>
+                <Skeleton height={90} width={330} borderRadius={10} />
+                <Skeleton height={90} width={330} borderRadius={10} />
+              </SkeletonTheme>
+            ) : (
+              movies.map((movie) => (
+                <div
+                  key={movie.id}
+                  className="boxesS"
+                  style={{
+                    backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
+                  }}
+                >
+                  <>
+                    <div className="left">
+                      <Image
+                        src={mobile ? movie.backdrop_path : movie.backdrop_path}
+                        alt={movie.title}
+                        width={300}
+                        height={190}
+                      />
                     </div>
-                    <p
-                      className="bot"
-                      style={{ color: "#c00", fontWeight: "600" }}
-                    >
-                      {movie.episode_run_time.length > 0
-                        ? `${movie.episode_run_time} mins | episode`
-                        : "unconfirmed"}
-                    </p>
-                  </div>
-                )}
-                <div className={style.rates}>
-                  <i className="fa fa-star" aria-hidden="true"></i>
-                  <p style={{ fontWeight: "600", color: lightMode && "#000" }}>
-                    {movie.vote_average !== 0
-                      ? ((movie.vote_average / 100) * 5).toFixed(1)
-                      : "Not rated"}
-                  </p>
+                    <div className="right">
+                      <div className="top">
+                        <h3>{movie.name}</h3>
+                        <div className="detail">
+                          <p>{movie.number_of_seasons} season - </p>
+                          <p>{movie.number_of_episodes} episodes</p>
+                        </div>
+                      </div>
+                      <p
+                        className="bot"
+                        style={{ color: "#c00", fontWeight: "600" }}
+                      >
+                        {movie.episode_run_time.length > 0
+                          ? `${movie.episode_run_time} mins | episode`
+                          : "unconfirmed"}
+                      </p>
+                    </div>
+                    <div className={style.rates}>
+                      <i className="fa fa-star" aria-hidden="true"></i>
+                      <p
+                        style={{
+                          fontWeight: "600",
+                          color: lightMode && "#000",
+                        }}
+                      >
+                        {movie.vote_average !== 0
+                          ? ((movie.vote_average / 100) * 5).toFixed(1)
+                          : "Not rated"}
+                      </p>
+                    </div>
+                    <h2 className={style.movieBan}>New</h2>
+                  </>
                 </div>
-                <h2 className={style.movieBan}>New</h2>
-              </div>
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
+        )}
       </div>
       <div className="videos">
         {moviesTrailers.length === 0 ? (

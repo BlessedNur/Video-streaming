@@ -40,6 +40,13 @@ function Sidebar() {
     setGenre,
     searchValue,
     setSearchValue,
+
+    selectedMovie,
+    setSelectedMovie,
+    watchlist,
+    setWatchlist,
+    currentUser,
+    setCurrentUser,
   ] = useContext(movieContext);
   const [navLabels, searchNavLabels] = useState(false);
 
@@ -503,12 +510,16 @@ function Sidebar() {
             {lightMode ? "Dark Mode" : "Light Mode"}
           </p>
         </li>
-        <div 
-            onClick={()=> {
-              
-              signOut()
-              navigate.push("/signup")
-            }} className={style.signOut}>
+        <div
+          onClick={() => {
+            setCurrentUser((prev) => ({
+              ...prev,
+              name: "",
+            }));
+          navigate.push("/signup");
+          }}
+          className={style.signOut}
+        >
           <i className="fa fa-sign-out" style={{ color: "red" }}></i>
           <p
             style={{

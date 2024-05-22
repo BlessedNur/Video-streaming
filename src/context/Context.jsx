@@ -17,7 +17,10 @@ function Context({ children }) {
   const [filteredType, setFilteredType] = useState("Default");
   const [cat, setCat] = useState(0);
   const [genre, setGenre] = useState("");
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    email: "",
+  });
 
   // const [watchlist, setWatchlist] = useState([]);
 
@@ -43,7 +46,6 @@ function Context({ children }) {
   });
   // console.log(selectedMovie);
 
-  
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("movie", JSON.stringify(selectedMovie));
