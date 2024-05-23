@@ -43,6 +43,7 @@ function Banner({ BannerApi, bannerWidth }) {
     setWatchlist,
     currentUser,
     setCurrentUser
+    
   ] = useContext(movieContext);
   const navigate = useRouter();
 

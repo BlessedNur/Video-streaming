@@ -158,8 +158,8 @@ function TopRated({ title, api, length }) {
                     <p
                       style={{ fontWeight: "600", color: lightMode && "#fff" }}
                     >
-                      {movie.vote_average != 0
-                        ? (movie.vote_average / 2).toFixed(1)
+                       {movie.vote_average != 0
+                        ? ((movie.vote_average / 100)*5).toFixed(1)
                         : "Not rated"}
                     </p>
                   </div>

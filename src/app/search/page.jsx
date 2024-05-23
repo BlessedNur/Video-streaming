@@ -67,10 +67,7 @@ const Page = () => {
       }, 5000);
     }
   };
-useEffect(()=>{
-  path === "/search" && !currentUser.name ? navigate.push("/signup") : "";
 
-})
   useEffect(() => {
     if (previousCat.current !== cat) {
       handleNote();
@@ -483,14 +480,12 @@ useEffect(()=>{
             </div>
           </div>
         )}
-        <div
+        {/* <div
           className={`${style.profileData} ${showProfile && style.showProfile}`}
           style={{
             backgroundColor: lightMode ? "#efefeffd" : "#0d0c0c",
             color: lightMode ? "#000" : "#d3d5db",
-            // display: "none",
           }}
-          // onClick={() => setShowProfile(false)}
         >
           <div className={style.header}>
             <h1>My Profile</h1>
@@ -499,7 +494,6 @@ useEffect(()=>{
               className={style.edit}
               style={{
                 border: !lightMode && "1px solid #62636450",
-                // color: !lightMode && "#626364",
               }}
             >
               <p>Edit profile Details</p>
@@ -530,7 +524,6 @@ useEffect(()=>{
               </div>
             </div>
           </div>
-          {/* <hr /> */}
           <div
             className={style.mainInfo}
             style={{
@@ -569,7 +562,6 @@ useEffect(()=>{
             className={style.picSection}
             style={{
               border: !lightMode && "1px solid #62636450",
-              // height: "11em",
               display: "flex",
               flexDirection: "column",
               gap: "3.5em",
@@ -618,7 +610,7 @@ useEffect(()=>{
               <div class={`text ${lightMode && "textx"}`}>Logout</div>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className={style.lists}>
         <section className={style.header}>
@@ -841,7 +833,10 @@ useEffect(()=>{
               <div
                 className={style.movieBox}
                 key={item.id}
-                onClick={() => {}}
+                onClick={() => {
+                  navigate.push("/details")
+                  setSelectedMovie(item)
+                }}
                 title={item.title || item.name}
               >
                 <div className={style.thumbnail}>
