@@ -594,6 +594,24 @@
   /* width: 100%; */
   /* overflow: scroll; */
 }
+.mainInfo {
+  border: 1px solid #d3d5db50;
+  padding: 1em;
+  display: flex;
+  border-radius: 10px;
+}
+.mainInfo h4,
+.picSection h4 {
+  color: #626364;
+  font-weight: 500;
+}
+.mainInfo h5,
+.picSection h4 {
+  /* color: #6f7377; */
+  font-weight: 600;
+  font-size: 11px;
+  margin-bottom: 0.2em;
+}
 .introL {
   color: black !important;
   /* display: flex; */

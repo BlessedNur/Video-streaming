@@ -485,6 +485,7 @@ const Page = () => {
                 }`}
                 style={{
                   backgroundColor: lightMode && "rgba(239, 239, 239, 0.992)",
+                  color:lightMode ?"#000" : "#fff"
                 }}
               >
                 <div

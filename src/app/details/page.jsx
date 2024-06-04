@@ -506,17 +506,25 @@ function Page() {
                                     color: lightMode && "#000",
                                   }}
                                 >
-                                  {items.name || items.title.slice(0, 15)}
+                                  {items.name || items.title.slice(0, 15)}..
                                 </h3>
                                 <div className="detail">
                                   <p> {releaseYear}</p>
                                   <p>
-                                    {items.runtime
-                                      ? convertRuntime(items.runtime) ||
-                                        items.year
-                                      : items.episode_run_time !== 0
-                                      ? `${items.episode_run_time}mins/episode`
-                                      : ""}
+                                    {selectedMovie.runtime
+                                      ? convertRuntime(selectedMovie.runtime) ||
+                                        selectedMovie.year
+                                      : selectedMovie.episode_run_time !== 0 ||
+                                        selectedMovie.duration
+                                      ? `${
+                                          selectedMovie.episode_run_time ||
+                                          selectedMovie.duration
+                                        }${
+                                          !selectedMovie.episode_run_time
+                                            ? ""
+                                            : "mins/episode"
+                                        }`
+                                      : ""}{" "}
                                   </p>
                                 </div>
                                 <div className={style.rates}>
@@ -530,10 +538,10 @@ function Page() {
                                       color: lightMode && "#000",
                                     }}
                                   >
-                                    {items.vote_average != 0
+                                    {items.vote_average != 0 || items.score != 0
                                       ? (
-                                          (items.vote_average / 100) *
-                                          5
+                                          items.score / 2 ||
+                                          (items.vote_average / 100) * 5
                                         ).toFixed(1)
                                       : "Not rated"}
                                   </h4>
@@ -839,12 +847,21 @@ function Page() {
                                                 selectedMovie.year}
                                           </p>
                                           <p>
-                                            {items.runtime
-                                              ? convertRuntime(items.runtime) ||
-                                                items.year
-                                              : items.episode_run_time !== 0
-                                              ? `${items.episode_run_time}mins/episode`
-                                              : ""}
+                                            {selectedMovie.runtime
+                                              ? convertRuntime(
+                                                  selectedMovie.runtime
+                                                ) || selectedMovie.year
+                                              : selectedMovie.episode_run_time !==
+                                                  0 || selectedMovie.duration
+                                              ? `${
+                                                  selectedMovie.episode_run_time ||
+                                                  selectedMovie.duration
+                                                }${
+                                                  !selectedMovie.episode_run_time
+                                                    ? ""
+                                                    : "mins/episode"
+                                                }`
+                                              : ""}{" "}
                                           </p>
                                         </div>
                                         <div className={style.rates}>
@@ -858,10 +875,11 @@ function Page() {
                                               color: lightMode && "#000",
                                             }}
                                           >
-                                            {items.vote_average != 0
+                                            {items.vote_average != 0 ||
+                                            items.score != 0
                                               ? (
-                                                  (items.vote_average / 100) *
-                                                  5
+                                                  items.score / 2 ||
+                                                  (items.vote_average / 100) * 5
                                                 ).toFixed(1)
                                               : "Not rated"}
                                           </h4>
