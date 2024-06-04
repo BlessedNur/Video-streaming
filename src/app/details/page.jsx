@@ -835,29 +835,29 @@ function Page() {
                                         <div className="detail">
                                           <p>
                                             {" "}
-                                            {selectedMovie.release_date
-                                              ? selectedMovie.release_date.split(
+                                            {items.release_date
+                                              ? items.release_date.split(
                                                   "-"
                                                 )[0]
-                                              : selectedMovie.first_air_date
-                                              ? selectedMovie.first_air_date.split(
+                                              : items.first_air_date
+                                              ? items.first_air_date.split(
                                                   "-"
                                                 )[0]
-                                              : selectedMovie.year &&
-                                                selectedMovie.year}
+                                              : items.year &&
+                                                items.year}
                                           </p>
                                           <p>
-                                            {selectedMovie.runtime
+                                            {items.runtime
                                               ? convertRuntime(
-                                                  selectedMovie.runtime
-                                                ) || selectedMovie.year
-                                              : selectedMovie.episode_run_time !==
-                                                  0 || selectedMovie.duration
+                                                  items.runtime
+                                                ) || items.year
+                                              : items.episode_run_time !==
+                                                  0 || items.duration
                                               ? `${
-                                                  selectedMovie.episode_run_time ||
-                                                  selectedMovie.duration
+                                                  items.episode_run_time ||
+                                                  items.duration
                                                 }${
-                                                  !selectedMovie.episode_run_time
+                                                  !items.episode_run_time
                                                     ? ""
                                                     : "mins/episode"
                                                 }`
