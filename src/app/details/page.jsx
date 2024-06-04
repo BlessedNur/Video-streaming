@@ -232,8 +232,7 @@ function Page() {
                         mobile &&
                         `url("${
                           selectedMovie.backdrop_path ||
-                          (selectedMovie.images.jpg &&
-                            selectedMovie.images.jpg.large_image_url) ||
+                          selectedMovie.images.jpg.large_image_url ||
                           "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
                         }") no-repeat center center / cover`,
                     }}
@@ -881,8 +880,8 @@ function Page() {
                       className={style.bk}
                       src={
                         selectedMovie.backdrop_path ||
-                        (selectedMovie.images.jpg &&
-                          selectedMovie.images.jpg.large_image_url)
+                        selectedMovie?.images?.jpg?.large_image_url ||
+                        "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
                       }
                       alt=""
                     />
