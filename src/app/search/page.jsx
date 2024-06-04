@@ -10,6 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import useMediaQuery from "@/components/UseMediaQuery";
 import Navigation from "@/components/Navigation/Navigation";
+import { useSession } from "next-auth/react";
 const Page = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -54,7 +55,9 @@ const Page = () => {
     setCurrentUser,
   ] = useContext(movieContext);
 
-  
+  const { data: session } = useSession();
+  const [minipro, setMiniPro] = useState(false);
+
   genre && setFilteredType("Default");
   path === "/search" && handleSideClick("");
   const previousCat = useRef(cat);
@@ -296,7 +299,7 @@ const Page = () => {
           break;
         case 1:
           filteredItems = series.filter((item) =>
-            item.name.toLowerCase().includes(searchQuery)
+            item.title.toLowerCase().includes(searchQuery)
           );
           break;
         case 2:
@@ -464,18 +467,83 @@ const Page = () => {
             </div>
             <div
               className={style.account}
-              onClick={() => {
-                setShowProfile(true);
-              }}
-              title="account"
+              onMouseOver={() => setMiniPro(true)}
+              onMouseLeave={() => setMiniPro(false)}
             >
               <div className={style.profile}>
-                <Image
-                  width={200}
-                  height={200}
-                  alt="profile"
-                  src={"/images/wallpaperflare.com_wallpaper (16).jpg"}
+                <img
+                  src={
+                    !session
+                      ? "/images/blank-profile-picture-973460_960_720.webp"
+                      : `${session.user.image}`
+                  }
                 />
+              </div>
+              <div
+                className={`${style.profilepop} ${
+                  minipro && style.profilePShow
+                }`}
+                style={{
+                  backgroundColor: lightMode && "rgba(239, 239, 239, 0.992)",
+                }}
+              >
+                <div
+                  className={style.picSection}
+                  style={{
+                    border: !lightMode && "1px solid #62636450",
+                  }}
+                >
+                  <div className={style.flex}>
+                    <div className={style.profilePic}>
+                      <img
+                        src={
+                          !session
+                            ? "/images/blank-profile-picture-973460_960_720.webp"
+                            : `${session.user.image}`
+                        }
+                      />
+                    </div>
+                    <div className={style.info}>
+                      {!currentUser.name ? (
+                        <h2>Unknown</h2>
+                      ) : (
+                        <h2>{currentUser.name}</h2>
+                      )}
+                      <p style={{ color: !lightMode && "#626364" }}>
+                        {/* Member since */}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p
+                  style={{
+                    margin: "1em 0",
+                  }}
+                >
+                  {session && session.user.email.slice(0, 10)}****
+                </p>
+                <button
+                  className={`Btn ${lightMode && "btn"}`}
+                  onClick={() => {
+                    signOut("google");
+                    setCurrentUser((prev) => ({
+                      ...prev,
+                      name: "",
+                    }));
+                    navigate.push("/signup");
+                  }}
+                >
+                  <div class="sign">
+                    <svg
+                      viewBox="0 0 512 512"
+                      className={lightMode && "btnSvg"}
+                    >
+                      <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                  </div>
+
+                  <div class={`text ${lightMode && "textx"}`}>Logout</div>
+                </button>
               </div>
             </div>
           </div>
@@ -834,8 +902,8 @@ const Page = () => {
                 className={style.movieBox}
                 key={item.id}
                 onClick={() => {
-                  navigate.push("/details")
-                  setSelectedMovie(item)
+                  navigate.push("/details");
+                  setSelectedMovie(item);
                 }}
                 title={item.title || item.name}
               >

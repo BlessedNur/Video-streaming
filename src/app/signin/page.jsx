@@ -56,11 +56,17 @@ function Page() {
     setCurrentUser,
   ] = useContext(movieContext);
 
+  const handleGoogle = () => {
+    setIsLoading(true);
+    signIn("google");
+  };
+
   useEffect(() => {
     if (session) {
       router.push("/");
+      setCurrentUser(session.user.name);
     }
-  }, [session, router]);
+  }, [session]);
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -117,9 +123,9 @@ function Page() {
           setCurrentUser((prev) => ({
             ...prev,
             email: email,
-            name:"user"
+            name: "user",
           }));
-          
+
           notyf.success("Successfully Logged in");
         } else if (res.status === 400) {
           setIsLoading(false);
@@ -172,16 +178,7 @@ function Page() {
               Praesentium, pariatur?
             </p>
           </div>
-          <button
-            className={style.google}
-            onClick={() => {
-              signIn();
-              if (session) {
-                navigate.push("/");
-                setCurrentUser(session.user);
-              }
-            }}
-          >
+          <button className={style.google} onClick={handleGoogle}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={"24"}
@@ -295,13 +292,7 @@ function Page() {
             <button
               className={style.google}
               type="button"
-              onClick={() => {
-                signIn();
-                if (session) {
-                  navigate.push("/");
-                  setCurrentUser(session.user);
-                }
-              }}
+              onClick={handleGoogle}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

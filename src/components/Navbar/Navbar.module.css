@@ -81,6 +81,7 @@
   width: 30px;
   background-color: white;
   border-radius: 50%;
+  position: relative;
   overflow: hidden;
 }
 .profile img {
@@ -98,6 +99,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
+  position: relative;
   cursor: pointer;
 }
 /* .asideLi::after {
@@ -321,4 +323,32 @@
 .button1:hover,
 .button2:hover {
   scale: 1.05;
+}
+.profilepop {
+  position: absolute;
+  left: -150px;
+  width: 18em;
+  top: 120%;
+  border-radius: 5px;
+  background-color: #080808;
+  white-space: nowrap;
+  padding: 1em;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+.profilePShow {
+  visibility: visible;
+  opacity: 1;
+}
+.profilepop .profilePic {
+  width: 5em !important;
+  height: 5em !important;
+}
+.profilepop .picSection {
+  border: none !important;
+  padding: 0 !important;
+}
+.profilepop .flex {
+  flex-direction: column !important;
 }

@@ -1,11 +1,11 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "./page.module.css";
 import Image from "next/image";
 import { movieContext } from "@/context/Context";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Navbar from "@/components/Navbar/Navbar";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useMediaQuery from "@/components/UseMediaQuery";
 import Navigation from "@/components/Navigation/Navigation";
 import { Notyf } from "notyf";
@@ -14,6 +14,7 @@ import "notyf/notyf.min.css";
 function Page() {
   const navigate = useRouter();
   const mobile = useMediaQuery("(max-width:500px)");
+  const path = usePathname();
 
   const [
     lightMode,
@@ -43,8 +44,9 @@ function Page() {
     setSelectedMovie,
     watchlist,
     setWatchlist,
+    currentUser,
+    setCurrentUser,
   ] = useContext(movieContext);
-
   function removeFromWatchlist(movieId) {
     const notyf = new Notyf({
       position: {
@@ -55,7 +57,7 @@ function Page() {
     });
 
     // Find the index of the movie in the watchlist
-    const index = watchlist.findIndex((movie) => movie.id === movieId);
+    const index = watchlist.findIndex((movie) => movie._id === movieId);
 
     if (index !== -1) {
       const updatedWatchlist = [
@@ -125,7 +127,7 @@ function Page() {
                     className={`${style.del} ${
                       lightMode ? style.Light : style.Dark
                     }`}
-                    onClick={() => removeFromWatchlist(item.id)}
+                    onClick={() => removeFromWatchlist(item._id)}
                   >
                     <i className={`fa fa-trash `} aria-hidden="true"></i>
                   </div>

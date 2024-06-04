@@ -252,9 +252,7 @@ function Sidebar() {
         </Link>
         <Link
           href={""}
-          className={`${style.asideLi} ${
-            activeSideLink === "categories" ? style.activeSideLi : ""
-          } ${style.gen}`}
+          className={`${style.asideLi} ${style.gen}`}
           onClick={() => {
             // handleSideClick("categories");
             if (!showMore) {
@@ -512,11 +510,12 @@ function Sidebar() {
         </li>
         <div
           onClick={() => {
+            signOut("google");
             setCurrentUser((prev) => ({
               ...prev,
               name: "",
             }));
-          navigate.push("/signup");
+            navigate.push("/signup");
           }}
           className={style.signOut}
         >
@@ -534,7 +533,6 @@ function Sidebar() {
           </p>
         </div>
       </div>
-      
     </aside>
   );
 }

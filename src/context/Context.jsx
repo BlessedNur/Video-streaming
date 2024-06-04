@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React, { createContext, useState, useEffect } from "react";
 
@@ -22,6 +23,9 @@ function Context({ children }) {
     email: "",
   });
 
+  const getUser = () => {
+    
+  }
   // const [watchlist, setWatchlist] = useState([]);
 
   const [watchlist, setWatchlist] = useState(() => {

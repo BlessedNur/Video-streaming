@@ -101,6 +101,7 @@
   align-items: center;
   gap: 0.5em;
   cursor: pointer;
+  position: relative;
 }
 /* .asideLi::after {
   content: "hello";
@@ -177,7 +178,7 @@
   width: 100%;
   margin: 1em 0;
   /* background-color: #c00; */
-  border: 1px solid  #d3d5db50;
+  border: 1px solid #d3d5db50;
   border-radius: 10px;
   padding: 1em;
   position: relative;
@@ -268,4 +269,33 @@
   top: 0;
   border-radius: 0 0 5px 0;
   background-color: #1c1d1d !important;
+}
+
+.profilepop {
+  position: absolute;
+  left: -150px;
+  width: 18em;
+  top: 120%;
+  border-radius: 5px;
+  background-color: #080808;
+  white-space: nowrap;
+  padding: 1em;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+.profilePShow {
+  visibility: visible;
+  opacity: 1;
+}
+.profilepop .profilePic {
+  width: 5em !important;
+  height: 5em !important;
+}
+.profilepop .picSection {
+  border: none !important;
+  padding: 0 !important;
+}
+.profilepop .flex {
+  flex-direction: column !important;
 }

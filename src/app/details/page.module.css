@@ -600,9 +600,13 @@
   width: 100%;
   /* display: none; */
   height: 101vh;
+  overflow: scroll;
   position: relative;
   z-index: 2;
   align-items: center;
+}
+.introL::-webkit-scrollbar {
+  display: none;
 }
 .intro::after {
   content: "";

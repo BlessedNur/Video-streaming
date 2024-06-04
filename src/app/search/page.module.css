@@ -175,7 +175,9 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
+  position: relative;
   cursor: pointer;
+  z-index: 2000;
 }
 
 /* .asideLi::after {
@@ -477,13 +479,12 @@
   .search {
     width: 30em;
   }
-  .Note{
-  bottom: -35px;
-  color: white;
-  font-size: 10px;
-
+  .Note {
+    bottom: -35px;
+    color: white;
+    font-size: 10px;
   }
-  .Note a{
+  .Note a {
     font-size: 12px;
   }
   .filters {
@@ -509,4 +510,33 @@
   .RightCat p {
     font-size: 10px;
   }
+}
+
+.profilepop {
+  position: absolute;
+  left: -150px;
+  width: 18em;
+  top: 120%;
+  border-radius: 5px;
+  background-color: #080808;
+  white-space: nowrap;
+  padding: 1em;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+.profilePShow {
+  visibility: visible;
+  opacity: 1;
+}
+.profilepop .profilePic {
+  width: 5em !important;
+  height: 5em !important;
+}
+.profilepop .picSection {
+  border: none !important;
+  padding: 0 !important;
+}
+.profilepop .flex {
+  flex-direction: column !important;
 }

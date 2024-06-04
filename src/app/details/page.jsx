@@ -51,7 +51,7 @@ function Page() {
     currentUser,
     setCurrentUser,
   ] = useContext(movieContext);
- 
+
   useEffect(() => {
     const getAllCats = async () => {
       try {
@@ -78,13 +78,32 @@ function Page() {
   const filteredArray = movieArray.filter((item) => {
     // Check if both genreNames arrays are defined and have at least one element
     if (
-      item.genreNames &&
-      item.genreNames.length > 0 &&
-      selectedMovie.genreNames &&
-      selectedMovie.genreNames.length > 0
+      (item.genreNames &&
+        item.genreNames.length > 0 &&
+        selectedMovie.genreNames &&
+        selectedMovie.genreNames.length > 0) ||
+      (item.genres &&
+        item.genres.length > 0 &&
+        selectedMovie.genres &&
+        selectedMovie.genres.length > 0)
     ) {
-      // Compare the first genre in each array
-      return item.genreNames[0] === selectedMovie.genreNames[0];
+      // Compare the first genre in each genreNames array
+      const genreNamesMatch =
+        item.genreNames &&
+        selectedMovie.genreNames &&
+        item.genreNames[0] === selectedMovie.genreNames[0];
+
+      // Compare the genres arrays by mapping and checking for intersection
+      const genresMatch =
+        item.genres &&
+        selectedMovie.genres &&
+        item.genres
+          .map((genre) => genre.name)
+          .some((name) =>
+            selectedMovie.genres.map((genre) => genre.name).includes(name)
+          );
+
+      return genreNamesMatch || genresMatch;
     } else {
       // If any array is undefined or empty, return false (no match)
       return false;
@@ -151,6 +170,8 @@ function Page() {
     ? selectedMovie.release_date.split("-")[0]
     : selectedMovie.first_air_date
     ? selectedMovie.first_air_date.split("-")[0]
+    : selectedMovie.year
+    ? selectedMovie.year
     : "Unknown";
 
   const addToWatchlist = (movie) => {
@@ -160,7 +181,7 @@ function Page() {
         y: "top",
       },
     });
-    const alreadyInWatchlist = watchlist.some((item) => item.id === movie.id);
+    const alreadyInWatchlist = watchlist.some((item) => item._id === movie._id);
 
     if (alreadyInWatchlist) {
       notfy.error("Already added to watchlist");
@@ -169,6 +190,7 @@ function Page() {
       notfy.success("Added to WatchList");
     }
   };
+
   return (
     <>
       {selectedMovie.length === 1 ? (
@@ -210,6 +232,7 @@ function Page() {
                         mobile &&
                         `url("${
                           selectedMovie.backdrop_path ||
+                          selectedMovie.images.jpg.large_image_url ||
                           "https://c4.wallpaperflare.com/wallpaper/568/232/7/texture-simple-dark-simple-background-wallpaper-preview.jpg"
                         }") no-repeat center center / cover`,
                     }}
@@ -227,7 +250,7 @@ function Page() {
                         />
                       </div>
                       <div className={style.RightIntro}>
-                        {selectedMovie.Logo[0] ? (
+                        {selectedMovie.Logo ? (
                           <div className={style.image}>
                             <img
                               src={selectedMovie.Logo[0]}
@@ -237,7 +260,9 @@ function Page() {
                             />
                           </div>
                         ) : (
-                          <h1>{selectedMovie.title || selectedMovie.name}</h1>
+                          <h1 style={{ fontSize: "30px", marginTop: "2em" }}>
+                            {selectedMovie.title || selectedMovie.name}
+                          </h1>
                         )}
 
                         <div className={style.actions}>
@@ -268,15 +293,31 @@ function Page() {
                         {selectedMovie.runtime
                           ? convertRuntime(selectedMovie.runtime) ||
                             selectedMovie.year
-                          : selectedMovie.episode_run_time !== 0
-                          ? `${selectedMovie.episode_run_time}mins/episode`
+                          : selectedMovie.episode_run_time !== 0 ||
+                            selectedMovie.duration
+                          ? `${
+                              selectedMovie.episode_run_time ||
+                              selectedMovie.duration
+                            }${
+                              !selectedMovie.episode_run_time
+                                ? ""
+                                : "mins/episode"
+                            }`
                           : ""}{" "}
                       </h3>
                       <h3>{releaseYear}</h3>
                       <h3>
-                        {selectedMovie.genreNames.find(
-                          (name) => name === "Horror"
-                        ) ? (
+                        {selectedMovie.genreNames ? (
+                          selectedMovie.genreNames.find(
+                            (name) => name === "Horror"
+                          ) ? (
+                            <h3>PG 16</h3>
+                          ) : (
+                            <h3>PG 13</h3>
+                          )
+                        ) : selectedMovie.genres.find(
+                            (name) => name === "Horror"
+                          ) ? (
                           <h3>PG 16</h3>
                         ) : (
                           <h3>PG 13</h3>
@@ -295,8 +336,14 @@ function Page() {
                       <h1 style={{ fontSize: "20px" }}>Overview</h1>
                       <p>
                         {!viewMore
-                          ? `${selectedMovie.overview.slice(0, 100)}...`
-                          : selectedMovie.overview}
+                          ? `${
+                              selectedMovie.overview
+                                ? selectedMovie.overview.slice(0, 100)
+                                : selectedMovie.synopsis &&
+                                  selectedMovie.synopsis.slice(0, 100)
+                            }...`
+                          : selectedMovie.overview ||
+                            selectedMovie.synopsis.slice(0, 250)}
                         <span
                           style={{
                             color: "#c00",
@@ -316,9 +363,13 @@ function Page() {
                       <div className={style.budget}>
                         <h2>Genre:</h2>
                         <div className={style.genres}>
-                          {selectedMovie.genreNames.map((name, index) => (
-                            <p key={index}>{name} </p>
-                          ))}
+                          {selectedMovie.genreNames
+                            ? selectedMovie.genreNames.map((name, index) => (
+                                <p key={index}>{name} </p>
+                              ))
+                            : selectedMovie.genres.map((name, index) => (
+                                <p key={index}>{name.name} </p>
+                              ))}
                         </div>
                       </div>
 
@@ -388,24 +439,25 @@ function Page() {
                           padding: "1em",
                         }}
                       >
-                        {selectedMovie.cast.map((items, index) => (
-                          <div
-                            className={`${style.castProfileTwos} `}
-                            key={index}
-                          >
-                            <div className={style.leftCast}>
-                              <img
-                                src={
-                                  items.profile_path
-                                    ? items.profile_path
-                                    : "/images/blank-profile-picture-973460_960_720.webp"
-                                }
-                                width={100}
-                                className={style.castimage}
-                                height={100}
-                              />
-                            </div>
-                            {/* <div className={style.rightCast}>
+                        {selectedMovie.cast &&
+                          selectedMovie.cast.map((items, index) => (
+                            <div
+                              className={`${style.castProfileTwos} `}
+                              key={index}
+                            >
+                              <div className={style.leftCast}>
+                                <img
+                                  src={
+                                    items.profile_path
+                                      ? items.profile_path
+                                      : "/images/blank-profile-picture-973460_960_720.webp"
+                                  }
+                                  width={100}
+                                  className={style.castimage}
+                                  height={100}
+                                />
+                              </div>
+                              {/* <div className={style.rightCast}>
                                   <h3
                                     style={{
                                       color: lightMode && "#000",
@@ -416,8 +468,8 @@ function Page() {
                                   </h3>
                                   <h3>As {items.character}</h3>
                                 </div> */}
-                          </div>
-                        ))}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   </div>
@@ -439,7 +491,7 @@ function Page() {
                                   items.poster_path ||
                                   items.images.jpg.image_url
                                 }
-                                alt={items.title || items.name}
+                                // alt={items.title || items.name}
                                 width={300}
                                 height={190}
                                 className={style.Imager}
@@ -457,14 +509,7 @@ function Page() {
                                   {items.name || items.title.slice(0, 15)}
                                 </h3>
                                 <div className="detail">
-                                  <p>
-                                    {" "}
-                                    {selectedMovie.release_date
-                                      ? selectedMovie.release_date.split("-")[0]
-                                      : selectedMovie.first_air_date.split(
-                                          "-"
-                                        )[0]}
-                                  </p>
+                                  <p> {releaseYear}</p>
                                   <p>
                                     {items.runtime
                                       ? convertRuntime(items.runtime) ||
@@ -504,11 +549,34 @@ function Page() {
                     <h1>Trailer</h1>
                     {mobile && (
                       <div className={style.trailer}>
-                        {!selectedMovie.trailer ? (
+                        {selectedMovie.trailer ||
+                        selectedMovie.trailers[0] ? (
                           <iframe
                             width="100"
                             height="100"
                             src={`https://www.youtube.com/embed/${selectedMovie.trailers[0].key}`}
+                            frameBorder="0"
+                            className={style.trailer}
+                            // allowFullScreen
+                            // title=""
+                          ></iframe>
+                        ) : !selectedMovie.trailer ||
+                          !selectedMovie.trailer[0].key ? (
+                          <div
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              display: "grid",
+                              placeContent: "center",
+                            }}
+                          >
+                            <p>No Trailer</p>
+                          </div>
+                        ) : selectedMovie.trailer.embed_url ? (
+                          <iframe
+                            width="100"
+                            height="100"
+                            src={selectedMovie.trailer.embed_url}
                             frameBorder="0"
                             className={style.trailer}
                             // allowFullScreen
@@ -531,7 +599,13 @@ function Page() {
                   </>
                   <div
                     className={`${style.scrollDown}  ${
-                      selectedMovie.overview.length > 200 && !showScrollAllDown
+                      selectedMovie.overview
+                        ? selectedMovie.overview.length > 200 &&
+                          !showScrollAllDown
+                          ? style.hiddenScroller
+                          : ""
+                        : selectedMovie.synopsis.length > 200 &&
+                          !showScrollAllDown
                         ? style.hiddenScroller
                         : ""
                     }`}
@@ -565,7 +639,7 @@ function Page() {
                             />
                           </div>
                         ) : (
-                          <h1 style={{ color: "#fff" }}>
+                          <h1 style={{ color: "#fff", fontSize: "30px" }}>
                             {selectedMovie.title || selectedMovie.name}
                           </h1>
                         )}
@@ -578,7 +652,7 @@ function Page() {
                           ref={movieListRef}
                         >
                           <p style={{ color: lightMode && "#000" }}>
-                            {selectedMovie.overview}
+                            {selectedMovie.overview || selectedMovie.synopsis}
                           </p>
                         </div>
                         <div className={style.overview}>
@@ -587,16 +661,31 @@ function Page() {
                             {selectedMovie.runtime
                               ? convertRuntime(selectedMovie.runtime) ||
                                 selectedMovie.year
-                              : selectedMovie.episode_run_time !== 0
-                              ? `${selectedMovie.episode_run_time}mins/episode`
+                              : selectedMovie.episode_run_time !== 0 ||
+                                selectedMovie.duration
+                              ? `${
+                                  selectedMovie.episode_run_time ||
+                                  selectedMovie.duration
+                                }${
+                                  !selectedMovie.episode_run_time
+                                    ? ""
+                                    : "mins/episode"
+                                }`
                               : ""}{" "}
                           </h3>
                           <h3>{releaseYear}</h3>
                           <h3>
-                            {selectedMovie.genreNames &&
-                            selectedMovie.genreNames.find(
-                              (name) => name === "Horror"
-                            ) ? (
+                            {selectedMovie.genreNames ? (
+                              selectedMovie.genreNames.find(
+                                (name) => name === "Horror"
+                              ) ? (
+                                <h3>PG 16</h3>
+                              ) : (
+                                <h3>PG 13</h3>
+                              )
+                            ) : selectedMovie.genres.find(
+                                (name) => name.name === "Horror"
+                              ) ? (
                               <h3>PG 16</h3>
                             ) : (
                               <h3>PG 13</h3>
@@ -606,14 +695,16 @@ function Page() {
                         </div>
                         <div className={style.genres}>
                           {selectedMovie.genreNames
-                            ? selectedMovie.genreNames.map((name, index) => (
-                                <p
-                                  style={{ color: !lightMode && "#fff" }}
-                                  key={index}
-                                >
-                                  {name}{" "}
-                                </p>
-                              ))
+                            ? selectedMovie.genreNames
+                                .map((name, index) => (
+                                  <p
+                                    style={{ color: !lightMode && "#fff" }}
+                                    key={index}
+                                  >
+                                    {name}{" "}
+                                  </p>
+                                ))
+                                .join(", ")
                             : ""}
                         </div>
                         <h1 style={{ color: !lightMode && "#fff" }}>Casts :</h1>
@@ -731,7 +822,7 @@ function Page() {
                                       <img
                                         src={
                                           items.backdrop_path ||
-                                          items.images.jpg.large_url
+                                          items.images.jpg.image_url
                                         }
                                         alt={items.title || items.name}
                                         width={300}
@@ -758,9 +849,12 @@ function Page() {
                                               ? selectedMovie.release_date.split(
                                                   "-"
                                                 )[0]
-                                              : selectedMovie.first_air_date.split(
+                                              : selectedMovie.first_air_date
+                                              ? selectedMovie.first_air_date.split(
                                                   "-"
-                                                )[0]}
+                                                )[0]
+                                              : selectedMovie.year &&
+                                                selectedMovie.year}
                                           </p>
                                           <p>
                                             {items.runtime
@@ -802,7 +896,10 @@ function Page() {
                     </div>
                     <img
                       className={style.bk}
-                      src={selectedMovie.backdrop_path}
+                      src={
+                        selectedMovie.backdrop_path ||
+                        selectedMovie.images.jpg.large_image_url
+                      }
                       alt=""
                     />
                   </div>
