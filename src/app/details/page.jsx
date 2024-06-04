@@ -549,34 +549,15 @@ function Page() {
                     <h1>Trailer</h1>
                     {mobile && (
                       <div className={style.trailer}>
-                        {selectedMovie.trailer ||
-                        selectedMovie.trailers[0] ? (
+                        {selectedMovie.trailer || selectedMovie.trailers ? (
                           <iframe
                             width="100"
                             height="100"
-                            src={`https://www.youtube.com/embed/${selectedMovie.trailers[0].key}`}
-                            frameBorder="0"
-                            className={style.trailer}
-                            // allowFullScreen
-                            // title=""
-                          ></iframe>
-                        ) : !selectedMovie.trailer ||
-                          !selectedMovie.trailer[0].key ? (
-                          <div
-                            style={{
-                              height: "100%",
-                              width: "100%",
-                              display: "grid",
-                              placeContent: "center",
-                            }}
-                          >
-                            <p>No Trailer</p>
-                          </div>
-                        ) : selectedMovie.trailer.embed_url ? (
-                          <iframe
-                            width="100"
-                            height="100"
-                            src={selectedMovie.trailer.embed_url}
+                            src={`https://www.youtube.com/embed/${
+                              selectedMovie.trailers
+                                ? selectedMovie.trailers[0].key
+                                : selectedMovie.trailer.youtube_id
+                            }`}
                             frameBorder="0"
                             className={style.trailer}
                             // allowFullScreen
@@ -683,7 +664,8 @@ function Page() {
                               ) : (
                                 <h3>PG 13</h3>
                               )
-                            ) :selectedMovie.genres && selectedMovie.genres.find(
+                            ) : selectedMovie.genres &&
+                              selectedMovie.genres.find(
                                 (name) => name.name === "Horror"
                               ) ? (
                               <h3>PG 16</h3>
@@ -898,7 +880,8 @@ function Page() {
                       className={style.bk}
                       src={
                         selectedMovie.backdrop_path ||
-                        selectedMovie.images.jpg.large_image_url
+                        (selectedMovie.images.jpg.large_image_url &&
+                          selectedMovie.images.jpg.large_image_url)
                       }
                       alt=""
                     />
