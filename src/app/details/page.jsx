@@ -511,16 +511,16 @@ function Page() {
                                 <div className="detail">
                                   <p> {releaseYear}</p>
                                   <p>
-                                    {selectedMovie.runtime
-                                      ? convertRuntime(selectedMovie.runtime) ||
-                                        selectedMovie.year
-                                      : selectedMovie.episode_run_time !== 0 ||
-                                        selectedMovie.duration
+                                    {items.runtime
+                                      ? convertRuntime(items.runtime) ||
+                                        items.year
+                                      : items.episode_run_time !== 0 ||
+                                        items.duration
                                       ? `${
-                                          selectedMovie.episode_run_time ||
-                                          selectedMovie.duration
+                                          items.episode_run_time ||
+                                          items.duration
                                         }${
-                                          !selectedMovie.episode_run_time
+                                          !items.episode_run_time
                                             ? ""
                                             : "mins/episode"
                                         }`
