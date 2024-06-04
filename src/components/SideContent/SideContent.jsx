@@ -11,6 +11,7 @@ import useMediaQuery from "../UseMediaQuery";
 function SideContent() {
   const [movies, setMovies] = useState([]);
   const [moviesTrailers, setMoviesTrailers] = useState([]);
+  console.log(moviesTrailers);
   const navigate = useRouter();
   const mobile = useMediaQuery("(max-width:500px)");
   ("(max-width: 768px)");
@@ -88,14 +89,14 @@ function SideContent() {
       try {
         const response = await fetch(`myapi/movie`);
         const data = await response.json();
-
+        console.log(data);
         const filterMovies = data.slice(0, 1).filter((movie) => {
           const releaseYear = movie.release_date.split("-")[0];
           console.log(releaseYear);
-          return releaseYear == 2024;
+        return releaseYear == 2023;
         });
         setMoviesTrailers(filterMovies);
-
+        console.log(filterMovies);
         // setUpcomingMovies(data);
       } catch (error) {
         console.error("Error fetching Upcoming movies:", error);

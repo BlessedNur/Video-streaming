@@ -479,10 +479,11 @@ function Navbar() {
                 </div>
                 <p
                   style={{
-                    margin: "1em 0",
+                    margin: "1em auto",
+                    width:"fit-content"
                   }}
                 >
-                  {session.user.email.slice(0, 10)}****
+                  {(session && session.user.email) || currentUser.email}
                 </p>
                 <button
                   className={`Btn ${lightMode && "btn"}`}
@@ -539,11 +540,7 @@ function Navbar() {
                     </button>
                   </Link>
                   <Link href={"/signin"}>
-                    <button
-                      className={style.button2}
-                    >
-                      Login
-                    </button>
+                    <button className={style.button2}>Login</button>
                   </Link>
                 </>
               )}
