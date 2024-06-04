@@ -683,7 +683,7 @@ function Page() {
                               ) : (
                                 <h3>PG 13</h3>
                               )
-                            ) : selectedMovie.genres.find(
+                            ) :selectedMovie.genres && selectedMovie.genres.find(
                                 (name) => name.name === "Horror"
                               ) ? (
                               <h3>PG 16</h3>
