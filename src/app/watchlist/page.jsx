@@ -97,7 +97,7 @@ function Page() {
             {watchlist.map((item) => (
               <div className={style.movieBox} key={item.id}>
                 <div className={style.thumbnail}>
-                  <Image
+                  <img
                     src={item.poster_path || item.images.jpg.image_url}
                     title={item.title || item.name}
                     alt={`Poster for ${item.title}`}

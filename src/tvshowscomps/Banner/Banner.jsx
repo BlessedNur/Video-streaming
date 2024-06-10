@@ -136,7 +136,7 @@ function Banner({ BannerApi, bannerWidth }) {
                   index === itemActive ? style.active : ""
                 } ${lightMode ? style.Light : style.Dark}`}
               >
-                <Image
+                <img
                   src={movie.backdrop_path}
                   width={6000}
                   height={10000}

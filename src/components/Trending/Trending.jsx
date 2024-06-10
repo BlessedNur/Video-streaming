@@ -130,7 +130,7 @@ function Trending({ title, api, length }) {
                   }}
                 >
                   <div className={style.thumbnail}>
-                    <Image
+                    <img
                       src={movie.backdrop_path}
                       alt={`Poster for ${movie.title}`}
                       width={200}
