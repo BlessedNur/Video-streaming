@@ -269,7 +269,7 @@ function Navbar() {
           {mobile ? (
             <>
               <div className={style.logo}>
-                <Image
+                <img
                   src={"/images/New_Project__2_-removebg-preview.png"}
                   width={200}
                   height={200}
@@ -480,7 +480,7 @@ function Navbar() {
                 <p
                   style={{
                     margin: "1em auto",
-                    width:"fit-content"
+                    width: "fit-content",
                   }}
                 >
                   {(session && session.user.email) || currentUser.email}

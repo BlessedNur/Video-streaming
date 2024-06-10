@@ -64,7 +64,7 @@ function Sidebar() {
       <div className={style.asideTop}>
         <div className={style.logo}>
           {!toggleAside ? (
-            <Image
+            <img
               src={"/images/New_Project__2_-removebg-preview.png"}
               width={200}
               height={200}
@@ -72,7 +72,7 @@ function Sidebar() {
             />
           ) : (
             // <h1>QUANMOVIES</h1>
-            <Image
+            <img
               src={"/images/New_Project__3_-removebg-preview.png"}
               width={200}
               height={200}

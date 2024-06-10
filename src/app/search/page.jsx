@@ -485,7 +485,7 @@ const Page = () => {
                 }`}
                 style={{
                   backgroundColor: lightMode && "rgba(239, 239, 239, 0.992)",
-                  color:lightMode ?"#000" : "#fff"
+                  color: lightMode ? "#000" : "#fff",
                 }}
               >
                 <div
@@ -577,7 +577,7 @@ const Page = () => {
           >
             <div className={style.flex}>
               <div className={style.profilePic}>
-                <Image
+                <img
                   width={200}
                   height={200}
                   alt="profile"
@@ -909,7 +909,7 @@ const Page = () => {
                 title={item.title || item.name}
               >
                 <div className={style.thumbnail}>
-                  <Image
+                  <img
                     src={item.poster_path || item.images.jpg.image_url}
                     alt={`Poster for ${item.title}`}
                     width={110}
