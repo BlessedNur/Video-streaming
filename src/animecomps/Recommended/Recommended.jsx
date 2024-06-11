@@ -114,7 +114,7 @@ function Recommended({ title, seeAllTypes, api, length }) {
                   }}
                 >
                   <div className={style.thumbnail}>
-                    <img
+                    <Image
                       src={movie.images.jpg.image_url}
                       alt={`Poster for ${movie.title}`}
                       width={110}

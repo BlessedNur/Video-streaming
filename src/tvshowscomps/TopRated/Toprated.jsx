@@ -127,7 +127,7 @@ function TopRated({ title, api, length }) {
                   }}
                 >
                   <div className={style.thumbnail}>
-                    <img
+                    <Image
                       src={movie.backdrop_path}
                       alt={`Poster for ${movie.title}`}
                       width={200}
@@ -158,8 +158,8 @@ function TopRated({ title, api, length }) {
                     <p
                       style={{ fontWeight: "600", color: lightMode && "#fff" }}
                     >
-                       {movie.vote_average != 0
-                        ? ((movie.vote_average / 100)*5).toFixed(1)
+                      {movie.vote_average != 0
+                        ? ((movie.vote_average / 100) * 5).toFixed(1)
                         : "Not rated"}
                     </p>
                   </div>

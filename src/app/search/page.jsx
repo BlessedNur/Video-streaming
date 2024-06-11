@@ -245,7 +245,7 @@ const Page = () => {
               title={item.title || item.name}
             >
               <div className={style.thumbnail}>
-                <img
+                <Image
                   src={item.poster_path || item.images.jpg.image_url}
                   alt={`Poster for ${item.title}`}
                   className={style.movieImage}
@@ -471,7 +471,7 @@ const Page = () => {
               onMouseLeave={() => setMiniPro(false)}
             >
               <div className={style.profile}>
-                <img
+                <Image
                   src={
                     !session
                       ? "/images/blank-profile-picture-973460_960_720.webp"
@@ -496,7 +496,7 @@ const Page = () => {
                 >
                   <div className={style.flex}>
                     <div className={style.profilePic}>
-                      <img
+                      <Image
                         src={
                           !session
                             ? "/images/blank-profile-picture-973460_960_720.webp"
@@ -577,7 +577,7 @@ const Page = () => {
           >
             <div className={style.flex}>
               <div className={style.profilePic}>
-                <img
+                <Image
                   width={200}
                   height={200}
                   alt="profile"
@@ -909,7 +909,7 @@ const Page = () => {
                 title={item.title || item.name}
               >
                 <div className={style.thumbnail}>
-                  <img
+                  <Image
                     src={item.poster_path || item.images.jpg.image_url}
                     alt={`Poster for ${item.title}`}
                     width={110}

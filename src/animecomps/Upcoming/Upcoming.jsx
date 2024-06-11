@@ -38,7 +38,7 @@ function Upcoming({ title, api, length }) {
     setSelectedMovie,
   ] = useContext(movieContext);
   console.log(lightMode);
-  
+
   useEffect(() => {
     const fetchUpcomingMovies = async () => {
       try {
@@ -107,13 +107,12 @@ function Upcoming({ title, api, length }) {
                   className={style.movieBox}
                   key={movie.id}
                   onClick={() => {
-                    navigate.push("/details")
-                    setSelectedMovie(movie)
+                    navigate.push("/details");
+                    setSelectedMovie(movie);
                   }}
-            
                 >
                   <div className={style.thumbnail}>
-                    <img
+                    <Image
                       src={movie.images.jpg.large_image_url}
                       alt={`Poster for ${movie.title}`}
                       className={style.movieImage}

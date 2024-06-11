@@ -144,7 +144,7 @@ function Upcoming({ title, api, length }) {
                   }}
                 >
                   <div className={style.thumbnail}>
-                    <img
+                    <Image
                       src={movie.backdrop_path}
                       alt={`Poster for ${movie.title}`}
                       width={200}

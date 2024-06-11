@@ -51,7 +51,12 @@ function Upcoming({ title, api, length }) {
           const releaseYear = movie.first_air_date.split("-")[0];
           console.log(releaseYear);
           return (
-            releaseYear == 2022 || releaseYear == 2023 || releaseYear == 2024 || releaseYear == 2016|| releaseYear == 2013|| releaseYear == 2015
+            releaseYear == 2022 ||
+            releaseYear == 2023 ||
+            releaseYear == 2024 ||
+            releaseYear == 2016 ||
+            releaseYear == 2013 ||
+            releaseYear == 2015
           );
         });
         setFilteredMovies(filterMovies);
@@ -135,7 +140,7 @@ function Upcoming({ title, api, length }) {
                   }}
                 >
                   <div className={style.thumbnail}>
-                    <img
+                    <Image
                       src={movie.backdrop_path}
                       alt={`Poster for ${movie.title}`}
                       width={200}
