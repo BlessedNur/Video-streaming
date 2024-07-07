@@ -90,10 +90,17 @@ function SideContent() {
         const response = await fetch(`myapi/movie`);
         const data = await response.json();
         console.log(data);
-        const filterMovies = data.slice(0, 1).filter((movie) => {
+        const filterMovies = data.filter((movie) => {
           const releaseYear = movie.release_date.split("-")[0];
           console.log(releaseYear);
-        return releaseYear == 2023;
+          return (
+            releaseYear == 2023 ||
+            releaseYear == 2024 ||
+            releaseYear == 2019 ||
+            releaseYear == 2018 ||
+            releaseYear == 2017 ||
+            releaseYear == 2016
+          );
         });
         setMoviesTrailers(filterMovies);
         console.log(filterMovies);
