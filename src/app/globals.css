@@ -307,7 +307,7 @@ aside p {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  /* height: 40vh; */
+  height: 60vh;
 }
 .trailer-box::-webkit-scrollbar {
   display: none;
