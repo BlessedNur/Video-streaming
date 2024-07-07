@@ -11,7 +11,6 @@ import useMediaQuery from "../UseMediaQuery";
 function SideContent() {
   const [movies, setMovies] = useState([]);
   const [moviesTrailers, setMoviesTrailers] = useState([]);
-  console.log(moviesTrailers);
   const navigate = useRouter();
   const mobile = useMediaQuery("(max-width:500px)");
   ("(max-width: 768px)");
@@ -95,11 +94,11 @@ function SideContent() {
           console.log(releaseYear);
           return (
             releaseYear == 2023 ||
-            releaseYear == 2024 ||
+            releaseYear == 2022 ||
+            releaseYear == 2021 ||
+            releaseYear == 2020 ||
             releaseYear == 2019 ||
-            releaseYear == 2018 ||
-            releaseYear == 2017 ||
-            releaseYear == 2016
+            releaseYear == 2018
           );
         });
         setMoviesTrailers(filterMovies);
@@ -394,7 +393,7 @@ function SideContent() {
                     <iframe
                       width="4p00"
                       height="600"
-                      src={`https://www.youtube.com/embed/${movie.trailers[0].key}`}
+                      src={`https://www.youtube.com/embed/${movie.trailers.key}`}
                       frameBorder="0"
                       className={style.trailer}
                       allowFullScreen
