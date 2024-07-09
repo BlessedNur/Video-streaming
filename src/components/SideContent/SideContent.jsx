@@ -72,7 +72,9 @@ function SideContent() {
             releaseYear == 2016
           );
         });
-        mobile ? setMovies(filterMovies) : setMovies(filterMovies.slice(1, 3));
+        mobile
+          ? setMovies(filterMovies.slice(1, 3))
+          : setMovies(filterMovies.slice(1, 3));
 
         // setUpcomingMovies(data);
       } catch (error) {
@@ -315,7 +317,15 @@ function SideContent() {
             </h2>
           </SkeletonTheme>
         ) : (
-          <h2 style={{ margin: ".5em 0" }}>Trailers</h2>
+          <h2
+            style={{
+              margin: ".5em auto",
+              width: "fit-content",
+              fontSize: "25px",
+            }}
+          >
+            Trailers
+          </h2>
         )}
         {/* <div className="trailers"> */}
         <div className="trailer-box">
@@ -388,39 +398,51 @@ function SideContent() {
               </SkeletonTheme>
             ) : (
               <>
-                {moviesTrailers.map((movie) => (
-                  <>
-                    <iframe
-                      width="4p00"
-                      height="600"
-                      src={`https://www.youtube.com/embed/${movie.trailers.key}`}
-                      frameBorder="0"
-                      className={style.trailer}
-                      allowFullScreen
-                      title=""
-                    ></iframe>
-                    <div
-                      className="view"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <h5>{movie.title}</h5>
-                      <Link
-                        href={""}
+                <div className="vid">
+                  {moviesTrailers.map((movie) => (
+                    <>
+                      <iframe
                         style={{
-                          color: "#626364",
-                          textDecoration: "none",
-                          cursor: "pointer",
+                          height:"300px"
+                        }}
+                        key={movie.id}
+                        width="100"
+                        height="300"
+                        src={`https://www.youtube.com/embed/${
+                          movie.trailers && movie.trailers[1]
+                            ? movie.trailers[1].key
+                            : movie.trailer
+                            ? movie.trailer.youtube_id
+                            : ""
+                        }`}
+                        frameBorder="0"
+                        className={style.trailer}
+                        // allowFullScreen
+                        // title=""
+                      ></iframe>
+                      <div
+                        className="view"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        view more
-                      </Link>
-                    </div>
-                  </>
-                ))}
+                        <h5>{movie.title}</h5>
+                        <Link
+                          href={""}
+                          style={{
+                            color: "#626364",
+                            textDecoration: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          view more
+                        </Link>
+                      </div>
+                    </>
+                  ))}
+                </div>
               </>
             )}
           </div>

@@ -8,11 +8,9 @@
   font-family: "Poppins", sans-serif;
   list-style: none;
   font-size: 12px;
-  
 }
-fieldset{
+fieldset {
   border: none;
-  
 }
 body {
   font-family: "poppins";
@@ -307,10 +305,14 @@ aside p {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  overflow: scroll;
   height: 60vh;
 }
-.trailer-box::-webkit-scrollbar {
+.vid::-webkit-scrollbar {
   display: none;
+}
+.vid iframe{
+  min-height: 300px !important;
 }
 .trailers {
   /* overflow-y: hidden; */
@@ -697,7 +699,6 @@ aside p {
     height: 10vh;
     margin-top: 0y;
   }
-  
 }
 @media screen and (max-width: 768px) {
   .latests {
@@ -710,25 +711,24 @@ aside p {
 }
 /* Change the background color when the input is autofilled */
 input:-webkit-autofill {
-    background-color: white !important; /* Change this to your desiwhite color */
-    transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color:#ffff !important;
+  background-color: white !important; /* Change this to your desiwhite color */
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffff !important;
 }
 
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-    background-color: white !important; /* Ensure the color stays when focused or hovewhite */
+  background-color: white !important; /* Ensure the color stays when focused or hovewhite */
 }
 
 /* For other browsers, you may need additional vendor prefixes */
 input:-moz-autofill {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 input:-ms-autofill {
-    background-color: white !important;
+  background-color: white !important;
 }
-
 
 .wrapper {
   width: 200px;
@@ -745,7 +745,7 @@ input:-ms-autofill {
   background-color: #fff;
   left: 15%;
   transform-origin: 50%;
-  animation: circle7124 .5s alternate infinite ease;
+  animation: circle7124 0.5s alternate infinite ease;
 }
 
 @keyframes circle7124 {
@@ -769,27 +769,27 @@ input:-ms-autofill {
 
 .circle:nth-child(2) {
   left: 45%;
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 
 .circle:nth-child(3) {
   left: auto;
   right: 15%;
-  animation-delay: .3s;
+  animation-delay: 0.3s;
 }
 
 .shadow {
   width: 20px;
   height: 4px;
   border-radius: 50%;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0, 0, 0, 0.9);
   position: absolute;
   top: 62px;
   transform-origin: 50%;
   z-index: -1;
   left: 15%;
   filter: blur(1px);
-  animation: shadow046 .5s alternate infinite ease;
+  animation: shadow046 0.5s alternate infinite ease;
 }
 
 @keyframes shadow046 {
@@ -799,33 +799,33 @@ input:-ms-autofill {
 
   40% {
     transform: scaleX(1);
-    opacity: .7;
+    opacity: 0.7;
   }
 
   100% {
-    transform: scaleX(.2);
-    opacity: .4;
+    transform: scaleX(0.2);
+    opacity: 0.4;
   }
 }
 
 .shadow:nth-child(4) {
   left: 45%;
-  animation-delay: .2s
+  animation-delay: 0.2s;
 }
 
 .shadow:nth-child(5) {
   left: auto;
   right: 15%;
-  animation-delay: .3s;
+  animation-delay: 0.3s;
 }
-.menu{
+.menu {
   /* position: relative; */
   z-index: 50;
 }
-.drawer{
+.drawer {
   position: fixed;
   height: 100vh;
-  transition: .3s;
+  transition: 0.3s;
   width: 100%;
   padding: 1em;
   padding-top: 5em;
@@ -843,18 +843,17 @@ input:-ms-autofill {
   flex-direction: column;
   gap: 1em;
 }
-.darkDraw{
+.darkDraw {
   background-color: black;
   color: white;
-
 }
-.showDraw{
+.showDraw {
   transform: translateX(0);
 }
-.drawer ul{
+.drawer ul {
   display: flex;
-  gap:  2em;
-  li a{
+  gap: 2em;
+  li a {
     text-decoration: none;
     color: inherit;
   }
@@ -875,7 +874,7 @@ input:-ms-autofill {
   top: 30%;
   opacity: 0;
   border-radius: 50px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   animation: fade458 1s linear infinite;
 }
 
@@ -956,7 +955,14 @@ input:-ms-autofill {
   appearance: none;
   width: 3.25em;
   height: 1.5em;
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(50%, #efefef),
+      color-stop(50%, #2a2a2a)
+    )
+    no-repeat;
   background: -o-linear-gradient(left, #efefef 50%, #2a2a2a 50%) no-repeat;
   background: linear-gradient(to right, #efefef 50%, #2a2a2a 50%) no-repeat;
   background-size: 205%;
@@ -977,7 +983,14 @@ input:-ms-autofill {
   position: absolute;
   top: 0.15em;
   left: 1.6em;
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(50%, #efefef),
+      color-stop(50%, #2a2a2a)
+    )
+    no-repeat;
   background: -o-linear-gradient(left, #efefef 50%, #2a2a2a 50%) no-repeat;
   background: linear-gradient(to right, #efefef 50%, #2a2a2a 50%) no-repeat;
   background-size: 205%;
@@ -996,5 +1009,3 @@ input:-ms-autofill {
 .theme-checkboxD:checked {
   background-position: 100%;
 }
-
-
